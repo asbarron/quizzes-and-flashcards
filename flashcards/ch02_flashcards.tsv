@@ -8,7 +8,7 @@ HMAC-SHA256 webhook auth (§2.2)	Recommended webhook method: the caller signs ea
 Sequential event processing (§2.2)	One event at a time per session. Prevents races in tool calls and memory writes, but a slow tool call blocks later events.
 Stable prefix (§2.3)	Assembly steps 1-7: identity files, MEMORY.md, daily logs, tool schemas. Unchanged between turns in a session, so it can be prompt-cached.
 Variable suffix (§2.3)	Session history plus the incoming event. Grows each turn and is not cached, so volatile content belongs at the end.
-Primary cost control lever (§2.3)	Governing workspace file size. The book's ungoverned six-month example costs about $165/month in input tokens versus about $13 governed.
+Primary cost control lever (§2.3)	Governing workspace file size. An ungoverned workspace after six months can cost about $165/month in input tokens versus about $13 governed.
 Silent skip of missing files (§2.3)	Absent context files are skipped without error. An AGENTS.md startup check can turn a missing SOUL.md into an explicit alert.
 Credentials and context (§2.3)	Keep secrets out of every context file, since the model can read all of it. Put them in environment variables used by tool code.
 SOUL.md's four questions (§2.4)	How the agent communicates, what wins when values conflict, what it will never do, and how it handles ambiguous instructions.

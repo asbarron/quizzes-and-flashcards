@@ -1,4 +1,4 @@
-Temporal shift (§1.1)	The book's framing of the chatbot-to-agent change: what matters most is that the agent persists and acts across time, not a jump in model capability.
+Temporal shift (§1.1)	The core of the chatbot-to-agent change: what matters most is that the agent persists and acts across time, not a jump in model capability.
 Continuous runtime loop (§1.1)	The agent's operating cycle: take in external events, pull memory, reason over state, call tools, act across interfaces, and fold results back into context.
 Compounding errors (§1.1)	A wrong decision gets saved to memory and keeps steering behavior for days, instead of staying a single bad answer in one chat.
 Unmonitored action accumulation (§1.1)	Agents can take actions the user never reviews until later, unlike chat output that the user sees immediately.

@@ -1,4 +1,4 @@
-Context accumulation	The largest cost driver in the book's analysis: the full conversation history is resent with every API call.
+Context accumulation	The largest cost driver in agent API spend: the full conversation history is resent with every API call.
 Base system prompt cost	Tool schemas plus workspace files sent with every message, whether or not tools are needed.
 Heartbeat	A periodic background prompt that checks for pending tasks. By default it goes to the primary model carrying full workspace context.
 Heartbeat routing	Sending heartbeats to a free local Ollama model instead of the paid primary model. Heartbeats need almost no reasoning capability.

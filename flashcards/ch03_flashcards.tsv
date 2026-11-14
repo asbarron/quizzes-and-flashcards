@@ -17,7 +17,7 @@ Good MEMORY.md entry (§3.5)	One to three sentences stating the rule, its ration
 Agent-proposed promotion (§3.5)	The agent proposes a durable fact and waits for confirmation; unreviewed writes can pollute memory.
 Investment allocation principle (§3.6)	Invest in SOUL.md first, configure AGENTS.md carefully, grow USER.md incrementally, curate MEMORY.md actively.
 Source authority (§3.7)	External content such as email, web pages, and tool results has analysis authority only; it can't issue instructions to the agent.
-Persistent foothold injection (§3.7)	An injection that gets written into MEMORY.md and silently persists across sessions; the book calls it the most dangerous because least visible.
+Persistent foothold injection (§3.7)	An injection that gets written into MEMORY.md and silently persists across sessions; the most dangerous injection outcome because it is the least visible.
 Five identity robustness tests (§3.7)	Instruction override, claimed SOUL.md update, blanket pre-authorization, SYSTEM directive, and admin-mode claim. Any compliance means not ready for write access.
 Minimal-start approach (§3.7b)	Deploy a roughly 12-line SOUL.md, use it for two weeks, then add targeted, tested fixes for observed patterns.
 SOUL.md-AGENTS.md blur test (§3.7b)	If a SOUL.md line names specific tools, file paths, or action sequences, move it to AGENTS.md.
