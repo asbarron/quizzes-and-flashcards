@@ -1,0 +1,26 @@
+Context accumulation	The largest cost driver in agent API spend: the full conversation history is resent with every API call.
+Base system prompt cost	Tool schemas plus workspace files sent with every message, whether or not tools are needed.
+Heartbeat	A periodic background prompt that checks for pending tasks. By default it goes to the primary model carrying full workspace context.
+Heartbeat routing	Sending heartbeats to a free local Ollama model instead of the paid primary model. Heartbeats need almost no reasoning capability.
+tinyllama context limit	Its 2,048-token window can be too small for heavy memory logs. Erratic heartbeat replies signal a move to a larger local model.
+Tiered model routing	Matching each task to a free, budget, standard or premium model by complexity instead of sending everything to the most capable one.
+Static routing	Explicitly invoking a lightweight agent profile for known simple tasks and using the default profile otherwise. Recommended because it cannot misfire.
+Dynamic routing	A cheap classifier assigns each incoming message a tier before context assembly. Worth it when routing savings exceed classifier overhead.
+Model tier inflation	Gradual drift toward the premium model from identity-file wording, habitual user requests or tool chain escalation. Investigate if Opus exceeds 10% of turns.
+softThresholdTokens	Context size at which older turns are summarized and dropped from active context. The summary is appended to the day's memory log.
+hardThresholdTokens	Context size at which summarization is forced regardless of conversation state.
+maxMessages pruning	For many short, independent interactions, cap the message count instead of relying on token thresholds, so stale topics are not carried forward.
+Pruning and quality	Removing stale history also helps answers, because the model's attention is no longer spread across irrelevant context.
+Prompt caching	Reuse of the processed form of an identical context prefix across calls. Cached reads bill at roughly 10% of the normal input rate.
+Cache ordering rule	Place stable content first and variable content last, in the same order on every call, so the prefix matches byte for byte.
+cacheControlTtl	Cache lifetime in seconds. Use 300 for interactive chats and longer values for hourly or overnight batch patterns.
+Cache write premium	The first write in a TTL window costs 125% of the standard input rate; later reads within the window cost 10%.
+Cache miss causes	Inconsistent prefix order, a timestamp or ID inserted before the prefix, an expired TTL, or editing identity files mid-session.
+Budget action: pause	Stops new processing but keeps state and queues messages; resumes when the limit resets. Suited to daily limits.
+Budget action: disable	Stops processing until someone re-enables it manually. Suited to monthly limits where you want to investigate first.
+Budget action: warn	Sends an alert to the configured channel while processing continues. Suited to soft per-session limits.
+Provider-level spend cap	A hard limit set in the model provider's console slightly above OpenClaw's own cap. It still fires if OpenClaw's enforcement fails.
+token_audit.py	A script that counts tokens per workspace file. Run it monthly to catch workspace growth that otherwise goes unnoticed.
+MEMORY.md compression	A monthly pass that drops stale entries, merges related ones and shortens the rest. MEMORY.md is the main source of workspace bloat.
+Cost anomaly shape	Sudden spikes usually point to loops or router misconfiguration; slow, steady increases usually point to workspace or MEMORY.md growth.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

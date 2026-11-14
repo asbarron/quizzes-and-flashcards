@@ -1,0 +1,26 @@
+Why identity files replace a single system prompt (§3.1)	A static system prompt can't learn between sessions, can't be updated from experience, and mixes global principles with session rules. Four files separate those concerns.
+Identity file update rates (§3.1)	SOUL.md rarely; AGENTS.md occasionally; USER.md regularly; MEMORY.md continuously.
+Character specification (§3.2)	What SOUL.md is: a decision framework the agent can apply to new situations, instead of trying to list every scenario.
+Priority ordering (§3.2)	An explicit ranking of which value wins in a conflict, so the agent doesn't have to invent a decision procedure.
+Hard boundaries (§3.2)	Few, absolute, binary, consequential constraints that hold regardless of framing. Target five to eight.
+Default ambiguity rule (§3.2)	When scope, reversibility, or target is unclear: state the interpretation, describe the planned action, ask for confirmation, and lean conservative.
+SOUL.md length (§3.2)	Under 100 lines. Past 150, refactor: procedures to AGENTS.md, user facts to USER.md, compress the rest.
+Identity coherence principle (§3.2)	A SOUL.md that explains why the agent behaves as it does generalizes better than a list of disconnected rules.
+Session initialization sequence (§3.3)	AGENTS.md's ordered list of files to read before replying. It runs because AGENTS.md instructs it; trimming it impairs continuity.
+Confirmation gate (§3.3)	An instruction that makes the agent pause before a class of action, say what it will do, and wait for explicit approval.
+Gates too broad or too narrow (§3.3)	Too broad blocks autonomy; too narrow leaves gaps, such as gating deletes but not email. Tie gates to irreversibility and external impact.
+Calibration function of USER.md (§3.4)	Tells the model the user's expertise, vocabulary, and context up front, so early turns aren't miscalibrated.
+What stays out of USER.md (§3.4)	Event logs, temporary context, technical configuration (openclaw.json's job), and sensitive data the agent doesn't need.
+Multi-user authorization rule (§3.4)	One user cannot authorize actions that affect another; confirmations apply per session and per user.
+Daily log vs MEMORY.md (§3.5)	Logs capture what happened. MEMORY.md captures what is likely to matter for decisions weeks or months later.
+Good MEMORY.md entry (§3.5)	One to three sentences stating the rule, its rationale, a date, and wording that makes sense out of context.
+Agent-proposed promotion (§3.5)	The agent proposes a durable fact and waits for confirmation; unreviewed writes can pollute memory.
+Investment allocation principle (§3.6)	Invest in SOUL.md first, configure AGENTS.md carefully, grow USER.md incrementally, curate MEMORY.md actively.
+Source authority (§3.7)	External content such as email, web pages, and tool results has analysis authority only; it can't issue instructions to the agent.
+Persistent foothold injection (§3.7)	An injection that gets written into MEMORY.md and silently persists across sessions; the most dangerous injection outcome because it is the least visible.
+Five identity robustness tests (§3.7)	Instruction override, claimed SOUL.md update, blanket pre-authorization, SYSTEM directive, and admin-mode claim. Any compliance means not ready for write access.
+Minimal-start approach (§3.7b)	Deploy a roughly 12-line SOUL.md, use it for two weeks, then add targeted, tested fixes for observed patterns.
+SOUL.md-AGENTS.md blur test (§3.7b)	If a SOUL.md line names specific tools, file paths, or action sequences, move it to AGENTS.md.
+Identity diagnostic ladder (§3.10.1)	Categorize the symptom, read the matching section literally, test it for ambiguity, check cross-file contradictions, then check MEMORY.md for drift.
+Fix-then-verify protocol (§3.10.4)	Make a surgical edit, comment the fix, rerun the failing test, run adjacent tests, and add a MEMORY.md note if the incident had real impact.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

@@ -1,0 +1,26 @@
+Loopback port binding	Prefixing the published port with 127.0.0.1 so the gateway listens only on the host. Without it, Docker publishes the port on all interfaces and the Control UI becomes reachable externally.
+restart: unless-stopped	Compose restart policy that brings the container back after a crash or host reboot, but not after a deliberate docker compose down.
+workspace/ volume	Operator-owned directory holding the identity files and agent configuration. You edit it directly, and it must be backed up.
+state/ volume	Agent-managed directory holding session history, memory logs and checkpoints. It is what lets the agent remember; never delete it.
+Healthcheck start_period	A grace period before Docker begins health checks, so a container that is still initializing is not restarted prematurely.
+Image pinning	Referencing a fixed version tag or sha256 digest instead of :latest, so production does not pick up unintended updates.
+openclaw onboard stages	Security acknowledgment, model provider setup, channel configuration, channel allowlists, and skills setup.
+First message after onboarding	Ask the agent to read BOOTSTRAP.md and walk you through it. This runs identity initialization before any real work.
+Settings the wizard skips	Budget limits, model routing, cache settings, memory governance, and heartbeat interval and routing. All need manual edits to openclaw.json.
+dmPolicy: allowlist	Only user IDs in the channel's allowFrom list can message the agent directly. The default open policy lets anyone on the platform reach it.
+groupPolicy: disabled	The agent ignores group chats. An open group policy lets any group member feed it prompt injection.
+Telegram as first channel	The recommended starting channel because it needs the least credential setup and gives the fastest feedback for testing.
+Control UI access rule	From a remote IP the Control UI works only over HTTPS with a valid certificate; otherwise use localhost. This is intentional.
+SSH tunnel for the Control UI	Development access method: forward a local port over SSH to the server's loopback-bound gateway port.
+.env secrets approach	Minimum viable option: secrets in an env file loaded by Compose. Gitignore it, set mode 600, and exclude secrets that reach beyond OpenClaw.
+Docker secrets	Swarm-mode secrets stored and transmitted encrypted, exposed only to authorized services as files. Requires OpenClaw support for _FILE variables.
+When to use an external secrets manager	When several people can SSH to the host, credentials are shared across services, regulation demands audited automatic rotation, or you deploy for a client.
+Committed .env file	Treat every credential in it as compromised and rotate all of them. Deleting the file after a push does not undo the exposure.
+Gateway token entropy	Generate the token randomly, for example with openssl rand -hex 24. Short or human-chosen tokens can be brute-forced against an exposed port.
+Docker and ufw	Docker edits iptables directly and bypasses ufw by default, so check that the Docker-managed rules match your firewall intent.
+openclaw doctor	Built-in policy audit that reports known misconfiguration patterns. Review every warning before going live.
+Backup targets	workspace/ and state/. With a working Compose setup, these two directories are all a full recovery needs. Test restores quarterly.
+archive/ directory	Holds earlier versions of identity files for rollback and audit. It is version history, not a backup.
+Behavioral monitoring	A short weekly read of a few recent conversations, checking for misread instructions, missed confirmation gates and unexpected MEMORY.md writes.
+Uptime Kuma	Optional external uptime monitor added to the Compose stack that polls the health endpoint and alerts when it fails.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

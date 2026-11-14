@@ -1,0 +1,26 @@
+Internal event object (§2.2)	The standard format every input is normalized into, so a Telegram message and a cron job are handled by identical downstream logic.
+Four event types (§2.2)	Message, scheduled, webhook, and heartbeat.
+Heartbeat event (§2.2)	Internal runtime signal, every 30 minutes by default, that triggers a light self-check and queued background work; it needs no external reply.
+dmPolicy (§2.2)	Direct-message setting per channel: allowlist (only IDs in allowFrom), open (anyone who finds the bot), or disabled.
+groupPolicy (§2.2)	Group-chat setting per channel: mention (respond only when @mentioned), all (process every message), or disabled.
+allowFrom identifiers (§2.2)	Use platform user IDs (numeric Telegram IDs, Slack member IDs), never usernames or display names, because those can change.
+HMAC-SHA256 webhook auth (§2.2)	Recommended webhook method: the caller signs each payload with a shared secret. Unlike a bearer token, the signature is bound to the content.
+Sequential event processing (§2.2)	One event at a time per session. Prevents races in tool calls and memory writes, but a slow tool call blocks later events.
+Stable prefix (§2.3)	Assembly steps 1-7: identity files, MEMORY.md, daily logs, tool schemas. Unchanged between turns in a session, so it can be prompt-cached.
+Variable suffix (§2.3)	Session history plus the incoming event. Grows each turn and is not cached, so volatile content belongs at the end.
+Primary cost control lever (§2.3)	Governing workspace file size. An ungoverned workspace after six months can cost about $165/month in input tokens versus about $13 governed.
+Silent skip of missing files (§2.3)	Absent context files are skipped without error. An AGENTS.md startup check can turn a missing SOUL.md into an explicit alert.
+Credentials and context (§2.3)	Keep secrets out of every context file, since the model can read all of it. Put them in environment variables used by tool code.
+SOUL.md's four questions (§2.4)	How the agent communicates, what wins when values conflict, what it will never do, and how it handles ambiguous instructions.
+AGENTS.md role (§2.4)	Operational runbook: files to load at session start, safety defaults, confirmation rules, memory governance, group chat and tool/channel policies.
+SOUL.md vs AGENTS.md conflict (§2.5)	On an edge-case conflict, SOUL.md wins because it sets the frame the model uses to interpret everything else.
+fallbacks array (§2.5)	Ordered list of alternate models tried in sequence when the primary is unavailable from rate limits, outages, or budget caps.
+Tool in OpenClaw (§2.6)	A directory under skills/ holding a SKILL.md (description, input schema, behavioral notes) plus the implementation code.
+Five-stage tool pipeline (§2.6)	Schema validation, permission check, sandbox check, execution, result normalization.
+SKILL.md is not enforced (§2.6)	Behavioral notes are read by the model, not checked by the execution layer. Put high-stakes constraints in the tool code as well.
+Specific confirmation gates (§2.6)	Gates that name exact details (recipient, file path, event) remove the gap left when the model interprets a vague word like destructive.
+Result compression (§2.6)	A cheap model summarizes large tool output before it enters context, so later calls carry a short summary instead of the full payload.
+Three memory layers (§2.7)	Session history (current conversation), daily logs in memory/YYYY-MM-DD.md, and curated long-term MEMORY.md.
+Memory drift (§2.7)	MEMORY.md facts that were true when written but are now outdated; the model still acts on them confidently. Dating entries makes drift visible.
+Null channel (§2.8)	Setting channel to null runs a task with no external message, which suits housekeeping such as the daily log write.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3
