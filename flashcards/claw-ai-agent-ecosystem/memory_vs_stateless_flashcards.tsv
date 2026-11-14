@@ -1,0 +1,16 @@
+Stateless chatbot (§1.1)	Each prompt stands alone and nothing carries over between interactions; even a long context window has a start and an end.
+Persistent agent (§1.1)	Keeps a working context that evolves over time; its current state results from earlier events and shapes later ones.
+Weekly briefing contrast (§1.1)	A chatbot needs fresh data pasted each week and can't recall last week's answer; an agent compares against the prior state it recorded.
+Memory persistence subsystem (§1.3)	Records outcomes so the next session starts knowing today's decisions; it is what makes persistence meaningful.
+Identity files vs system prompt (§1.3.1)	A framework system prompt resets each session; Claw identity files exist outside any conversation and load fresh every session.
+Price of full identity loading (§1.3.1)	Loading whole files every session costs more tokens than retrieving RAG chunks, but the agent always has its complete identity.
+SOUL.md (§3.2)	Values and decision priorities: communication, value conflicts, hard limits, and ambiguity handling. Changes rarely.
+AGENTS.md (§3.3)	Procedures: session initialization, confirmation gates, group behavior, and memory governance rules.
+USER.md (§3.4)	Persistent user context and calibration: name, timezone, role, expertise, preferences, and topics to avoid raising.
+MEMORY.md (§3.5)	Curated, dated, durable facts likely to affect decisions weeks or months later; maintained deliberately, not auto-generated.
+Daily log (§2.7)	memory/YYYY-MM-DD.md: a model-written session summary of decisions, tool calls, and open items. Today's and yesterday's load by default.
+Promotion (§3.5)	Moving a durable fact from daily logs into MEMORY.md, by user instruction, agent proposal with confirmation, or scheduled review.
+Stale memory (§2.7)	Outdated facts the model applies with full confidence, producing answers that are precisely wrong rather than vaguely generic.
+Memory as attack surface (§2.7)	An injected false MEMORY.md entry loads into every later session. Restrict memory writes to direct user instructions and confirmed facts.
+Session history vs memory log (§4.4)	Session history carries context within one session; the memory log carries what should outlast it.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3
