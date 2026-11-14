@@ -1,0 +1,51 @@
+AGENTS.md	Workspace file for operating procedures: session startup order, confirmation gates, group chat behavior, and memory rules. SOUL.md sets values; this sets conduct.
+Agentic moment	The 2025 to 2026 window when individuals could run persistent autonomous agents on ordinary hardware, enabled by capable models, tool frameworks, and identity files.
+BOOTSTRAP.md	Optional workspace file holding a guided identity setup. It runs when the agent's first message asks it to read and walk through the file.
+Bootstrap trap	A new agent gets a real question as its first message, skips identity setup, and acts generically until its identity files are loaded.
+Budget cap	A daily or monthly spend limit in config that pauses or disables the agent once API cost reaches the threshold.
+Cache hit	A prompt cache lookup that matches the same token sequence at the same position, billed at roughly a tenth of the normal input rate.
+Claw pattern	Template of seven subsystems: events coming in, building context, identity and policy, the model's reasoning, running tools, persisting memory, and output channels.
+ClawHub	OpenClaw's community skills registry. Listings are not vetted before publication, so audit any skill before installing it.
+ClawJacked	Vulnerability class in which hostile content in a web page or email takes over an agent session through indirect prompt injection.
+Confirmation gate	AGENTS.md rule requiring user approval before a named operation. It must define the trigger, what to show first, and what counts as a real yes.
+Context assembly	Runtime step 2: merging identity files, memory, session history, and the new message into one token sequence. The main driver of cost.
+Context window	The most tokens a model can take in one call. The book cites 200,000 for claude-sonnet-4-6; typical context assembly uses 20,000 to 60,000.
+Daily log	Auto-created memory file named by date that records the day's activity, decisions, and open items. Loaded at session start.
+Graceful degradation	When tools, context, or capabilities are lost, the agent falls back to a reduced but still correct mode instead of failing or misbehaving.
+Hard boundary	A SOUL.md constraint no source can override, including the operator. Written in absolute terms like never, unlike softer preferences.
+Heartbeat	A scheduled synthetic turn, every 30 minutes by default, that runs the full loop. Unrouted on Sonnet it costs about $1.08 a day; route it to a local model.
+HHH alignment	Helpful, Harmless, Honest. Fine for chat but insufficient for agents, where SOUL.md must rank these values to settle conflicts.
+Identity layer	SOUL.md, AGENTS.md, USER.md, and MEMORY.md together. They split the system prompt into files with distinct roles, update rates, and governance.
+Indirect prompt injection	Injection hidden in content the agent retrieves, such as email, web pages, documents, or API replies. The most common form in production.
+Knowledge elicitation	A method for turning expert know-how into usable representations. For SOUL.md, it means making the operator's unstated intent explicit.
+MCP (Model Context Protocol)	Anthropic's open protocol for connecting models to external tools, letting one tool implementation serve many agent runtimes.
+Memory drift	MEMORY.md slowly diverging from reality because stale entries are never removed. A frequent cause of fixed bugs reappearing.
+MEMORY.md	Long-term store for durable facts, preferences, and history. Needs regular pruning of stale or resolved entries to protect cost and quality.
+Multi-agent orchestration	A brain agent coordinates specialized sub-agents, each with its own identity files and tools. Trust between agents must be set explicitly.
+NanoClaw	Claw-pattern runtime built around container isolation: agent work runs in Docker containers, so tasks cannot reach each other's files or processes.
+OpenClaw	Runtime created by Peter Steinberger and released in late 2025. It became the first broadly used self-hosted agent to combine identity files, memory, channels, and tools.
+Prompt caching	The Anthropic API reuses computed state for a repeated token prefix. Works best when stable content precedes changing content in context.
+Prompt injection	Hostile instructions placed in model input to override identity constraints. Five types: direct, indirect, web page, tool result, and memory poisoning.
+Reversibility framework	Ranks operations from fully reversible (create) to effortful (rename), hard (overwrite), and irreversible (delete, send). Gate strictness should scale with it.
+Runtime loop	Eight steps per turn: event received, context assembly, model call, parsing, tool execution, follow-up call, memory update, response delivery.
+Session	Running context from the first message until closed or restarted. OpenClaw keeps a separate one for each agent, channel, and peer combination.
+Session pruning	Once context passes the soft threshold, older turns are summarized into the daily log and dropped, capping cost while keeping continuity.
+Skills	Extensions that add tools beyond the built-in set, from ClawHub or local files. Community skills are unvetted and need auditing.
+softThresholdTokens	The context size that triggers session pruning. The book recommends 40,000 tokens as a balance of context richness and cost.
+SOUL.md	File setting the agent's behavioral philosophy: style, value priority order, hard boundaries, and ambiguity handling. Aim for under 100 lines.
+Source trust hierarchy	AGENTS.md ranking of instruction sources: runtime config, authenticated user, trusted orchestrator, scheduled prompts, then external content as data only.
+Supply chain attack	A malicious payload delivered through a dependency such as a skill or package, in three stages: listing, payload delivery, execution.
+Tool risk tier	Five consequence levels: read-only, stateful read, write, destructive write, destructive delete. The tier sets default permissions and gates.
+USER.md	Holds task-relevant user context such as role, projects, and preferences. Keep it under 50 lines and review monthly, since stale content hurts.
+Workspace	Directory holding identity files, memory, skill configs, and agent files. Keep it in a private version-controlled repo and back it up often.
+Brain agent	The orchestrator that splits tasks, routes them to sub-agents, and merges results. Trusted above sub-agents but still bound by its own SOUL.md.
+Channel	Any surface the agent communicates through, such as Telegram, Slack, email, webhooks, or an API. Each has its own access settings.
+dmPolicy	Controls who can open direct messages with the agent: allowlist (listed IDs only), open (anyone), or disabled. Production should use allowlist.
+Event queue	Lines up incoming events and handles them singly, so tool runs never overlap and contexts never mix.
+Gateway	OpenClaw's entry point for incoming events. It normalizes channels, enforces access control, and routes to the runtime loop.
+Null channel	Synthetic output for background jobs. The full loop runs, including tools and memory writes, but no reply is delivered.
+SKILL.md	Per-skill file describing its tools, input schemas, and usage constraints. Loaded into context, so vague descriptions cause misrouted tool calls.
+Token audit	Counting tokens across workspace files with tiktoken to find bloat. Target a total under 3,000 tokens.
+Trust hierarchy collapse	Multi-agent failure where sub-agent messages get user-level authority, so a compromised sub-agent can steer the brain agent.
+Webhook	A public HTTPS endpoint an outside service calls when events occur, used for Gmail push, GitHub events, and calendar updates.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

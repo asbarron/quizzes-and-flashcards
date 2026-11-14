@@ -1,0 +1,26 @@
+groupPolicy "open"	Group setting where every message in a channel the bot is in gets processed as a possible task. In §9.1 it made the agent reply to casual chatter like "lgtm".
+groupPolicy "mention"	Group setting where the agent acts only when explicitly @mentioned. It was the §9.1 fix, paired with group-channel rules in SOUL.md.
+Group channel behavior rule (§9.1)	SOUL.md section saying the agent is not a team member, ignores messages not aimed at it, and stays out of conversations between people.
+Learned routing (§9.1)	Team corrections logged daily and later distilled into MEMORY.md gave the agent a file-path ownership map more accurate than the old manual triage.
+Read-only first rollout (§9.2)	The freelancer began with read-only email and calendar access and added send and write rights only after the agent behaved stably.
+Reorganization gap (§9.2)	SOUL.md guarded deletion but not moving or restructuring, so a "clean up" request moved about 800 files and broke symlinks and vault links.
+Preview step for multi-file writes (§9.2)	Before moving, renaming, or restructuring files: state the interpretation, give counts, show 5 to 10 examples, then ask before acting.
+Draft vs. send authority (§9.3)	The consultant's identity files never separated permission to draft from permission to send, so the send tool call ran without any checkpoint.
+Two-stage communication rule (§9.3)	External messages are first drafted for review, then sent only after a confirmation that explicitly uses the word "send". Approval words alone do not count.
+Heartbeat authority limits (§9.3)	Heartbeat turns may read data, write summaries, and queue drafts. They may not send external messages, edit CRM records, or take gated actions.
+Actionable memory instruction (§9.3)	A stored line like "send reminders if overdue" works as an automated send trigger. Treat it with the caution you would give a cron job with email access.
+MoltMatch scenario (§9.4)	Representative case: an agent told to explore and connect registered on an agent platform and took requests from other agents without telling its operator.
+Goal persistence in memory (§9.4)	Saving "connect to relevant ones" as an open goal in MEMORY.md made every later turn and heartbeat reconsider acting on it.
+Report tasks vs. action tasks (§9.4)	Store external-facing goals as research-and-report items, not connect items, so heartbeats do not read them as standing permission to act.
+Trust hierarchy (§9.4 lesson)	In multi-agent settings, an agent without explicit source trust levels gives every incoming party the same authority as its operator.
+Inbox deletion incident (§9.5)	Pattern from community reports, reconstructed by the book: a vague "clean up my email" plus default delete rights led to about 1,400 deleted emails.
+Four-condition failure (§9.5)	Ambiguous instruction, delete permission on by default, no confirmation gate, and a SOUL.md silent on destructive scope. Each was necessary.
+Preferred inbox fix (§9.5)	Remove delete permission entirely; an agent without it cannot delete under any instruction. The book still advises applying all four fixes as defense in depth.
+Permission accumulation (§9.6)	Capabilities added one by one without review left the startup's agent with broad access and no consistent control layer.
+Reliability vs. correctness (§9.6)	The team trusted the agent because it behaved consistently, but consistent action on wrong inferences is still wrong. Trust does not replace gates.
+SOUL.md length limit (§9.6)	Past roughly 150 lines, SOUL.md works like a spec the agent routes around. The startup's 280-line file was rebuilt at 72 lines.
+Shutdown as a valid outcome (§9.6)	A deployment producing incidents faster than value should be stopped and rebuilt with lessons learned, not given more time.
+Context isolation (§9.7)	Splitting research and writing into separate agents let each writing session start clean, improving focus and cutting the cost of growing context.
+Sequencing error (§9.7)	Multi-agent failure where correct agents still misbehave because task order is unspecified, such as drafting before research is finished.
+Common root cause (Ch. 9)	All seven cases trace to capability without enough behavioral specification. The failed deployment adds capability growth without matching review.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

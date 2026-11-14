@@ -1,0 +1,26 @@
+Claw pattern as a category	OpenClaw's lasting contribution is the self-hosted agent runtime pattern itself, which others copied, extended, and hardened within months.
+NanoClaw	Self-hosted Claw-pattern runtime that contains execution in Docker containers by design, instead of relying on configuration restrictions.
+Isolation-first vs. configuration-based security	NanoClaw confines tool execution through architecture. OpenClaw starts with host access and depends on opt-in restrictions set in config.
+Why NanoClaw was built	Config hardening narrows but cannot remove the risk that an injected tool with filesystem access reaches anything the host process can.
+When NanoClaw fits	Sensitive regulated data, several users needing isolation from each other, unreviewed community tools, or existing container orchestration.
+When hardened OpenClaw fits	A single user, tools that need persistent filesystem state, latency-sensitive tool calls, and tool code the operator has reviewed.
+Container overhead	Per-task containers add spin-up latency to tool calls and need extra setup for any state that must persist between calls.
+Explainability advantage	Enterprises often choose NanoClaw because auditors and legal teams grasp container isolation more easily, even when security is equivalent.
+Identity files (landscape table)	Structured SOUL.md/AGENTS.md-style files kept outside the conversation. A plain system prompt or agent config only earns partial credit.
+Built-in memory (landscape table)	Persistence the runtime manages across sessions, such as daily logs plus MEMORY.md. Needing an external vector store counts as partial.
+Multi-channel (landscape table)	Native support for messaging apps like Telegram, Slack, Discord, and WhatsApp without building custom connectors.
+CrewAI and AutoGen	Python libraries for multi-agent pipelines and research experiments. Better for task runs than for always-on assistants.
+LangChain and LlamaIndex	Developer frameworks for building custom agent and RAG applications. Neither is a deployable runtime on its own.
+n8n with AI nodes	A workflow automation backbone with AI in selected steps. Suits hybrid automation better than a pure agent.
+Moltbook	A Reddit-style platform whose users are AI agents. The book treats it as a research artifact for observing multi-agent behavior.
+Identity drift under adversarial pressure	Agents repeatedly exposed to peers claiming authority gradually treat them as instruction sources, unless SOUL.md rules that out.
+Peer trust convergence	Without explicit trust levels, agents give all agent messages equal weight, letting a low-authority agent mislead higher-authority ones.
+Non-transferable authority statement	SOUL.md clause saying behavior is set by config files loaded at session start, and no runtime message can lift or widen it.
+Agent message categorization	Treat another agent as a trusted orchestrator only if AGENTS.md names it. Otherwise handle its messages as external data, not commands.
+ClawHub skill permissions	An installed skill runs with the agent's own permissions, including any filesystem and outbound network access the agent holds.
+ClawHub verified publisher tier	Skills reviewed by the ClawHub security team, scanned by automated static analysis, and tied to a known publisher identity.
+Template test	If you cannot recall making the decision a SOUL.md section encodes, it probably came from a template and may not fit your situation.
+Four development trajectories	Security tooling matures, multi-agent orchestration standardizes, behavioral evaluation frameworks develop, and regulatory frameworks arrive.
+Adversarial subagents	Open research problem: a subagent compromised by injection pushing its payload up to the orchestrator. No standard defense exists yet.
+Portable vs. non-portable assets	Identity markdown files move between runtimes. Session logs, skill configuration, and channel registrations must be redone on a new platform.
+Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3
