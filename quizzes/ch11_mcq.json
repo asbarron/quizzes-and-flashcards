@@ -12,7 +12,7 @@
   "section": "§11.1"
  },
  {
-  "q": "A solo user has reviewed all tool code, needs files to persist between tool calls, and cares about tool latency. Which does the book point to?",
+  "q": "A solo user has reviewed all tool code, needs files to persist between tool calls, and cares about tool latency. Which is the best fit?",
   "options": [
    "OpenClaw with full hardening",
    "NanoClaw with per-task containers",
@@ -24,7 +24,7 @@
   "section": "§11.1"
  },
  {
-  "q": "Per the book, why do many enterprises that evaluate both end up choosing NanoClaw?",
+  "q": "Why do many enterprises that evaluate both OpenClaw and NanoClaw end up choosing NanoClaw?",
   "options": [
    "It has more GitHub stars",
    "It is cheaper to run",
@@ -48,7 +48,7 @@
   "section": "§11.2"
  },
  {
-  "q": "What does the book mean by trust hierarchy collapse?",
+  "q": "What is trust hierarchy collapse in a multi-agent system?",
   "options": [
    "Running out of context for trust rules",
    "Agents converging on equal trust for all agent messages, so a low-authority agent can mislead others",
@@ -60,7 +60,7 @@
   "section": "§11.2"
  },
  {
-  "q": "A practitioner wants a ClawHub skill that reads their email. What does the book advise?",
+  "q": "A practitioner wants a ClawHub skill that reads their email. What's the safe approach?",
   "options": [
    "Use only a verified publisher skill or review the code yourself",
    "Pick the most-starred community skill",
@@ -72,7 +72,7 @@
   "section": "§11.3.1"
  },
  {
-  "q": "Which protocol does the book call the closest current candidate for standardizing agent-to-agent communication?",
+  "q": "Which protocol is the closest current candidate for standardizing agent-to-agent communication?",
   "options": [
    "OAuth 2.0",
    "Webhooks",
@@ -80,7 +80,7 @@
    "Model Context Protocol (MCP)"
   ],
   "answer": 3,
-  "explanation": "MCP already standardizes tool interfaces, and the book sees extending it to agent coordination as a natural step. (Barron, The Claw AI Agent Ecosystem, §11.4)",
+  "explanation": "MCP already standardizes tool interfaces, and extending it to agent coordination is a natural step. (Barron, The Claw AI Agent Ecosystem, §11.4)",
   "section": "§11.4"
  },
  {
@@ -108,7 +108,7 @@
   "section": "§11.6"
  },
  {
-  "q": "For a beginner deployment in months 1 to 3, which ecosystem developments does the book call most relevant?",
+  "q": "For a beginner deployment in its first three months, which ecosystem developments matter most?",
   "options": [
    "Multi-agent orchestration standards",
    "Enterprise behavioral evaluation tooling",

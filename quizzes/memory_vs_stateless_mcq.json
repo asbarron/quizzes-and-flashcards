@@ -1,6 +1,6 @@
 [
  {
-  "q": "Why, per Chapter 1, can't a chat interface manage a project from kickoff through delivery well?",
+  "q": "Why can't a chat interface manage a project from kickoff through delivery well?",
   "options": [
    "Models are too weak at multi-step reasoning",
    "It retains nothing from earlier days; even a long context window has a beginning and an end",
@@ -72,7 +72,7 @@
   "section": "§4.4"
  },
  {
-  "q": "Why does the book say stale memory can be worse than no memory?",
+  "q": "Why can stale memory be worse than no memory?",
   "options": [
    "The model applies outdated facts with full confidence, giving precisely wrong answers",
    "Stale entries crash the runtime",
@@ -84,7 +84,7 @@
   "section": "§2.7"
  },
  {
-  "q": "Which injection outcome does Chapter 3 call the most dangerous because it is the least visible?",
+  "q": "Which injection outcome is the most dangerous because it is the least visible?",
   "options": [
    "Persona override",
    "Authority escalation using a SYSTEM prefix",
@@ -128,7 +128,7 @@
    "USER.md"
   ],
   "answer": 3,
-  "explanation": "Chapter 2 lists timezone as an inappropriate MEMORY.md entry because it already belongs in USER.md. (Barron, The Claw AI Agent Ecosystem, §2.4)",
+  "explanation": "Timezone is an inappropriate MEMORY.md entry because it already belongs in USER.md. (Barron, The Claw AI Agent Ecosystem, §2.4)",
   "section": "§2.4"
  },
  {

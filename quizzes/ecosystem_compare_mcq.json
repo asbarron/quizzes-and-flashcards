@@ -1,6 +1,6 @@
 [
  {
-  "q": "In the book's landscape table, which systems are self-hosted and have full identity file support?",
+  "q": "Which systems are self-hosted and support full structured identity files?",
   "options": [
    "CrewAI and AutoGen",
    "OpenClaw and NanoClaw",
@@ -24,7 +24,7 @@
   "section": "§11.1"
  },
  {
-  "q": "A team wants to move its OpenClaw SOUL.md and AGENTS.md to NanoClaw. What does the book say about the identity layer?",
+  "q": "A team wants to move its OpenClaw SOUL.md and AGENTS.md to NanoClaw. What happens to the identity layer?",
   "options": [
    "NanoClaw does not support identity files",
    "Files must be rewritten as container specs",
@@ -36,7 +36,7 @@
   "section": "§11.1"
  },
  {
-  "q": "Why does the book rate NanoClaw's configuration complexity higher than OpenClaw's?",
+  "q": "Why is NanoClaw's configuration more complex than OpenClaw's?",
   "options": [
    "It requires Python code",
    "It has no default settings",
@@ -48,7 +48,7 @@
   "section": "§11.1"
  },
  {
-  "q": "A Python-skilled team needs a multi-step task pipeline with defined start and end states and no always-on runtime. Which does the book point to?",
+  "q": "A Python-skilled team needs a multi-step task pipeline with defined start and end states and no always-on runtime. Which fits best?",
   "options": [
    "CrewAI or AutoGen",
    "OpenClaw",
@@ -60,7 +60,7 @@
   "section": "§11.6"
  },
  {
-  "q": "For an always-on assistant that reacts to events and keeps context across sessions, which does the book say provide the full runtime model?",
+  "q": "For an always-on assistant that reacts to events and keeps context across sessions, which systems provide the full runtime model?",
   "options": [
    "LangChain and LlamaIndex",
    "Dify and Flowise",
@@ -72,7 +72,7 @@
   "section": "§11.6"
  },
  {
-  "q": "A technical team with no developers wants to configure an agent without writing code. Why does the book favor OpenClaw or NanoClaw here?",
+  "q": "A technical team with no developers wants to configure an agent without writing code. Why do OpenClaw or NanoClaw fit here?",
   "options": [
    "They have no configuration at all",
    "They are configured through JSON and markdown files",
@@ -80,11 +80,11 @@
    "They are managed by a cloud provider"
   ],
   "answer": 1,
-  "explanation": "Python frameworks need Python expertise. The book calls this team skill fit often a bigger constraint than architecture. (Barron, The Claw AI Agent Ecosystem, §11.6)",
+  "explanation": "Python frameworks need Python expertise; team skill fit is often a bigger constraint than architecture. (Barron, The Claw AI Agent Ecosystem, §11.6)",
   "section": "§11.6"
  },
  {
-  "q": "How does the book position LangChain and LlamaIndex?",
+  "q": "How are LangChain and LlamaIndex best positioned?",
   "options": [
    "As managed enterprise runtimes",
    "As isolation-first runtimes",
@@ -108,7 +108,7 @@
   "section": "§11.1.1"
  },
  {
-  "q": "When does the book recommend n8n with AI nodes?",
+  "q": "When is n8n with AI nodes the right choice?",
   "options": [
    "For container-isolated enterprise agents",
    "For research experiments with many agents",
@@ -128,7 +128,7 @@
    "They are self-hosted"
   ],
   "answer": 0,
-  "explanation": "The book reserves full credit for separate SOUL.md/AGENTS.md-style files that support its governance model. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "explanation": "Full credit goes to separate SOUL.md/AGENTS.md-style files that support structured governance. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
   "section": "§11.1.1"
  },
  {

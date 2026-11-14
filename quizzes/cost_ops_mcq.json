@@ -8,7 +8,7 @@
    "Bandwidth: heartbeats saturate a 1 Gbps link."
   ],
   "answer": 2,
-  "explanation": "The book says memory is the constraint and recommends the 8 GB tier over the 4 GB minimum when running local Ollama. (Barron, The Claw AI Agent Ecosystem, §5.1)",
+  "explanation": "Memory is the constraint: choose the 8 GB tier over the 4 GB minimum when running local Ollama. (Barron, The Claw AI Agent Ecosystem, §5.1)",
   "section": "§5.1"
  },
  {
@@ -48,11 +48,11 @@
   "section": "§5.10"
  },
  {
-  "q": "Setup: today's API cost is double the 7-day average. Under the book's thresholds, what is the status?",
+  "q": "Setup: today's API cost is double the 7-day average. What alert level is this?",
   "options": [
    "Green: within normal variation.",
    "Yellow: investigate within a week.",
-   "Not covered by the thresholds.",
+   "No alert: daily cost swings are normal.",
    "Red: act now."
   ],
   "answer": 3,
@@ -60,7 +60,7 @@
   "section": "§5.11"
  },
  {
-  "q": "Setup: a customer-support style deployment handles many short, unrelated questions. Which session setting does the book suggest?",
+  "q": "Setup: a customer-support style deployment handles many short, unrelated questions. Which session setting fits best?",
   "options": [
    "Raise softThresholdTokens to 100,000.",
    "Cap the session at about 20 messages with truncation.",
@@ -80,7 +80,7 @@
    "Disable prompt caching."
   ],
   "answer": 0,
-  "explanation": "The book suggests higher thresholds for long-running tasks so more context fits before summarization. (Barron, The Claw AI Agent Ecosystem, §6.4)",
+  "explanation": "Long-running tasks warrant higher thresholds so more context fits before summarization. (Barron, The Claw AI Agent Ecosystem, §6.4)",
   "section": "§6.4"
  },
  {
@@ -104,11 +104,11 @@
    "Whether the provider spend cap is too low."
   ],
   "answer": 1,
-  "explanation": "The book says a hit rate under 70% points to one of the four cache failure modes. (Barron, The Claw AI Agent Ecosystem, §6.9)",
+  "explanation": "A hit rate under 70% points to one of the four cache failure modes. (Barron, The Claw AI Agent Ecosystem, §6.9)",
   "section": "§6.9"
  },
  {
-  "q": "Setup: you plan to add OpenRouter for cheaper models before applying any other cost strategy. What does the book advise?",
+  "q": "Setup: you plan to add OpenRouter for cheaper models before applying any other cost strategy. What's the better approach?",
   "options": [
    "Add as many providers as possible at the start.",
    "Replace Anthropic entirely with local models.",
@@ -116,11 +116,11 @@
    "Optimize within a single provider first; multi-provider adds complexity."
   ],
   "answer": 3,
-  "explanation": "The book's strategies cut costs substantially without provider diversity, and multi-provider adds rate-limit, quality and credential overhead. (Barron, The Claw AI Agent Ecosystem, §6.10)",
+  "explanation": "Single-provider strategies already cut costs substantially, and multi-provider adds rate-limit, quality and credential overhead. (Barron, The Claw AI Agent Ecosystem, §6.10)",
   "section": "§6.10"
  },
  {
-  "q": "Setup: a pull request code review task needs a model tier. Which tier does the book's routing table assign?",
+  "q": "Setup: a pull request code review task needs a model tier. Which tier fits best?",
   "options": [
    "Sonnet",
    "Local 1B model",
@@ -132,7 +132,7 @@
   "section": "§6.10"
  },
  {
-  "q": "Setup: the config budget limit is set, but a bug could stop OpenClaw from enforcing it. What extra layer does the book require?",
+  "q": "Setup: the config budget limit is set, but a bug could stop OpenClaw from enforcing it. What extra layer is needed?",
   "options": [
    "A second daily limit in openclaw.json.",
    "A cron job that kills the container at midnight.",
@@ -140,7 +140,7 @@
    "Nothing; config limits are sufficient."
   ],
   "answer": 2,
-  "explanation": "Provider caps are the last line of defense. The book says neither layer alone is sufficient. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "explanation": "Provider caps are the last line of defense. Neither layer alone is sufficient. (Barron, The Claw AI Agent Ecosystem, §6.6)",
   "section": "§6.6"
  }
 ]
