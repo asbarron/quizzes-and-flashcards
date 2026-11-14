@@ -13,11 +13,11 @@ Knowledge representation problem	Experts cannot fully put their knowledge into w
 Three unelicited assumptions	Scope, reversibility, and permission context: things operators assume the agent understands but never write into SOUL.md.
 Edge case battery	For each tool, write 3 to 5 instructions a reasonable person could read two ways, run them, and compare results with your intent.
 Highest-ambiguity operation class	Clean, remove, and delete requests rank very high in ambiguity because both the exact scope and the undo path are unclear.
-Loop 1: action, memory, behavior	Reinforcing loop. Outcomes saved to memory shape later sessions, so good habits and wrong assumptions both amplify until corrected.
-Loop 2: feedback to SOUL.md revision	Balancing loop that keeps the agent aligned with intent, but it only closes when the operator watches behavior and revises identity files.
-Loop 3: memory growth and context cost	As memory grows, context cost and truncation risk rise and quality falls, unless memory governance intervenes.
+Feedback loop: action, memory, behavior	Reinforcing loop. Outcomes saved to memory shape later sessions, so good habits and wrong assumptions both amplify until corrected.
+Feedback loop: user feedback to SOUL.md	Balancing loop that keeps the agent aligned with intent, but it only closes when the operator watches behavior and revises identity files.
+Feedback loop: memory growth and context cost	As memory grows, context cost and truncation risk rise and quality falls, unless memory governance intervenes.
 Tool vs. employee paradigm	Tool framing yields conservative configuration; employee framing yields permissive configuration. Start as a tool and widen scope as trust is earned.
-Five ethical design principles	Explicit interest priority, autonomy calibrated to context, a stated harm floor, deliberate consent design, and attention to third-party effects.
+Ethical design principles for agents	Explicit interest priority, autonomy calibrated to context, a stated harm floor, deliberate consent design, and attention to third-party effects.
 Harm floor	The hard boundaries an agent keeps regardless of instructions. Leaving the section empty is a policy choice, not a neutral default.
 Deployer (EU AI Act)	The party that puts an AI system into use for a purpose. An individual running OpenClaw counts as a deployer, not a provider.
 NIST AI RMF	Voluntary US framework published in 2023, organized into four functions: Govern, Map, Measure, and Manage.

@@ -9,7 +9,7 @@ Draft vs. send authority	The consultant's identity files never separated permiss
 Two-stage communication rule	External messages are first drafted for review, then sent only after a confirmation that explicitly uses the word "send". Approval words alone do not count. (§9.3)
 Heartbeat authority limits	Heartbeat turns may read data, write summaries, and queue drafts. They may not send external messages, edit CRM records, or take gated actions. (§9.3)
 Actionable memory instruction	A stored line like "send reminders if overdue" works as an automated send trigger. Treat it with the caution you would give a cron job with email access. (§9.3)
-MoltMatch scenario	Representative case: an agent told to explore and connect registered on an agent platform and took requests from other agents without telling its operator. (§9.4)
+Agent recruited by other agents	An agent told to explore and connect joins an agent platform and takes requests from other agents without telling its operator. (§9.4)
 Goal persistence in memory	Saving "connect to relevant ones" as an open goal in MEMORY.md made every later turn and heartbeat reconsider acting on it. (§9.4)
 Report tasks vs. action tasks	Store external-facing goals as research-and-report items, not connect items, so heartbeats do not read them as standing permission to act. (§9.4)
 Trust hierarchy	In multi-agent settings, an agent without explicit source trust levels gives every incoming party the same authority as its operator. (§9.4 lesson)
@@ -22,4 +22,4 @@ SOUL.md length limit	Past roughly 150 lines, SOUL.md works like a spec the agent
 Shutdown as a valid outcome	A deployment producing incidents faster than value should be stopped and rebuilt with lessons learned, not given more time. (§9.6)
 Context isolation	Splitting research and writing into separate agents let each writing session start clean, improving focus and cutting the cost of growing context. (§9.7)
 Sequencing error	Multi-agent failure where correct agents still misbehave because task order is unspecified, such as drafting before research is finished. (§9.7)
-Common root cause (Ch. 9)	All seven cases trace to capability without enough behavioral specification. The failed deployment adds capability growth without matching review.
+Common root cause of agent incidents	Capability without enough behavioral specification. Growing capability without matching review makes it worse.

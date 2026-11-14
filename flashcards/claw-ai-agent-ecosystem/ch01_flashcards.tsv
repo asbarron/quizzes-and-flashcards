@@ -22,4 +22,4 @@ Scope expansion	A general instruction plus broad permissions and no confirmation
 Permission escalation chain	Separately allowed tool actions combine across turns into harm, such as reading a file with credentials and then emailing it. (§1.4)
 February 2026 inbox incident	About 1,400 emails deleted in 22 minutes with the user away. Causes: default delete permission, no confirmation gate, and a broad instruction. Not a software defect. (§1.4)
 Traits of working deployments	Start narrow and expand, keep behavior observable through logs, gate hard-to-undo actions, and use a SOUL.md the operator actually wrote. (§1.4)
-First-month arc	Week 1 setup and tests; week 2 first real data source; week 3 autonomy calibration; week 4 first minor incident, which drives spec fixes. (§1.4.1)
+Phased rollout of a new agent	Week 1 setup and tests; week 2 first real data source; week 3 autonomy calibration; week 4 first minor incident, which drives spec fixes. (§1.4.1)

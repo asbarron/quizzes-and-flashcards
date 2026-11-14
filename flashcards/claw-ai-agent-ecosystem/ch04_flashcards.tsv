@@ -1,4 +1,4 @@
-Eight-step turn	Event received, context assembly, model call, response parsing, tool execution, follow-up model call, memory update, response delivery. (§4.1)
+Steps in one agent turn	Event received, context assembly, model call, response parsing, tool execution, follow-up model call, memory update, response delivery. (§4.1)
 Response parsing branch	Text only: skip to memory update and delivery. Tool calls: execute, append results, call the model again, and repeat until no tools remain. (§4.1)
 Session history default	The whole session history loads every turn; without pruning it grows unbounded and the user pays for all of it on each message. (§4.2)
 Model-tool-memory sub-loop	Validate the call, execute the tool, append the result, call the model again; repeat until the response is text only. (§4.3)

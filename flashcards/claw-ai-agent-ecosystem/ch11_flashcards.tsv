@@ -6,9 +6,9 @@ When NanoClaw fits	Sensitive regulated data, several users needing isolation fro
 When hardened OpenClaw fits	A single user, tools that need persistent filesystem state, latency-sensitive tool calls, and tool code the operator has reviewed.
 Container overhead	Per-task containers add spin-up latency to tool calls and need extra setup for any state that must persist between calls.
 Explainability advantage	Enterprises often choose NanoClaw because auditors and legal teams grasp container isolation more easily, even when security is equivalent.
-Identity files (landscape table)	Structured SOUL.md/AGENTS.md-style files kept outside the conversation. A plain system prompt or agent config only earns partial credit.
-Built-in memory (landscape table)	Persistence the runtime manages across sessions, such as daily logs plus MEMORY.md. Needing an external vector store counts as partial.
-Multi-channel (landscape table)	Native support for messaging apps like Telegram, Slack, Discord, and WhatsApp without building custom connectors.
+Identity file support across agent platforms	Structured SOUL.md/AGENTS.md-style files kept outside the conversation. A plain system prompt or agent config only earns partial credit.
+Built-in memory across agent platforms	Persistence the runtime manages across sessions, such as daily logs plus MEMORY.md. Needing an external vector store counts as partial.
+Multi-channel support across agent platforms	Native support for messaging apps like Telegram, Slack, Discord, and WhatsApp without building custom connectors.
 CrewAI and AutoGen	Python libraries for multi-agent pipelines and research experiments. Better for task runs than for always-on assistants.
 LangChain and LlamaIndex	Developer frameworks for building custom agent and RAG applications. Neither is a deployable runtime on its own.
 n8n with AI nodes	A workflow automation backbone with AI in selected steps. Suits hybrid automation better than a pure agent.
@@ -20,6 +20,6 @@ Agent message categorization	Treat another agent as a trusted orchestrator only 
 ClawHub skill permissions	An installed skill runs with the agent's own permissions, including any filesystem and outbound network access the agent holds.
 ClawHub verified publisher tier	Skills reviewed by the ClawHub security team, scanned by automated static analysis, and tied to a known publisher identity.
 Template test	If you cannot recall making the decision a SOUL.md section encodes, it probably came from a template and may not fit your situation.
-Four development trajectories	Security tooling matures, multi-agent orchestration standardizes, behavioral evaluation frameworks develop, and regulatory frameworks arrive.
+Where agent ecosystems are heading	Security tooling matures, multi-agent orchestration standardizes, behavioral evaluation frameworks develop, and regulatory frameworks arrive.
 Adversarial subagents	Open research problem: a subagent compromised by injection pushing its payload up to the orchestrator. No standard defense exists yet.
 Portable vs. non-portable assets	Identity markdown files move between runtimes. Session logs, skill configuration, and channel registrations must be redone on a new platform.
