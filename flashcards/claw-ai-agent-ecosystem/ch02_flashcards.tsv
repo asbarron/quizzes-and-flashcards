@@ -11,7 +11,7 @@ Variable suffix	Session history plus the incoming event. Grows each turn and is 
 Primary cost control lever	Governing workspace file size. An ungoverned workspace after six months can cost about $165/month in input tokens versus about $13 governed. (§2.3)
 Silent skip of missing files	Absent context files are skipped without error. An AGENTS.md startup check can turn a missing SOUL.md into an explicit alert. (§2.3)
 Credentials and context	Keep secrets out of every context file, since the model can read all of it. Put them in environment variables used by tool code. (§2.3)
-SOUL.md's four questions	How the agent communicates, what wins when values conflict, what it will never do, and how it handles ambiguous instructions. (§2.4)
+What SOUL.md must answer	How the agent communicates, what wins when values conflict, what it will never do, and how it handles ambiguous instructions. (§2.4)
 AGENTS.md role	Operational runbook: files to load at session start, safety defaults, confirmation rules, memory governance, group chat and tool/channel policies. (§2.4)
 SOUL.md vs AGENTS.md conflict	On an edge-case conflict, SOUL.md wins because it sets the frame the model uses to interpret everything else. (§2.5)
 fallbacks array	Ordered list of alternate models tried in sequence when the primary is unavailable from rate limits, outages, or budget caps. (§2.5)
