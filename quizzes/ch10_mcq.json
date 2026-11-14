@@ -1,6 +1,6 @@
 [
  {
-  "q": "According to the book, what is the core weakness of HHH alignment under agentic conditions?",
+  "q": "What is the core weakness of HHH alignment once an AI runs as a persistent agent?",
   "options": [
    "Its values are wrong for agents",
    "It applies only to open-source models",
@@ -36,7 +36,7 @@
   "section": "§10.1"
  },
  {
-  "q": "SOUL.md says to always confirm before sending email, but the AGENTS.md email tool sets requireConfirmation to false. What does the book say usually happens?",
+  "q": "SOUL.md says to always confirm before sending email, but the AGENTS.md email tool sets requireConfirmation to false. What usually happens?",
   "options": [
    "SOUL.md wins because it is loaded first",
    "The more specific AGENTS.md setting wins and silently overrides SOUL.md",
@@ -48,7 +48,7 @@
   "section": "§10.2"
  },
  {
-  "q": "Which identity file does the book describe as relationship policy?",
+  "q": "Which identity file acts as relationship policy?",
   "options": [
    "SOUL.md",
    "AGENTS.md",
@@ -72,7 +72,7 @@
   "section": "§10.3"
  },
  {
-  "q": "In the book's table of operation classes, which has the lowest ambiguity?",
+  "q": "Which class of request is usually the least ambiguous for an agent to interpret?",
   "options": [
    "Send / Publish",
    "Organize / Archive",
@@ -96,7 +96,7 @@
   "section": "§10.4"
  },
  {
-  "q": "In the book's application of Meadows' leverage points to a Claw deployment, which is rated highest leverage?",
+  "q": "Applying Meadows' leverage points to an agent deployment, which intervention has the highest leverage?",
   "options": [
    "Goals (SOUL.md)",
    "Rules (AGENTS.md and permissions)",
@@ -108,7 +108,7 @@
   "section": "§10.4"
  },
  {
-  "q": "An operator leaves the SOUL.md hard boundaries section empty. How does the book characterize this?",
+  "q": "An operator writes a SOUL.md with no hard boundaries at all. What does that choice amount to?",
   "options": [
    "A neutral default that defers to the operator",
    "A safe choice since models are trained to avoid harm",

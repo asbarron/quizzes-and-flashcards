@@ -1,6 +1,6 @@
 [
  {
-  "q": "According to the book's analysis, which cost driver accounts for the largest share of API spend?",
+  "q": "Which cost driver typically accounts for the largest share of an agent's API spend?",
   "options": [
    "Heartbeats and background tasks",
    "Improper model selection",
@@ -8,7 +8,7 @@
    "Multi-round reasoning on complex tasks"
   ],
   "answer": 2,
-  "explanation": "The six-driver table puts context accumulation at 40–50% of spend, well above the other drivers. (Barron, The Claw AI Agent Ecosystem, §6.1)",
+  "explanation": "Context accumulation typically makes up 40–50% of spend, well above the other drivers. (Barron, The Claw AI Agent Ecosystem, §6.1)",
   "section": "§6.1"
  },
  {
@@ -20,11 +20,11 @@
    "The cache TTL expired; raise cacheControlTtl."
   ],
   "answer": 0,
-  "explanation": "The book names the small context window as tinyllama's failure mode and suggests phi-4 or qwen2.5:7b, both still free via Ollama. (Barron, The Claw AI Agent Ecosystem, §6.2)",
+  "explanation": "tinyllama's failure mode is its small context window; phi-4 or qwen2.5:7b are stronger options, both still free via Ollama. (Barron, The Claw AI Agent Ecosystem, §6.2)",
   "section": "§6.2"
  },
  {
-  "q": "Why does the book recommend static routing over dynamic routing for most deployments?",
+  "q": "Why is static routing usually a better choice than dynamic routing for most deployments?",
   "options": [
    "It always produces lower cost than dynamic routing.",
    "Dynamic routing is not supported by OpenClaw.",
@@ -36,7 +36,7 @@
   "section": "§6.3"
  },
  {
-  "q": "A SOUL.md says to use the best available model for anything important to the user. What effect does the book predict?",
+  "q": "A SOUL.md says to use the best available model for anything important to the user. What effect is this likely to have?",
   "options": [
    "The router ignores identity files, so there is no effect.",
    "Most requests get classified as important, skewing routing toward the premium model.",
@@ -44,7 +44,7 @@
    "The agent refuses to use Haiku for any task."
   ],
   "answer": 1,
-  "explanation": "The book warns that identity-file wording like this drives tier inflation and says to audit identity files for implicit model instructions. (Barron, The Claw AI Agent Ecosystem, §6.3)",
+  "explanation": "Wording like this drives tier inflation, so audit identity files for implicit model instructions. (Barron, The Claw AI Agent Ecosystem, §6.3)",
   "section": "§6.3"
  },
  {
@@ -60,7 +60,7 @@
   "section": "§6.5.5"
  },
  {
-  "q": "A user messages the agent about once an hour throughout the day. Which cacheControlTtl does the book recommend?",
+  "q": "A user messages the agent about once an hour throughout the day. Which cacheControlTtl fits this pattern best?",
   "options": [
    "300 seconds",
    "3600 seconds",
@@ -68,7 +68,7 @@
    "604800 seconds"
   ],
   "answer": 1,
-  "explanation": "For periodic hourly use the book recommends a one-hour TTL so the cache stays warm across gaps. (Barron, The Claw AI Agent Ecosystem, §6.5.2)",
+  "explanation": "For periodic hourly use, a one-hour TTL keeps the cache warm across gaps; a five-minute TTL would expire between messages. (Barron, The Claw AI Agent Ecosystem, §6.5.2)",
   "section": "§6.5.2"
  },
  {
@@ -84,7 +84,7 @@
   "section": "§6.5.6"
  },
  {
-  "q": "Which budget action does the book recommend for a monthly limit, and why?",
+  "q": "Which budget action is best for a monthly limit, and why?",
   "options": [
    "pause, so the agent resumes at midnight",
    "warn, so processing is never interrupted",
@@ -104,11 +104,11 @@
    "They automatically correct the cron expression."
   ],
   "answer": 1,
-  "explanation": "The book lists runaway automation as a tail scenario that daily limits catch quickly, before it compounds over the billing cycle. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "explanation": "Runaway automation is a tail scenario that daily limits catch quickly, before it compounds over the billing cycle. (Barron, The Claw AI Agent Ecosystem, §6.6)",
   "section": "§6.6"
  },
  {
-  "q": "In the book's month-one optimization trajectory, which change comes first?",
+  "q": "You're starting to cut costs on a default deployment. Which change is the best first step?",
   "options": [
    "Enabling tiered model routing",
    "Configuring session pruning",

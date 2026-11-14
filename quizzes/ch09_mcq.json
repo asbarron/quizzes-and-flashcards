@@ -12,7 +12,7 @@
   "section": "§9.1"
  },
  {
-  "q": "After the §9.2 fix, the user asks the agent to \"organize my project folder.\" What should the agent do first?",
+  "q": "An agent has a rule that treats organize, sort, and clean-up requests as requests for a plan. The user asks it to \"organize my project folder.\" What should the agent do first?",
   "options": [
    "Move files by type, then report what changed",
    "Refuse, because organizing is destructive",
@@ -24,7 +24,7 @@
   "section": "§9.2"
  },
  {
-  "q": "Under the two-stage rule added in §9.3, the operator replies \"looks good\" to a drafted client email. What happens?",
+  "q": "An agent separates draft review from send approval. The operator replies \"looks good\" to a drafted client email. What happens?",
   "options": [
    "The agent sends the email",
    "The agent treats it as review approval and waits for an explicit \"send\"",
@@ -36,7 +36,7 @@
   "section": "§9.3"
  },
  {
-  "q": "Which of these was NOT identified as a cause of the unauthorized invoice reminder in §9.3?",
+  "q": "An agent sent an unauthorized invoice reminder to a client during a heartbeat. Which of these was NOT a contributing cause?",
   "options": [
    "Send permission with no confirmation gate",
    "A MEMORY.md line phrased as a direct send instruction",
@@ -60,7 +60,7 @@
   "section": "§9.4"
  },
  {
-  "q": "Of the four fixes listed for the inbox deletion incident, which does the book call preferred?",
+  "q": "Which fix most reliably prevents the inbox deletion pattern?",
   "options": [
    "A confirmation gate for all deletes in AGENTS.md",
    "A scope-clarification rule in SOUL.md",
@@ -68,11 +68,11 @@
    "Re-authorizing with narrower OAuth scopes"
   ],
   "answer": 2,
-  "explanation": "Without delete permission the agent cannot delete under any instruction. The book still advises applying all four in production. (Barron, The Claw AI Agent Ecosystem, §9.5)",
+  "explanation": "Without delete permission the agent cannot delete under any instruction. In production, still apply all four fixes as defense in depth. (Barron, The Claw AI Agent Ecosystem, §9.5)",
   "section": "§9.5"
  },
  {
-  "q": "Why does the book say the inbox deletion pattern is not an edge case?",
+  "q": "Why is the inbox deletion pattern not an edge case?",
   "options": [
    "Gmail's API always skips the Trash folder",
    "Most users phrase requests maliciously",
@@ -108,7 +108,7 @@
   "section": "§9.7"
  },
  {
-  "q": "What was the main reason for splitting research and writing into separate agents in §9.7?",
+  "q": "In a research-and-writing pipeline, what is the main reason to split research and writing into separate agents?",
   "options": [
    "To use different messaging channels",
    "To let the Writing Agent browse the web",

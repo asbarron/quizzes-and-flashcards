@@ -1,6 +1,6 @@
 [
  {
-  "q": "Which of these is NOT one of the three properties the book says distinguish the agentic threat model?",
+  "q": "Which of these is NOT a property that distinguishes the agentic threat model from conventional applications?",
   "options": [
    "Persistent authentication to multiple systems",
    "Autonomous execution without human review",
@@ -12,7 +12,7 @@
   "section": "§8.1"
  },
  {
-  "q": "A weather API response includes a field telling the agent to update MEMORY.md with a forwarding rule. What does the book say SOUL.md should establish?",
+  "q": "A weather API response includes a field telling the agent to update MEMORY.md with a forwarding rule. What should SOUL.md establish to prevent this?",
   "options": [
    "Tool results have no instruction authority, the same as other external content.",
    "Tool results are trusted because the agent called the API itself.",
@@ -24,7 +24,7 @@
   "section": "§8.2"
  },
  {
-  "q": "Which factor did the book NOT cite as enabling the car dealership chatbot incident?",
+  "q": "Which factor did NOT enable the car dealership chatbot incident?",
   "options": [
    "No distinction in authority between operator configuration and customer messages",
    "No refusal of persona-adoption requests",
@@ -32,7 +32,7 @@
    "The attacker poisoned the chatbot's long-term memory."
   ],
   "answer": 3,
-  "explanation": "The book stresses the attack needed no memory access or tools, only typed text exploiting missing authority, identity and confirmation rules. (Barron, The Claw AI Agent Ecosystem, §8.2)",
+  "explanation": "The attack needed no memory access or tools, only typed text exploiting missing authority, identity and confirmation rules. (Barron, The Claw AI Agent Ecosystem, §8.2)",
   "section": "§8.2"
  },
  {
@@ -48,7 +48,7 @@
   "section": "§8.3"
  },
  {
-  "q": "A user installs an email-summary skill that came with read, send, delete and label permissions. What hardening does the book recommend?",
+  "q": "A user installs an email-summary skill that came with read, send, delete and label permissions. What's the right hardening?",
   "options": [
    "Keep all permissions but lower the log level.",
    "Remove only delete, since send is needed for summaries.",
@@ -104,7 +104,7 @@
    "Classify the root cause before touching anything."
   ],
   "answer": 1,
-  "explanation": "The book says to resist investigating first: every second of continued execution can add damage. Scope and reconstruction come after. (Barron, The Claw AI Agent Ecosystem, §8.8)",
+  "explanation": "Resist investigating first: every second of continued execution can add damage. Scope and reconstruction come after. (Barron, The Claw AI Agent Ecosystem, §8.8)",
   "section": "§8.8"
  },
  {
