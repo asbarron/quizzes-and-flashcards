@@ -5,6 +5,7 @@ on:
     branches: [main]
     tags: ["v*"]
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -28,8 +29,29 @@ jobs:
       - name: Build Anki packages
         run: python3 tools/build_anki.py build
 
-      - name: Publish release
-        if: startsWith(github.ref, 'refs/tags/v')
-        uses: softprops/action-gh-release@v2
+      - name: Move the latest tag to this commit
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        run: |
+          git tag -f latest
+          git push -f origin latest
+
+      - name: Publish latest decks
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: ncipollo/release-action@v1
         with:
-          files: build/*.apkg
+          tag: latest
+          name: Latest decks
+          body: Anki packages built from the newest flashcards and quizzes. Open a .apkg file in Anki (File > Import).
+          artifacts: build/*.apkg
+          allowUpdates: true
+          removeArtifacts: true
+          makeLatest: true
+
+      - name: Publish versioned release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/*.apkg
+          allowUpdates: true
+          generateReleaseNotes: true
+          makeLatest: false
