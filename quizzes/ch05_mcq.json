@@ -1,0 +1,122 @@
+[
+ {
+  "q": "In the production compose file, the ports line reads '8080:8080' with no IP prefix. What is the consequence?",
+  "options": [
+   "The container fails to start because a bind address is mandatory.",
+   "The port is reachable only from other containers on the Docker network.",
+   "The gateway and Control UI are published on all interfaces and reachable from external networks.",
+   "Docker binds to loopback by default, so nothing changes."
+  ],
+  "answer": 2,
+  "explanation": "Without the 127.0.0.1 prefix Docker publishes the port on 0.0.0.0. The book says to bind to loopback and let a reverse proxy handle external TLS. (Barron, The Claw AI Agent Ecosystem, §5.2.1)",
+  "section": "§5.2.1"
+ },
+ {
+  "q": "Which of these does the openclaw onboard wizard configure?",
+  "options": [
+   "Channel allowlists",
+   "Budget controls and spending limits",
+   "Prompt cache settings",
+   "Heartbeat interval and routing"
+  ],
+  "answer": 0,
+  "explanation": "The wizard covers security acknowledgment, model provider, channels, channel allowlists and skills. Budget, routing, cache, memory governance and heartbeat settings need manual edits. (Barron, The Claw AI Agent Ecosystem, §5.3)",
+  "section": "§5.3"
+ },
+ {
+  "q": "A home Mac Mini deployment needs Gmail Pub/Sub webhooks, and the operator does not want to open router ports. What does the book recommend?",
+  "options": [
+   "Binding the gateway to 0.0.0.0 and enabling UPnP",
+   "Polling Gmail with a cron job every minute instead",
+   "Moving to a cloud provider, since home hosting cannot receive webhooks",
+   "A tunnel service such as Cloudflare Tunnel or Tailscale Funnel"
+  ],
+  "answer": 3,
+  "explanation": "Both tunnel options avoid port forwarding and terminate HTTPS automatically, giving the host the public endpoint webhooks need. (Barron, The Claw AI Agent Ecosystem, §5.1)",
+  "section": "§5.1"
+ },
+ {
+  "q": "A deployment has no public HTTPS endpoint. What stops working?",
+  "options": [
+   "Scheduled cron events",
+   "Inbound webhook triggers only",
+   "Outbound API calls to the model provider",
+   "Replies on messaging platforms"
+  ],
+  "answer": 1,
+  "explanation": "Without a public endpoint, cron, outbound calls and messaging responses still work; only inbound webhook triggers are lost. (Barron, The Claw AI Agent Ecosystem, §5.1)",
+  "section": "§5.1"
+ },
+ {
+  "q": "For a single-operator personal deployment on a machine the operator fully controls, which secrets approach does the book consider sufficient?",
+  "options": [
+   "HashiCorp Vault with an agent sidecar",
+   "Docker Swarm secrets with automated rotation",
+   "Storing keys in openclaw.json with literal values",
+   "A .env file with owner-only permissions, kept out of git"
+  ],
+  "answer": 3,
+  "explanation": "The book calls a properly permissioned .env adequate for single-operator setups and says Vault's added benefit there is real but small. (Barron, The Claw AI Agent Ecosystem, §5.6)",
+  "section": "§5.6"
+ },
+ {
+  "q": "An operator enables ufw with a deny rule for port 8080 and assumes the gateway is protected. What does the book warn about?",
+  "options": [
+   "ufw cannot block TCP ports above 1024.",
+   "Docker modifies iptables directly and bypasses ufw by default, so the rule may not apply.",
+   "The deny rule also blocks SSH unless port 22 is listed first.",
+   "ufw rules are reset whenever the container restarts."
+  ],
+  "answer": 1,
+  "explanation": "The checklist says to verify Docker-managed iptables rules because Docker bypasses ufw by default. (Barron, The Claw AI Agent Ecosystem, §5.7)",
+  "section": "§5.7"
+ },
+ {
+  "q": "During the post-checklist functional test, you message the agent from an account not on the allowFrom list. What is the expected result?",
+  "options": [
+   "The message is rejected silently.",
+   "The agent replies that access is denied.",
+   "The agent asks the operator to approve the new user.",
+   "The agent responds but disables tools for that user."
+  ],
+  "answer": 0,
+  "explanation": "The book's post-checklist test expects messages from accounts outside allowFrom to be rejected without any reply. (Barron, The Claw AI Agent Ecosystem, §5.7)",
+  "section": "§5.7"
+ },
+ {
+  "q": "You run docker compose up -d --force-recreate openclaw to update. What happens to workspace/, state/ and logs/?",
+  "options": [
+   "They are wiped and restored from the last backup.",
+   "state/ is reset but workspace/ is kept.",
+   "They are preserved because they live in mounted volumes.",
+   "They are preserved only if the image tag is pinned."
+  ],
+  "answer": 2,
+  "explanation": "Container recreation does not touch mounted volumes, so identity files and session history survive the update. (Barron, The Claw AI Agent Ecosystem, §5.10)",
+  "section": "§5.10"
+ },
+ {
+  "q": "A personal deployment logs 3 ERROR entries in the past 24 hours. Under the book's alert thresholds, what should you do?",
+  "options": [
+   "Treat it as green; fewer than 5 errors is normal.",
+   "Treat it as yellow and investigate within 24 hours.",
+   "Treat it as red and stop the agent immediately.",
+   "Ignore it unless API cost also spikes."
+  ],
+  "answer": 1,
+  "explanation": "One to five errors in 24 hours is yellow, which calls for investigation within a day. More than five is red. (Barron, The Claw AI Agent Ecosystem, §5.11)",
+  "section": "§5.11"
+ },
+ {
+  "q": "What is the purpose of the workspace archive/ directory?",
+  "options": [
+   "Daily backups of state/ and workspace/",
+   "Rotated application logs older than 14 days",
+   "Cached skill packages for offline installs",
+   "Version history of identity files for rollback and audit"
+  ],
+  "answer": 3,
+  "explanation": "The book says archive/ holds earlier identity-file versions for rollback and incident audit, and explicitly is not a backup. (Barron, The Claw AI Agent Ecosystem, §5.9)",
+  "section": "§5.9"
+ }
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "q": "In the eight-step turn, what happens after response parsing when the model's output contains tool calls?",
+  "options": [
+   "Memory update",
+   "Response delivery",
+   "Tool execution",
+   "Context assembly"
+  ],
+  "answer": 2,
+  "explanation": "Tool calls route to execution, then a follow-up model call; text-only output skips ahead. (Barron, The Claw AI Agent Ecosystem, §4.1)",
+  "section": "§4.1"
+ },
+ {
+  "q": "The model generates a call to a tool the agent does not have. What normally happens?",
+  "options": [
+   "Validation rejects it and returns an error to the model, which usually acknowledges the missing tool",
+   "The runtime crashes",
+   "A similarly named tool runs instead",
+   "The call is dropped with no feedback"
+  ],
+  "answer": 0,
+  "explanation": "Hallucinated tools fail the existence and schema checks and come back as recoverable errors. (Barron, The Claw AI Agent Ecosystem, §4.3)",
+  "section": "§4.3"
+ },
+ {
+  "q": "Which of these does tool call validation NOT check?",
+  "options": [
+   "Whether the tool is in the enabled list",
+   "Whether the operation's outcome matches the user's intent",
+   "Whether arguments match the input schema",
+   "Whether the tool has hit its rate limit"
+  ],
+  "answer": 1,
+  "explanation": "Validation covers format and tier; intent alignment is left to SOUL.md and AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §4.3)",
+  "section": "§4.3"
+ },
+ {
+  "q": "Why does the book suggest routing the end-of-session summary to Haiku?",
+  "options": [
+   "Haiku has a larger context window",
+   "AGENTS.md requires it",
+   "Sonnet cannot write files",
+   "Summarizing a session is structured extraction, not complex reasoning, so a cheaper model suffices"
+  ],
+  "answer": 3,
+  "explanation": "The summary is an extra model call; a cheaper model handles it well at a fraction of the cost. (Barron, The Claw AI Agent Ecosystem, §4.4)",
+  "section": "§4.4"
+ },
+ {
+  "q": "A user talks to the agent on Telegram for personal matters and on Slack for work. How are sessions handled by default?",
+  "options": [
+   "One session shared across all channels",
+   "One session per channel shared by all users",
+   "Separate sessions per channel and per peer",
+   "One session for every interaction"
+  ],
+  "answer": 2,
+  "explanation": "The default isolation key is channel plus peer, which avoids context bleed. (Barron, The Claw AI Agent Ecosystem, §4.5)",
+  "section": "§4.5"
+ },
+ {
+  "q": "What distinguishes summarization from truncation as session pruning strategies?",
+  "options": [
+   "Truncation keeps continuity; summarization drops turns",
+   "Summarization compresses the oldest turns into a summary; truncation drops them with no summary",
+   "They behave identically",
+   "Summarization only applies to heartbeat sessions"
+  ],
+  "answer": 1,
+  "explanation": "Summarization preserves continuity at some cost; truncation is cheaper but loses it. (Barron, The Claw AI Agent Ecosystem, §4.5)",
+  "section": "§4.5"
+ },
+ {
+  "q": "An operator disables the heartbeat to save money, and the next morning's scheduled briefing never arrives. Why?",
+  "options": [
+   "Scheduled and time-triggered work depends on the heartbeat; without it the agent acts only on user messages",
+   "The briefing requires Opus",
+   "The Telegram token expired",
+   "MEMORY.md crossed its hard threshold"
+  ],
+  "answer": 0,
+  "explanation": "The book warns to disable heartbeats only when there are no scheduled tasks or background processing. (Barron, The Claw AI Agent Ecosystem, §4.6)",
+  "section": "§4.6"
+ },
+ {
+  "q": "Cache hit rate collapsed right after an operator put a current timestamp at the top of the system context. Why?",
+  "options": [
+   "Timestamps overflow the context window",
+   "Caching is disabled for Telegram",
+   "Timestamps trigger session pruning",
+   "A changing token at the start invalidates the cache for everything after it"
+  ],
+  "answer": 3,
+  "explanation": "Cache hits require identical tokens in the same positions, so volatile content must come last. (Barron, The Claw AI Agent Ecosystem, §4.7.3)",
+  "section": "§4.7.3"
+ },
+ {
+  "q": "An agent forgets an interaction even though its reply looked normal. Logs show disk quota exceeded under memory/. What is the right fix?",
+  "options": [
+   "Switch to Opus",
+   "Monitor workspace disk, alert at 80%, and rotate memory logs",
+   "Increase maxQueueDepth",
+   "Enable streaming"
+  ],
+  "answer": 1,
+  "explanation": "Memory write failures are silent to the user, so disk monitoring and log rotation prevent them. (Barron, The Claw AI Agent Ecosystem, §4.7.4)",
+  "section": "§4.7.4"
+ },
+ {
+  "q": "An operator edits AGENTS.md during an active session, and the agent ignores the new rule. What is the cause?",
+  "options": [
+   "AGENTS.md has a size limit",
+   "Rules must be written to MEMORY.md",
+   "Identity files load at session start, so the session must restart",
+   "The event queue is full"
+  ],
+  "answer": 2,
+  "explanation": "Compare the file modification time with the loaded_at time; if newer, restart the session. (Barron, The Claw AI Agent Ecosystem, §4.11)",
+  "section": "§4.11"
+ }
+]
