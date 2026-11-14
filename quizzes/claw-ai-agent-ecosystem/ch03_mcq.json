@@ -1,0 +1,122 @@
+[
+ {
+  "q": "Why should a SOUL.md keep its hard boundaries to a short list?",
+  "options": [
+   "Each boundary adds a separate model call at session start",
+   "Models stop reading identity files after the first few rules",
+   "Hard boundaries belong in AGENTS.md, so SOUL.md should only reference them",
+   "A long list becomes a constraint maze, so the agent spends effort navigating rules instead of reasoning about the task"
+  ],
+  "answer": 3,
+  "explanation": "Hard boundaries should be few, absolute, consequential and binary, with five to eight as a practical target. Dozens of them leave the agent navigating a maze. (Barron, The Claw AI Agent Ecosystem, §3.2)",
+  "section": "§3.2"
+ },
+ {
+  "q": "Beyond token cost, why does an overly long SOUL.md degrade behavior?",
+  "options": [
+   "The runtime refuses files over 100 lines",
+   "The model starts treating it as a contract to work around, and contradictions accumulate",
+   "Long files break prompt caching",
+   "Long files cannot be version-controlled"
+  ],
+  "answer": 1,
+  "explanation": "Dense files shift the model from embodying a philosophy to navigating rules. (Barron, The Claw AI Agent Ecosystem, §3.2)",
+  "section": "§3.2"
+ },
+ {
+  "q": "AGENTS.md lists confirmation gates by tool name. The operator adds a Slack-posting tool, and the agent posts without confirming. What's the right fix?",
+  "options": [
+   "Define gates by category, such as any tool that sends data to an external endpoint",
+   "Move the gate into USER.md",
+   "Record the new tool in MEMORY.md",
+   "Increase the heartbeat frequency"
+  ],
+  "answer": 0,
+  "explanation": "Name-based gates silently miss new tools; category-based gates cover them automatically. (Barron, The Claw AI Agent Ecosystem, §3.10.2)",
+  "section": "§3.10.2"
+ },
+ {
+  "q": "Which item belongs in USER.md?",
+  "options": [
+   "A record of yesterday's session outcomes",
+   "Model routing configuration",
+   "Communication preferences and expertise level",
+   "The calendar API key"
+  ],
+  "answer": 2,
+  "explanation": "USER.md holds stable user context and calibration; logs, config, and secrets go elsewhere or nowhere. (Barron, The Claw AI Agent Ecosystem, §3.4)",
+  "section": "§3.4"
+ },
+ {
+  "q": "In a team deployment, Ava approved a bulk file delete on Monday. On Tuesday, Kai asks for a similar delete. What should the agent do?",
+  "options": [
+   "Get fresh confirmation, because one user's approval does not carry to another user or session",
+   "Proceed, citing Monday's approval",
+   "Proceed if the files are in the same directory",
+   "Proceed if Kai is on the allowlist"
+  ],
+  "answer": 0,
+  "explanation": "Confirmation applies per session and per user; one user cannot authorize actions for another. (Barron, The Claw AI Agent Ecosystem, §3.4)",
+  "section": "§3.4"
+ },
+ {
+  "q": "Which entry best fits MEMORY.md?",
+  "options": [
+   "Drafted the Q1 report today",
+   "Working late this week",
+   "Current timezone",
+   "Q1 reports go to Sarah before March 15"
+  ],
+  "answer": 3,
+  "explanation": "MEMORY.md holds standing facts likely to matter months later; one-off events and current context go elsewhere. (Barron, The Claw AI Agent Ecosystem, §3.5)",
+  "section": "§3.5"
+ },
+ {
+  "q": "What is the core principle of the SOUL.md source authority defense against injection?",
+  "options": [
+   "Require confirmation for every single action",
+   "Disable all tools that read external content",
+   "Treat external content as material to analyze, never as instructions to execute",
+   "Trust any message that begins with SYSTEM"
+  ],
+  "answer": 2,
+  "explanation": "The defense draws a firm line between analyzing external content and taking orders from it. (Barron, The Claw AI Agent Ecosystem, §3.7)",
+  "section": "§3.7"
+ },
+ {
+  "q": "Every time the agent surprises the operator, they add a bullet to Hard Limits. After three months there are 25 overlapping items. What antipattern is this and what is the fix?",
+  "options": [
+   "Persona replacement; remove the persona",
+   "Accumulating constraints list; refine existing constraints and keep the list at 5-8",
+   "SOUL.md-AGENTS.md blur; move limits to USER.md",
+   "Memory drift; date every limit"
+  ],
+  "answer": 1,
+  "explanation": "Check whether an existing limit already covers the case and refine it instead of appending. (Barron, The Claw AI Agent Ecosystem, §3.7b)",
+  "section": "§3.7b"
+ },
+ {
+  "q": "An operator keeps fixing a behavior only to see it return. What is the most common source?",
+  "options": [
+   "Unstable tool schema order",
+   "Event queue depth",
+   "Output channel splitting",
+   "Memory drift in MEMORY.md"
+  ],
+  "answer": 3,
+  "explanation": "Stale or conflicting memory entries can override well-written identity files. (Barron, The Claw AI Agent Ecosystem, §3.10.1)",
+  "section": "§3.10.1"
+ },
+ {
+  "q": "MEMORY.md says the user works 9-5 Pacific, and a later entry says the user is in London until further notice. What's the right way to handle this?",
+  "options": [
+   "Explicitly delete the superseded entry, since MEMORY.md is a truth store, not a log",
+   "Keep both and let the model pick the newer one",
+   "Move both entries to USER.md",
+   "Add a third entry explaining the conflict"
+  ],
+  "answer": 0,
+  "explanation": "Conflicting entries leave the agent unsure which is current; the old one should be removed when superseded. (Barron, The Claw AI Agent Ecosystem, §3.10.2)",
+  "section": "§3.10.2"
+ }
+]

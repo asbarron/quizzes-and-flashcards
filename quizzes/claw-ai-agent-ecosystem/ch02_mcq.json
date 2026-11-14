@@ -1,0 +1,122 @@
+[
+ {
+  "q": "A bot replies to direct messages but never responds when @mentioned in a group. What is the likely cause?",
+  "options": [
+   "The bot token expired",
+   "groupPolicy is set to disabled",
+   "USER.md is missing",
+   "Streaming is enabled for the channel"
+  ],
+  "answer": 1,
+  "explanation": "DMs working rules out the token; the failure table maps this symptom to a misconfigured groupPolicy that should be mention. (Barron, The Claw AI Agent Ecosystem, §2.9)",
+  "section": "§2.9"
+ },
+ {
+  "q": "Why is HMAC-SHA256 preferred over a bearer token for webhook authentication?",
+  "options": [
+   "It is faster to compute",
+   "It works without a shared secret",
+   "It accepts calls from any source",
+   "It binds the signature to the payload content"
+  ],
+  "answer": 3,
+  "explanation": "A static bearer token proves nothing about the payload; an HMAC signature is computed over the content itself. (Barron, The Claw AI Agent Ecosystem, §2.2)",
+  "section": "§2.2"
+ },
+ {
+  "q": "Which context component belongs to the variable suffix rather than the stable prefix?",
+  "options": [
+   "Session conversation history",
+   "Tool schemas",
+   "MEMORY.md",
+   "Yesterday's daily log"
+  ],
+  "answer": 0,
+  "explanation": "Steps 8-9 (history and the incoming event) change each turn; steps 1-7 form the cacheable prefix. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "section": "§2.3"
+ },
+ {
+  "q": "SOUL.md is accidentally deleted from the workspace. What does the runtime do by default?",
+  "options": [
+   "Refuses to start",
+   "Loads a built-in default SOUL.md",
+   "Skips the file silently; the agent responds without the intended behavioral constraints",
+   "Discards all incoming events"
+  ],
+  "answer": 2,
+  "explanation": "Missing files are skipped without error, so add an AGENTS.md check that alerts the operator. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "section": "§2.3"
+ },
+ {
+  "q": "Where should API credentials used by a tool live?",
+  "options": [
+   "In MEMORY.md",
+   "In environment variables accessed by the tool implementation",
+   "In USER.md",
+   "In the tool's SKILL.md"
+  ],
+  "answer": 1,
+  "explanation": "Anything in workspace context files is readable by the model and potentially exposed through injection. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "section": "§2.3"
+ },
+ {
+  "q": "SOUL.md and AGENTS.md give conflicting guidance on an edge case. Which governs?",
+  "options": [
+   "SOUL.md, because it establishes the interpretive frame",
+   "AGENTS.md, because it is more specific",
+   "Whichever file was edited most recently",
+   "Neither; the model always asks the user"
+  ],
+  "answer": 0,
+  "explanation": "The model treats SOUL.md as the frame for interpreting the operational rules in AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §2.5)",
+  "section": "§2.5"
+ },
+ {
+  "q": "What is the order of OpenClaw's tool execution pipeline?",
+  "options": [
+   "Permission check, execution, schema validation, sandbox check, result normalization",
+   "Sandbox check, schema validation, execution, permission check, result normalization",
+   "Execution, result normalization, permission check, schema validation, sandbox check",
+   "Schema validation, permission check, sandbox check, execution, result normalization"
+  ],
+  "answer": 3,
+  "explanation": "Arguments are validated first, permissions and sandboxing are resolved before execution, and output is normalized last. (Barron, The Claw AI Agent Ecosystem, §2.6)",
+  "section": "§2.6"
+ },
+ {
+  "q": "A SKILL.md says never to delete events organized by others, yet after processing a crafted email the agent deleted one. What is the most robust fix?",
+  "options": [
+   "Reword the SKILL.md rule more forcefully",
+   "Add a second calendar tool",
+   "Enforce the organizer check inside the tool implementation",
+   "Disable prompt caching"
+  ],
+  "answer": 2,
+  "explanation": "SKILL.md notes are only interpreted by the model; a code-level check refuses the call even if the model is manipulated. (Barron, The Claw AI Agent Ecosystem, §2.6)",
+  "section": "§2.6"
+ },
+ {
+  "q": "An operator finds an entry in MEMORY.md they never authorized; it appeared after the agent processed an email. What is the likely cause and fix?",
+  "options": [
+   "Memory poisoning through injection; remove the entry and restrict memory-write sources in AGENTS.md",
+   "Slow daily log promotion; promote entries manually",
+   "Session history truncation; raise the hard threshold",
+   "Wrong scheduler timezone; fix the cron setting"
+  ],
+  "answer": 0,
+  "explanation": "The failure table maps unexpected MEMORY.md entries to injection, fixed by removal plus write restrictions. (Barron, The Claw AI Agent Ecosystem, §2.9)",
+  "section": "§2.9"
+ },
+ {
+  "q": "A Telegram user receives a burst of partial, incomplete messages for each reply. What is the likely cause?",
+  "options": [
+   "The character limit is set too high",
+   "Streaming is enabled on a non-streaming surface",
+   "dmPolicy is set to open",
+   "parseMode is set to mrkdwn"
+  ],
+  "answer": 1,
+  "explanation": "Streaming to a messaging app produces message fragments, so enforce non-streaming in both config and AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §2.8)",
+  "section": "§2.8"
+ }
+]
