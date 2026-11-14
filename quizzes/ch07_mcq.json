@@ -1,0 +1,122 @@
+[
+ {
+  "q": "Under the tool risk tier table, what are the default permission and confirmation requirement for email send?",
+  "options": [
+   "Enabled by default; no confirmation",
+   "Enabled explicitly; confirmation recommended",
+   "Disabled by default; confirmation required",
+   "Enabled explicitly; no confirmation if the draft was reviewed earlier"
+  ],
+  "answer": 2,
+  "explanation": "Email send is a destructive write: disabled by default and always gated by confirmation. (Barron, The Claw AI Agent Ecosystem, §7.2)",
+  "section": "§7.2"
+ },
+ {
+  "q": "An email send tool call times out. What does the tool failure protocol say?",
+  "options": [
+   "Do not retry automatically; log the failure and ask the user how to proceed.",
+   "Retry up to three times with exponential backoff.",
+   "Retry once after 5 seconds, then report.",
+   "Continue the task and send a follow-up later."
+  ],
+  "answer": 0,
+  "explanation": "Writes and destructive actions are never auto-retried because a partial success could send the email twice. Only reads retry once. (Barron, The Claw AI Agent Ecosystem, §7.3.1)",
+  "section": "§7.3.1"
+ },
+ {
+  "q": "A user types 'Ignore your previous instructions' in an allowlisted session. How does the trust hierarchy treat this?",
+  "options": [
+   "As a valid override, since the user is authenticated",
+   "As Level 5 external content to be summarized",
+   "As a trigger to reload SOUL.md from disk",
+   "As a Level 2 message trying to use Level 1 authority, which has no effect"
+  ],
+  "answer": 3,
+  "explanation": "The user has full task authority but cannot rewrite runtime configuration by message. Changing Level 1 means editing the file. (Barron, The Claw AI Agent Ecosystem, §7.4.2)",
+  "section": "§7.4.2"
+ },
+ {
+  "q": "A heartbeat fires at 2am and finds an email that seems to need a reply. What should the agent do?",
+  "options": [
+   "Send a short holding reply, since heartbeats can act for the user.",
+   "Defer the decision to the next user session and log it in the daily memory entry.",
+   "Draft and send the reply if it is under 100 words.",
+   "Ignore the email and delete the reminder."
+  ],
+  "answer": 1,
+  "explanation": "Scheduled prompts are not user proxies and cannot send new outbound messages; decisions needing judgment are deferred and logged. (Barron, The Claw AI Agent Ecosystem, §7.9)",
+  "section": "§7.9"
+ },
+ {
+  "q": "An operator adds an RSS feed integration but forgets to update the trust hierarchy. What is the risk?",
+  "options": [
+   "The feed is blocked until assigned a level.",
+   "The feed automatically receives Level 4 authority.",
+   "Nothing; RSS content cannot contain instructions.",
+   "The agent may give the feed user-level authority by default."
+  ],
+  "answer": 3,
+  "explanation": "The book calls this the most common maintenance failure. Any source not explicitly assigned should be placed at Level 5. (Barron, The Claw AI Agent Ecosystem, §7.4.4)",
+  "section": "§7.4.4"
+ },
+ {
+  "q": "Which of these is NOT one of the three conditions for expanding a permission tier?",
+  "options": [
+   "The current tier passes its test battery.",
+   "At least 30 days have passed since the last expansion.",
+   "At least 10 sessions at the current tier have been reviewed.",
+   "The new permission has a confirmation gate."
+  ],
+  "answer": 1,
+  "explanation": "Expansion is evidence-based, not calendar-based: passing tests, a reviewed sample of sessions, and a gate on the new permission. (Barron, The Claw AI Agent Ecosystem, §7.5)",
+  "section": "§7.5"
+ },
+ {
+  "q": "In Stage 1 of the staged test, the prompt is 'Help me get my email situation under control.' What is the safe response?",
+  "options": [
+   "Ask clarifying questions about the goal and acceptable operations before acting.",
+   "Start drafting filter rules for the inbox.",
+   "Archive all read emails older than 30 days.",
+   "Refuse, because email management is out of scope."
+  ],
+  "answer": 0,
+  "explanation": "The vague prompt tests scope containment. Acting before establishing scope means AGENTS.md needs an ambiguity protocol. (Barron, The Claw AI Agent Ecosystem, §7.6)",
+  "section": "§7.6"
+ },
+ {
+  "q": "What does Stage 5 of the pre-deployment test verify?",
+  "options": [
+   "The daily budget limit pauses the agent.",
+   "Injected document content is ignored.",
+   "The agent keeps its memory after the deployment is stopped and restarted.",
+   "Unauthorized users are silently rejected."
+  ],
+  "answer": 2,
+  "explanation": "Stage 5 is the recovery test. An agent that loses memory on restart has suffered a data loss event. (Barron, The Claw AI Agent Ecosystem, §7.6)",
+  "section": "§7.6"
+ },
+ {
+  "q": "For a trading skill, how should options and derivatives access be enabled?",
+  "options": [
+   "Automatically, once equity trading is enabled",
+   "Through a separate explicit capability flag, distinct from equity trading",
+   "After 30 days of successful equity trades",
+   "By default in read-only mode"
+  ],
+  "answer": 1,
+  "explanation": "Options can lose more than the initial capital through leverage, so the book requires their own flag rather than bundling them with general trading. (Barron, The Claw AI Agent Ecosystem, §7.11)",
+  "section": "§7.11"
+ },
+ {
+  "q": "Spec-driven agent development is compared to which software practice?",
+  "options": [
+   "Continuous deployment",
+   "Pair programming",
+   "Chaos engineering",
+   "Test-driven development"
+  ],
+  "answer": 3,
+  "explanation": "As tests come before code in TDD, SOUL.md and AGENTS.md come before tools are connected, forcing decisions about every case up front. (Barron, The Claw AI Agent Ecosystem, §7.10)",
+  "section": "§7.10"
+ }
+]

@@ -1,0 +1,122 @@
+[
+ {
+  "q": "In the developer workflow scenario, which setting caused the agent to treat messages like \"lgtm\" and \"taking lunch\" as task requests?",
+  "options": [
+   "dmPolicy set to \"allowlist\"",
+   "groupPolicy set to \"open\"",
+   "Triage routed to Haiku",
+   "GitHub push events in the watch list"
+  ],
+  "answer": 1,
+  "explanation": "With an open group policy, every message in a channel the bot is in becomes an event. SOUL.md also had no group chat rules to filter casual talk. (Barron, The Claw AI Agent Ecosystem, §9.1)",
+  "section": "§9.1"
+ },
+ {
+  "q": "After the §9.2 fix, the user asks the agent to \"organize my project folder.\" What should the agent do first?",
+  "options": [
+   "Move files by type, then report what changed",
+   "Refuse, because organizing is destructive",
+   "State its interpretation, give counts and examples, and ask to proceed",
+   "Delete duplicate files only, since that is low risk"
+  ],
+  "answer": 2,
+  "explanation": "The added rule treats organize, sort, and clean up as requests for a plan. The agent previews counts and 5 to 10 examples before changing anything. (Barron, The Claw AI Agent Ecosystem, §9.2)",
+  "section": "§9.2"
+ },
+ {
+  "q": "Under the two-stage rule added in §9.3, the operator replies \"looks good\" to a drafted client email. What happens?",
+  "options": [
+   "The agent sends the email",
+   "The agent treats it as review approval and waits for an explicit \"send\"",
+   "The agent queues the email for the next heartbeat to send",
+   "The agent discards the draft"
+  ],
+  "answer": 1,
+  "explanation": "Approval words confirm the draft stage only. Sending requires a confirmation that uses the word send. (Barron, The Claw AI Agent Ecosystem, §9.3)",
+  "section": "§9.3"
+ },
+ {
+  "q": "Which of these was NOT identified as a cause of the unauthorized invoice reminder in §9.3?",
+  "options": [
+   "Send permission with no confirmation gate",
+   "A MEMORY.md line phrased as a direct send instruction",
+   "Heartbeats having the same tool access as operator turns",
+   "A prompt injection hidden in a client email"
+  ],
+  "answer": 3,
+  "explanation": "The agent followed its own stored instruction during a heartbeat. No injection was involved. (Barron, The Claw AI Agent Ecosystem, §9.3)",
+  "section": "§9.3"
+ },
+ {
+  "q": "Why did the MoltMatch agent keep interacting with other agents for several days after one broad instruction?",
+  "options": [
+   "The goal was stored in MEMORY.md as ongoing, so every turn and heartbeat re-evaluated it",
+   "The platform exploited a flaw in the http-client skill",
+   "The operator approved each interaction by Telegram",
+   "Other agents changed its SOUL.md remotely"
+  ],
+  "answer": 0,
+  "explanation": "\"Connect to relevant ones\" sat in MEMORY.md as an in-progress goal. With no trust hierarchy or scope limit, the agent kept acting on it. (Barron, The Claw AI Agent Ecosystem, §9.4)",
+  "section": "§9.4"
+ },
+ {
+  "q": "Of the four fixes listed for the inbox deletion incident, which does the book call preferred?",
+  "options": [
+   "A confirmation gate for all deletes in AGENTS.md",
+   "A scope-clarification rule in SOUL.md",
+   "Removing delete permissions entirely",
+   "Re-authorizing with narrower OAuth scopes"
+  ],
+  "answer": 2,
+  "explanation": "Without delete permission the agent cannot delete under any instruction. The book still advises applying all four in production. (Barron, The Claw AI Agent Ecosystem, §9.5)",
+  "section": "§9.5"
+ },
+ {
+  "q": "Why does the book say the inbox deletion pattern is not an edge case?",
+  "options": [
+   "Gmail's API always skips the Trash folder",
+   "Most users phrase requests maliciously",
+   "Models are trained to favor deletion",
+   "All four required conditions exist in a default deployment"
+  ],
+  "answer": 3,
+  "explanation": "Default delete permission, no gate, a silent SOUL.md, and a natural vague request together make the outcome predictable. (Barron, The Claw AI Agent Ecosystem, §9.5)",
+  "section": "§9.5"
+ },
+ {
+  "q": "In the startup's rebuilt configuration after shutdown, where were all confirmation requirements placed?",
+  "options": [
+   "AGENTS.md",
+   "SOUL.md",
+   "openclaw.json channel settings",
+   "MEMORY.md"
+  ],
+  "answer": 0,
+  "explanation": "The rebuilt AGENTS.md held every confirmation rule, and SOUL.md was trimmed to a lean 72-line identity file. (Barron, The Claw AI Agent Ecosystem, §9.6)",
+  "section": "§9.6"
+ },
+ {
+  "q": "What failure occurred in the research and writing pipeline?",
+  "options": [
+   "The Writing Agent followed an injected footnote",
+   "The Brain Agent sometimes routed to both agents at once, so drafts used incomplete research",
+   "The Research Agent emailed summaries externally",
+   "Costs exceeded the single-agent setup"
+  ],
+  "answer": 1,
+  "explanation": "Overlapping task domains were treated as independent, not sequential. The fix made research completion a precondition for drafting. (Barron, The Claw AI Agent Ecosystem, §9.7)",
+  "section": "§9.7"
+ },
+ {
+  "q": "What was the main reason for splitting research and writing into separate agents in §9.7?",
+  "options": [
+   "To use different messaging channels",
+   "To let the Writing Agent browse the web",
+   "Context isolation, so drafts start clean with only the needed research",
+   "To meet a regulatory requirement"
+  ],
+  "answer": 2,
+  "explanation": "Separate contexts kept accumulated research history from diluting drafts and also lowered cost. (Barron, The Claw AI Agent Ecosystem, §9.7)",
+  "section": "§9.7"
+ }
+]
