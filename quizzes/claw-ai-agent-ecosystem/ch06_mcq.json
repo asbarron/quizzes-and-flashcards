@@ -1,0 +1,122 @@
+[
+ {
+  "q": "Which cost driver typically accounts for the largest share of an agent's API spend?",
+  "options": [
+   "Heartbeats and background tasks",
+   "Improper model selection",
+   "Context accumulation from resending full conversation history",
+   "Multi-round reasoning on complex tasks"
+  ],
+  "answer": 2,
+  "explanation": "Context accumulation typically makes up 40–50% of spend, well above the other drivers. (Barron, The Claw AI Agent Ecosystem, §6.1)",
+  "section": "§6.1"
+ },
+ {
+  "q": "After routing heartbeats to tinyllama, heartbeat responses become erratic on a workspace with large memory logs. What is the likely cause and fix?",
+  "options": [
+   "Its 2,048-token context is too small; switch to a larger local model such as qwen2.5:7b.",
+   "Ollama is rate-limiting requests; raise the heartbeat interval.",
+   "tinyllama lacks tool support; route heartbeats back to Sonnet.",
+   "The cache TTL expired; raise cacheControlTtl."
+  ],
+  "answer": 0,
+  "explanation": "tinyllama's failure mode is its small context window; phi-4 or qwen2.5:7b are stronger options, both still free via Ollama. (Barron, The Claw AI Agent Ecosystem, §6.2)",
+  "section": "§6.2"
+ },
+ {
+  "q": "Why is static routing usually a better choice than dynamic routing for most deployments?",
+  "options": [
+   "It always produces lower cost than dynamic routing.",
+   "Dynamic routing is not supported by OpenClaw.",
+   "Static routing sends every request to Haiku.",
+   "It needs no classification logic and cannot misfire."
+  ],
+  "answer": 3,
+  "explanation": "Static routing is less theoretically optimal but simpler: the user or AGENTS.md picks the profile, so nothing can misclassify. (Barron, The Claw AI Agent Ecosystem, §6.3)",
+  "section": "§6.3"
+ },
+ {
+  "q": "A SOUL.md says to use the best available model for anything important to the user. What effect is this likely to have?",
+  "options": [
+   "The router ignores identity files, so there is no effect.",
+   "Most requests get classified as important, skewing routing toward the premium model.",
+   "Requests are split evenly across tiers.",
+   "The agent refuses to use Haiku for any task."
+  ],
+  "answer": 1,
+  "explanation": "Wording like this drives tier inflation, so audit identity files for implicit model instructions. (Barron, The Claw AI Agent Ecosystem, §6.3)",
+  "section": "§6.3"
+ },
+ {
+  "q": "In every session, the second turn logs cache_hit_tokens as 0. The session init code prepends the current timestamp to the context. What is happening?",
+  "options": [
+   "The TTL is too long, so the cache never refreshes.",
+   "Haiku does not support prompt caching.",
+   "Cache reads are only logged on turn 3 and later.",
+   "Variable content before the stable prefix breaks the byte match, so the cache never hits."
+  ],
+  "answer": 3,
+  "explanation": "Any variable content placed ahead of the stable prefix invalidates the whole cache. Keep stable content first and variable content last. (Barron, The Claw AI Agent Ecosystem, §6.5.5)",
+  "section": "§6.5.5"
+ },
+ {
+  "q": "A user messages the agent about once an hour throughout the day. Which cacheControlTtl fits this pattern best?",
+  "options": [
+   "300 seconds",
+   "3600 seconds",
+   "60 seconds",
+   "604800 seconds"
+  ],
+  "answer": 1,
+  "explanation": "For periodic hourly use, a one-hour TTL keeps the cache warm across gaps; a five-minute TTL would expire between messages. (Barron, The Claw AI Agent Ecosystem, §6.5.2)",
+  "section": "§6.5.2"
+ },
+ {
+  "q": "When is prompt caching likely to cost more than it saves?",
+  "options": [
+   "A single, one-off Opus call whose prefix is not reused within the TTL",
+   "An interactive chat with several turns in five minutes",
+   "A high-frequency Haiku pipeline",
+   "A batch job that reuses the same prefix nightly with a 24-hour TTL"
+  ],
+  "answer": 0,
+  "explanation": "The 25% write premium is only recovered by later reads. A single-use call pays the premium with no reads to offset it. (Barron, The Claw AI Agent Ecosystem, §6.5.6)",
+  "section": "§6.5.6"
+ },
+ {
+  "q": "Which budget action is best for a monthly limit, and why?",
+  "options": [
+   "pause, so the agent resumes at midnight",
+   "warn, so processing is never interrupted",
+   "disable, so the agent stays stopped until someone investigates",
+   "pause, so queued messages are dropped"
+  ],
+  "answer": 2,
+  "explanation": "Disable needs a manual re-enable, giving you a chance to look into the cause before the agent runs again. Pause fits daily limits. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "section": "§6.6"
+ },
+ {
+  "q": "A cron typo schedules a task at a 5-minute interval when 5 hours was intended. What role do budget controls play?",
+  "options": [
+   "They prevent the cron job from being scheduled.",
+   "They catch the runaway within the first day instead of at month end.",
+   "They have no effect because cron tasks bypass budgets.",
+   "They automatically correct the cron expression."
+  ],
+  "answer": 1,
+  "explanation": "Runaway automation is a tail scenario that daily limits catch quickly, before it compounds over the billing cycle. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "section": "§6.6"
+ },
+ {
+  "q": "You're starting to cut costs on a default deployment. Which change is the best first step?",
+  "options": [
+   "Enabling tiered model routing",
+   "Configuring session pruning",
+   "Adding multi-provider routing through OpenRouter",
+   "Routing heartbeats to a local Ollama model"
+  ],
+  "answer": 3,
+  "explanation": "Day 1 is heartbeat routing: quick to set up, immediate effect, no capability change. Routing and pruning come in later weeks. (Barron, The Claw AI Agent Ecosystem, §6.8)",
+  "section": "§6.8"
+ }
+]
