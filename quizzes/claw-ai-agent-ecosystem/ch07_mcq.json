@@ -27,12 +27,12 @@
   "q": "A user types 'Ignore your previous instructions' in an allowlisted session. How does the trust hierarchy treat this?",
   "options": [
    "As a valid override, since the user is authenticated",
-   "As Level 5 external content to be summarized",
+   "As external content to be summarized",
    "As a trigger to reload SOUL.md from disk",
-   "As a Level 2 message trying to use Level 1 authority, which has no effect"
+   "As a user message trying to change runtime configuration, which has no effect"
   ],
   "answer": 3,
-  "explanation": "The user has full task authority but cannot rewrite runtime configuration by message. Changing Level 1 means editing the file.",
+  "explanation": "The user has full task authority but cannot rewrite runtime configuration by message. Changing the configuration means editing the file.",
   "section": "§7.4.2"
  },
  {
@@ -51,12 +51,12 @@
   "q": "An operator adds an RSS feed integration but forgets to update the trust hierarchy. What is the risk?",
   "options": [
    "The feed is blocked until assigned a level.",
-   "The feed automatically receives Level 4 authority.",
+   "The feed automatically gets scheduled-prompt authority.",
    "Nothing; RSS content cannot contain instructions.",
    "The agent may give the feed user-level authority by default."
   ],
   "answer": 3,
-  "explanation": "This is the most common maintenance failure. Place any source not explicitly assigned at Level 5.",
+  "explanation": "This is the most common maintenance failure. Treat any source without an explicit trust level as external content.",
   "section": "§7.4.4"
  },
  {

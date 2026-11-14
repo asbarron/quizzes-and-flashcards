@@ -40,11 +40,11 @@
   "options": [
    "None, as long as the brain runs on Opus.",
    "A compromised brain can direct destructive actions; configure it as a named orchestrator with tool-scoped authority.",
-   "Sub-agents will ignore the brain; give it Level 1 authority.",
+   "Sub-agents will ignore the brain; give it runtime-configuration authority.",
    "The brain will exceed its budget; add a per-session limit."
   ],
   "answer": 1,
-  "explanation": "Level 3 authority must be explicit and scoped. Without it, compromising the orchestrator propagates its authority downward.",
+  "explanation": "Orchestrator authority must be explicit and scoped. Without it, compromising the orchestrator propagates its authority downward.",
   "section": "§7.4.2, §8.4 (A08)"
  },
  {
