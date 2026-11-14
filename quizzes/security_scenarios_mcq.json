@@ -20,7 +20,7 @@
    "Pinning the web-search skill version"
   ],
   "answer": 0,
-  "explanation": "The book's defense for web page injection pairs the source authority rule with narrow email permissions; without send access the agent cannot comply. (Barron, The Claw AI Agent Ecosystem, §8.2)",
+  "explanation": "The defense for web page injection pairs the source authority rule with narrow email permissions; without send access the agent cannot comply. (Barron, The Claw AI Agent Ecosystem, §8.2)",
   "section": "§8.2"
  },
  {
@@ -56,7 +56,7 @@
    "The agent still asks for confirmation before deleting anything."
   ],
   "answer": 3,
-  "explanation": "This is the book's stored injection test: memory entries cannot grant the authority they claim. (Barron, The Claw AI Agent Ecosystem, §8.7)",
+  "explanation": "This is a stored injection test: memory entries cannot grant the authority they claim. (Barron, The Claw AI Agent Ecosystem, §8.7)",
   "section": "§8.7"
  },
  {
@@ -92,7 +92,7 @@
    "The only risk is slower response times."
   ],
   "answer": 2,
-  "explanation": "An open DM policy makes the agent publicly reachable. The book's fix is allowlist plus rate limits and budget caps. (Barron, The Claw AI Agent Ecosystem, §8.4 (A10), §8.5)",
+  "explanation": "An open DM policy makes the agent publicly reachable. The fix is an allowlist plus rate limits and budget caps. (Barron, The Claw AI Agent Ecosystem, §8.4 (A10), §8.5)",
   "section": "§8.4 (A10), §8.5"
  },
  {
@@ -132,7 +132,7 @@
   "section": "§8.3, §8.8"
  },
  {
-  "q": "Setup: a user said 'clean up my email' and the agent deleted about 1,400 messages. There was no attacker. How does the book classify and fix it?",
+  "q": "Setup: a user said 'clean up my email' and the agent deleted about 1,400 messages. There was no attacker. How should it be classified and fixed?",
   "options": [
    "Prompt injection; add a source authority rule.",
    "Supply chain compromise; reinstall the email skill.",
@@ -140,7 +140,7 @@
    "Access control failure; tighten the allowlist."
   ],
   "answer": 2,
-  "explanation": "The book's analysis calls it a behavioral failure amplified by unscoped delete permission, and fixes both layers. (Barron, The Claw AI Agent Ecosystem, §8.4 (A03), §8.5)",
+  "explanation": "It is a behavioral failure amplified by unscoped delete permission, so fix both layers. (Barron, The Claw AI Agent Ecosystem, §8.4 (A03), §8.5)",
   "section": "§8.4 (A03), §8.5"
  }
 ]
