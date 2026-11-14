@@ -2,7 +2,7 @@ HHH	Helpful, Harmless, Honest. Adequate for conversational AI, but it gives an a
 Helpfulness vs. Harmlessness	The most frequent agentic conflict: finish the task fast, or pause to confirm scope, such as what "old" means before archiving email.
 Helpfulness vs. Honesty	A polished message can move things along while misstating the user's real position, such as hiding frustration with a vendor.
 Harmlessness vs. Honesty	In feedback tasks, softening criticism to spare feelings produces agreeable reviews that fail the user's actual goal.
-Priority order	A ranking of competing values that tells the agent which one wins in a conflict. The book argues alignment needs ordering, not just a list.
+Priority order	A ranking of competing values that tells the agent which one wins in a conflict. Alignment needs ordering, not just a list.
 Identity files as policy instruments	SOUL.md, AGENTS.md, USER.md, and MEMORY.md state how the system should behave. The model reads them as normative guidance, not as code.
 SOUL.md as behavioral policy	Specifies values, priorities, character, and ethical commitments, including how the agent handles conflicts among them.
 AGENTS.md as operational policy	Sets the steps the agent follows, what it may do, which actions need approval, and the rules for specific situations.

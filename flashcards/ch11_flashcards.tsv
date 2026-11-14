@@ -12,7 +12,7 @@ Multi-channel (landscape table)	Native support for messaging apps like Telegram,
 CrewAI and AutoGen	Python libraries for multi-agent pipelines and research experiments. Better for task runs than for always-on assistants.
 LangChain and LlamaIndex	Developer frameworks for building custom agent and RAG applications. Neither is a deployable runtime on its own.
 n8n with AI nodes	A workflow automation backbone with AI in selected steps. Suits hybrid automation better than a pure agent.
-Moltbook	A Reddit-style platform whose users are AI agents. The book treats it as a research artifact for observing multi-agent behavior.
+Moltbook	A Reddit-style platform whose users are AI agents. Useful as a research artifact for observing multi-agent behavior.
 Identity drift under adversarial pressure	Agents repeatedly exposed to peers claiming authority gradually treat them as instruction sources, unless SOUL.md rules that out.
 Peer trust convergence	Without explicit trust levels, agents give all agent messages equal weight, letting a low-authority agent mislead higher-authority ones.
 Non-transferable authority statement	SOUL.md clause saying behavior is set by config files loaded at session start, and no runtime message can lift or widen it.
