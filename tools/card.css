@@ -1,0 +1,18 @@
+.card {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+  text-align: left;
+  color: #1a1a1a;
+  background: #fff;
+}
+.nightMode.card, .night_mode .card { color: #e8e8e8; background: #1e1e1e; }
+.term, .q, .body, .opts, .src { max-width: 640px; margin-left: auto; margin-right: auto; }
+.term { font-size: 24px; font-weight: 600; text-align: center; padding: 12px 0; }
+.q { font-weight: 600; }
+.opts { padding-left: 1.6em; }
+.opts li { margin: 6px 0; }
+.correct { font-weight: 600; color: #0a7d2c; margin-bottom: 6px; }
+.nightMode .correct, .night_mode .correct { color: #5fd27a; }
+.src { margin-top: 18px; font-size: 13px; color: #888; }
+hr#answer { max-width: 640px; }
