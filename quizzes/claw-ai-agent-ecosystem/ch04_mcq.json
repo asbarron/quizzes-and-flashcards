@@ -1,14 +1,14 @@
 [
  {
-  "q": "In the eight-step turn, what happens after response parsing when the model's output contains tool calls?",
+  "q": "Mid-turn, the model's response contains a tool call. What happens next?",
   "options": [
-   "Memory update",
-   "Response delivery",
-   "Tool execution",
-   "Context assembly"
+   "Memory is updated and the turn ends",
+   "The response is sent to the user as-is",
+   "The tool runs and its result goes back to the model in a follow-up call",
+   "Context is reassembled from scratch"
   ],
   "answer": 2,
-  "explanation": "Tool calls route to execution, then a follow-up model call; text-only output skips ahead. (Barron, The Claw AI Agent Ecosystem, §4.1)",
+  "explanation": "Tool calls route to execution and a follow-up model call. Text-only output goes straight to delivery.",
   "section": "§4.1"
  },
  {
@@ -20,7 +20,7 @@
    "The call is dropped with no feedback"
   ],
   "answer": 0,
-  "explanation": "Hallucinated tools fail the existence and schema checks and come back as recoverable errors. (Barron, The Claw AI Agent Ecosystem, §4.3)",
+  "explanation": "Hallucinated tools fail the existence and schema checks and come back as recoverable errors.",
   "section": "§4.3"
  },
  {
@@ -32,7 +32,7 @@
    "Whether the tool has hit its rate limit"
   ],
   "answer": 1,
-  "explanation": "Validation covers format and tier; intent alignment is left to SOUL.md and AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §4.3)",
+  "explanation": "Validation covers format and tier; intent alignment is left to SOUL.md and AGENTS.md.",
   "section": "§4.3"
  },
  {
@@ -44,7 +44,7 @@
    "Summarizing a session is structured extraction, not complex reasoning, so a cheaper model suffices"
   ],
   "answer": 3,
-  "explanation": "The summary is an extra model call; a cheaper model handles it well at a fraction of the cost. (Barron, The Claw AI Agent Ecosystem, §4.4)",
+  "explanation": "The summary is an extra model call; a cheaper model handles it well at a fraction of the cost.",
   "section": "§4.4"
  },
  {
@@ -56,7 +56,7 @@
    "One session for every interaction"
   ],
   "answer": 2,
-  "explanation": "The default isolation key is channel plus peer, which avoids context bleed. (Barron, The Claw AI Agent Ecosystem, §4.5)",
+  "explanation": "The default isolation key is channel plus peer, which avoids context bleed.",
   "section": "§4.5"
  },
  {
@@ -68,7 +68,7 @@
    "Summarization only applies to heartbeat sessions"
   ],
   "answer": 1,
-  "explanation": "Summarization preserves continuity at some cost; truncation is cheaper but loses it. (Barron, The Claw AI Agent Ecosystem, §4.5)",
+  "explanation": "Summarization preserves continuity at some cost; truncation is cheaper but loses it.",
   "section": "§4.5"
  },
  {
@@ -80,7 +80,7 @@
    "MEMORY.md crossed its hard threshold"
   ],
   "answer": 0,
-  "explanation": "Disable heartbeats only when there are no scheduled tasks or background processing. (Barron, The Claw AI Agent Ecosystem, §4.6)",
+  "explanation": "Disable heartbeats only when there are no scheduled tasks or background processing.",
   "section": "§4.6"
  },
  {
@@ -92,7 +92,7 @@
    "A changing token at the start invalidates the cache for everything after it"
   ],
   "answer": 3,
-  "explanation": "Cache hits require identical tokens in the same positions, so volatile content must come last. (Barron, The Claw AI Agent Ecosystem, §4.7.3)",
+  "explanation": "Cache hits require identical tokens in the same positions, so volatile content must come last.",
   "section": "§4.7.3"
  },
  {
@@ -104,7 +104,7 @@
    "Enable streaming"
   ],
   "answer": 1,
-  "explanation": "Memory write failures are silent to the user, so disk monitoring and log rotation prevent them. (Barron, The Claw AI Agent Ecosystem, §4.7.4)",
+  "explanation": "Memory write failures are silent to the user, so disk monitoring and log rotation prevent them.",
   "section": "§4.7.4"
  },
  {
@@ -116,7 +116,7 @@
    "The event queue is full"
   ],
   "answer": 2,
-  "explanation": "Compare the file modification time with the loaded_at time; if newer, restart the session. (Barron, The Claw AI Agent Ecosystem, §4.11)",
+  "explanation": "Compare the file modification time with the loaded_at time; if newer, restart the session.",
   "section": "§4.11"
  }
 ]

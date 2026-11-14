@@ -1,6 +1,6 @@
 [
  {
-  "q": "Setup: you will run OpenClaw on a VPS with a local Ollama model for heartbeats. Which constraint drives the minimum VPS size?",
+  "q": "You will run OpenClaw on a VPS with a local Ollama model for heartbeats. Which constraint drives the minimum VPS size?",
   "options": [
    "CPU: Ollama requires at least 8 cores.",
    "Disk: model files need over 100 GB.",
@@ -8,11 +8,11 @@
    "Bandwidth: heartbeats saturate a 1 Gbps link."
   ],
   "answer": 2,
-  "explanation": "Memory is the constraint: choose the 8 GB tier over the 4 GB minimum when running local Ollama. (Barron, The Claw AI Agent Ecosystem, §5.1)",
+  "explanation": "Memory is the constraint: choose the 8 GB tier over the 4 GB minimum when running local Ollama.",
   "section": "§5.1"
  },
  {
-  "q": "Setup: jq on openclaw.json shows heartbeat.model is set to the Sonnet model. What should change?",
+  "q": "Jq on openclaw.json shows heartbeat.model is set to the Sonnet model. What should change?",
   "options": [
    "Route heartbeats to a local model, since they only check for pending tasks.",
    "Nothing; heartbeats should use the primary model.",
@@ -20,11 +20,11 @@
    "Disable heartbeats entirely."
   ],
   "answer": 0,
-  "explanation": "Heartbeats carry full context but need little reasoning. Routing them to Ollama removes their API cost with negligible trade-off. (Barron, The Claw AI Agent Ecosystem, §5.7, §6.2)",
+  "explanation": "Heartbeats carry full context but need little reasoning. Routing them to Ollama removes their API cost with negligible trade-off.",
   "section": "§5.7, §6.2"
  },
  {
-  "q": "Setup: the onboarding wizard has finished and the agent answers messages. What remains before the deployment is production-grade?",
+  "q": "The onboarding wizard has finished and the agent answers messages. What remains before the deployment is production-grade?",
   "options": [
    "Nothing; the wizard produces a production configuration.",
    "Re-running the wizard with the --production flag.",
@@ -32,11 +32,11 @@
    "Manual openclaw.json edits for budget, model routing, caching, memory governance and heartbeats."
   ],
   "answer": 3,
-  "explanation": "The wizard gets you to working; the settings it skips are what make the deployment production-grade. (Barron, The Claw AI Agent Ecosystem, §5.3)",
+  "explanation": "The wizard gets you to working; the settings it skips are what make the deployment production-grade.",
   "section": "§5.3"
  },
  {
-  "q": "Setup: a production deployment must not change unexpectedly when you run docker compose pull. What should you do?",
+  "q": "A production deployment must not change unexpectedly when you run docker compose pull. What should you do?",
   "options": [
    "Set restart to no.",
    "Pin the image to a specific version tag or digest instead of :latest.",
@@ -44,11 +44,11 @@
    "Run pull only on weekends."
   ],
   "answer": 1,
-  "explanation": "Pinning by tag or sha256 digest gives reproducible, stable deployments. (Barron, The Claw AI Agent Ecosystem, §5.10)",
+  "explanation": "Pinning by tag or sha256 digest gives reproducible, stable deployments.",
   "section": "§5.10"
  },
  {
-  "q": "Setup: today's API cost is double the 7-day average. What alert level is this?",
+  "q": "Today's API cost is double the 7-day average. What alert level is this?",
   "options": [
    "Green: within normal variation.",
    "Yellow: investigate within a week.",
@@ -56,11 +56,11 @@
    "Red: act now."
   ],
   "answer": 3,
-  "explanation": "Cost at +100% of the 7-day average, or a hit budget limit, is red and calls for immediate action. (Barron, The Claw AI Agent Ecosystem, §5.11)",
+  "explanation": "Cost at +100% of the 7-day average, or a hit budget limit, is red and calls for immediate action.",
   "section": "§5.11"
  },
  {
-  "q": "Setup: a customer-support style deployment handles many short, unrelated questions. Which session setting fits best?",
+  "q": "A customer-support style deployment handles many short, unrelated questions. Which session setting fits best?",
   "options": [
    "Raise softThresholdTokens to 100,000.",
    "Cap the session at about 20 messages with truncation.",
@@ -68,11 +68,11 @@
    "Use summarize with a 170,000 hard threshold."
   ],
   "answer": 1,
-  "explanation": "For short independent interactions, a message cap stops stale topics from carrying forward. (Barron, The Claw AI Agent Ecosystem, §6.4)",
+  "explanation": "For short independent interactions, a message cap stops stale topics from carrying forward.",
   "section": "§6.4"
  },
  {
-  "q": "Setup: in long research sessions, summarization at 40,000 tokens keeps interrupting multi-step reasoning. What should you adjust?",
+  "q": "In long research sessions, summarization at 40,000 tokens keeps interrupting multi-step reasoning. What should you adjust?",
   "options": [
    "Raise softThresholdTokens to roughly 60,000–80,000.",
    "Lower softThresholdTokens to 20,000.",
@@ -80,11 +80,11 @@
    "Disable prompt caching."
   ],
   "answer": 0,
-  "explanation": "Long-running tasks warrant higher thresholds so more context fits before summarization. (Barron, The Claw AI Agent Ecosystem, §6.4)",
+  "explanation": "Long-running tasks warrant higher thresholds so more context fits before summarization.",
   "section": "§6.4"
  },
  {
-  "q": "Setup: monthly cost has crept up steadily for months with no sudden spikes. What is the most likely cause and first check?",
+  "q": "Monthly cost has crept up steadily for months with no sudden spikes. What is the most likely cause and first check?",
   "options": [
    "A reasoning loop; check for calls seconds apart.",
    "Router misclassification to Opus; check model counts.",
@@ -92,11 +92,11 @@
    "A compromised API key; rotate it."
   ],
   "answer": 2,
-  "explanation": "Gradual increases usually mean workspace or MEMORY.md growth; sudden spikes point to loops or routing errors. (Barron, The Claw AI Agent Ecosystem, §6.7, §6.11)",
+  "explanation": "Gradual increases usually mean workspace or MEMORY.md growth; sudden spikes point to loops or routing errors.",
   "section": "§6.7, §6.11"
  },
  {
-  "q": "Setup: your measured cache hit rate is 55% on interactive sessions. What should you investigate?",
+  "q": "Your measured cache hit rate is 55% on interactive sessions. What should you investigate?",
   "options": [
    "Whether the model supports caching at all.",
    "Prefix order, timestamp injection, TTL expiry, and mid-session identity file edits.",
@@ -104,11 +104,11 @@
    "Whether the provider spend cap is too low."
   ],
   "answer": 1,
-  "explanation": "A hit rate under 70% points to one of the four cache failure modes. (Barron, The Claw AI Agent Ecosystem, §6.9)",
+  "explanation": "A hit rate under 70% points to one of the four cache failure modes.",
   "section": "§6.9"
  },
  {
-  "q": "Setup: you plan to add OpenRouter for cheaper models before applying any other cost strategy. What's the better approach?",
+  "q": "You plan to add OpenRouter for cheaper models before applying any other cost strategy. What's the better approach?",
   "options": [
    "Add as many providers as possible at the start.",
    "Replace Anthropic entirely with local models.",
@@ -116,11 +116,11 @@
    "Optimize within a single provider first; multi-provider adds complexity."
   ],
   "answer": 3,
-  "explanation": "Single-provider strategies already cut costs substantially, and multi-provider adds rate-limit, quality and credential overhead. (Barron, The Claw AI Agent Ecosystem, §6.10)",
+  "explanation": "Single-provider strategies already cut costs substantially, and multi-provider adds rate-limit, quality and credential overhead.",
   "section": "§6.10"
  },
  {
-  "q": "Setup: a pull request code review task needs a model tier. Which tier fits best?",
+  "q": "A pull request code review task needs a model tier. Which tier fits best?",
   "options": [
    "Sonnet",
    "Local 1B model",
@@ -128,11 +128,11 @@
    "Opus only"
   ],
   "answer": 0,
-  "explanation": "Code review combines long context with reasoning; the table says Haiku quality is inadequate and assigns Sonnet. (Barron, The Claw AI Agent Ecosystem, §6.10)",
+  "explanation": "Code review combines long context with reasoning; the table says Haiku quality is inadequate and assigns Sonnet.",
   "section": "§6.10"
  },
  {
-  "q": "Setup: the config budget limit is set, but a bug could stop OpenClaw from enforcing it. What extra layer is needed?",
+  "q": "The config budget limit is set, but a bug could stop OpenClaw from enforcing it. What extra layer is needed?",
   "options": [
    "A second daily limit in openclaw.json.",
    "A cron job that kills the container at midnight.",
@@ -140,7 +140,7 @@
    "Nothing; config limits are sufficient."
   ],
   "answer": 2,
-  "explanation": "Provider caps are the last line of defense. Neither layer alone is sufficient. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "explanation": "Provider caps are the last line of defense. Neither layer alone is sufficient.",
   "section": "§6.6"
  }
 ]

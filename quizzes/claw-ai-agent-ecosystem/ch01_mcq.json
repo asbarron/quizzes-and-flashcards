@@ -8,7 +8,7 @@
    "A pricing shift from per-seat to per-token billing"
   ],
   "answer": 2,
-  "explanation": "The change is mainly about time: an agent's state carries forward, while a chat exchange is complete in itself. (Barron, The Claw AI Agent Ecosystem, §1.1)",
+  "explanation": "The change is mainly about time: an agent's state carries forward, while a chat exchange is complete in itself.",
   "section": "§1.1"
  },
  {
@@ -20,19 +20,19 @@
    "Output channel failure"
   ],
   "answer": 0,
-  "explanation": "A wrong decision written to memory keeps shaping later behavior; these are compounding errors. (Barron, The Claw AI Agent Ecosystem, §1.1)",
+  "explanation": "A wrong decision written to memory keeps shaping later behavior; these are compounding errors.",
   "section": "§1.1"
  },
  {
-  "q": "Which of the following was NOT part of the combination that let OpenClaw spread?",
+  "q": "An agent platform goes viral without shipping a new model. Which factor is least likely to explain its adoption?",
   "options": [
-   "Single-file configuration in openclaw.json",
-   "Self-hosted deployment on commodity hardware",
-   "Multi-channel communication over real messaging platforms",
+   "Configuration lives in a single file",
+   "It runs self-hosted on commodity hardware",
+   "It talks to users over messaging apps they already use",
    "A proprietary fine-tuned model"
   ],
   "answer": 3,
-  "explanation": "OpenClaw's edge was integrating existing parts; the model capability was already available to earlier systems. (Barron, The Claw AI Agent Ecosystem, §1.1.1)",
+  "explanation": "Adoption came from integrating existing pieces. The model capability was already available.",
   "section": "§1.1.1"
  },
  {
@@ -44,7 +44,7 @@
    "It required a vector database"
   ],
   "answer": 1,
-  "explanation": "System prompts are hidden from users, fragile under unexpected input, and non-persistent. (Barron, The Claw AI Agent Ecosystem, §1.2)",
+  "explanation": "System prompts are hidden from users, fragile under unexpected input, and non-persistent.",
   "section": "§1.2"
  },
  {
@@ -56,7 +56,7 @@
    "A RAG system over the submissions"
   ],
   "answer": 2,
-  "explanation": "Deterministic, high-volume, structured work with strict execution guarantees is where workflow tools beat agents. (Barron, The Claw AI Agent Ecosystem, §1.2.1)",
+  "explanation": "Deterministic, high-volume, structured work with strict execution guarantees is where workflow tools beat agents.",
   "section": "§1.2.1"
  },
  {
@@ -68,7 +68,7 @@
    "Output channels"
   ],
   "answer": 1,
-  "explanation": "Event intake normalizes inputs and drops unauthorized events before any model call. (Barron, The Claw AI Agent Ecosystem, §1.3)",
+  "explanation": "Event intake normalizes inputs and drops unauthorized events before any model call.",
   "section": "§1.3"
  },
  {
@@ -80,7 +80,7 @@
    "Written by the agent as dated narrative logs, with identity files loaded in full"
   ],
   "answer": 3,
-  "explanation": "Claw memory is narrative, agent-authored, and includes identity files that are always fully loaded. (Barron, The Claw AI Agent Ecosystem, §1.3.1)",
+  "explanation": "Claw memory is narrative, agent-authored, and includes identity files that are always fully loaded.",
   "section": "§1.3.1"
  },
  {
@@ -92,31 +92,31 @@
    "Lengthening the heartbeat interval"
   ],
   "answer": 0,
-  "explanation": "This is scope expansion, which calls for permission design and SOUL.md hard limits. (Barron, The Claw AI Agent Ecosystem, §1.4)",
+  "explanation": "This is scope expansion, which calls for permission design and SOUL.md hard limits.",
   "section": "§1.4"
  },
  {
-  "q": "What best explains the February 2026 inbox deletion incident?",
+  "q": "A user tells an agent with delete access and no confirmation gate to \"clean up my inbox,\" and it deletes thousands of messages. What best explains the outcome?",
   "options": [
    "A hallucination bug in the email tool",
-   "A predictable result of a capable system lacking specified intent, scope, and reversibility",
+   "A capable system acting on unspecified intent, scope, and reversibility",
    "A supply chain attack through a malicious skill",
    "A provider outage that duplicated delete calls"
   ],
   "answer": 1,
-  "explanation": "The agent did not malfunction; default delete access, no confirmation gate, and a broad instruction combined. (Barron, The Claw AI Agent Ecosystem, §1.4)",
+  "explanation": "Nothing malfunctioned. A broad instruction, default delete access, and no confirmation gate combined.",
   "section": "§1.4"
  },
  {
-  "q": "In the first month of a new deployment, what is the main activity of week 3?",
+  "q": "Two weeks into a new deployment, the agent asks for confirmation on harmless reads but acts fast on risky writes. What should the operator do next?",
   "options": [
-   "Connecting the first real data source",
-   "Writing the initial identity files",
-   "Calibrating autonomy based on observed behavior",
-   "Analyzing the first operational incident"
+   "Connect another data source",
+   "Rewrite the identity files from scratch",
+   "Calibrate autonomy from observed behavior: loosen safe reads, tighten risky writes",
+   "Wait for the first incident before changing anything"
   ],
   "answer": 2,
-  "explanation": "By week 3 the operator has enough observed behavior to tune where the agent is too cautious or too aggressive. (Barron, The Claw AI Agent Ecosystem, §1.4.1)",
+  "explanation": "Observed behavior is the evidence for tuning where the agent is too cautious or too aggressive.",
   "section": "§1.4.1"
  }
 ]

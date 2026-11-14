@@ -8,7 +8,7 @@
    "Multi-round reasoning on complex tasks"
   ],
   "answer": 2,
-  "explanation": "Context accumulation typically makes up 40–50% of spend, well above the other drivers. (Barron, The Claw AI Agent Ecosystem, §6.1)",
+  "explanation": "Context accumulation typically makes up 40–50% of spend, well above the other drivers.",
   "section": "§6.1"
  },
  {
@@ -20,11 +20,11 @@
    "The cache TTL expired; raise cacheControlTtl."
   ],
   "answer": 0,
-  "explanation": "tinyllama's failure mode is its small context window; phi-4 or qwen2.5:7b are stronger options, both still free via Ollama. (Barron, The Claw AI Agent Ecosystem, §6.2)",
+  "explanation": "tinyllama's failure mode is its small context window; phi-4 or qwen2.5:7b are stronger options, both still free via Ollama.",
   "section": "§6.2"
  },
  {
-  "q": "Why is static routing usually a better choice than dynamic routing for most deployments?",
+  "q": "Why is static routing a better default than dynamic routing for most deployments?",
   "options": [
    "It always produces lower cost than dynamic routing.",
    "Dynamic routing is not supported by OpenClaw.",
@@ -32,7 +32,7 @@
    "It needs no classification logic and cannot misfire."
   ],
   "answer": 3,
-  "explanation": "Static routing is less theoretically optimal but simpler: the user or AGENTS.md picks the profile, so nothing can misclassify. (Barron, The Claw AI Agent Ecosystem, §6.3)",
+  "explanation": "Static routing is less theoretically optimal but simpler: the user or AGENTS.md picks the profile, so nothing can misclassify.",
   "section": "§6.3"
  },
  {
@@ -44,7 +44,7 @@
    "The agent refuses to use Haiku for any task."
   ],
   "answer": 1,
-  "explanation": "Wording like this drives tier inflation, so audit identity files for implicit model instructions. (Barron, The Claw AI Agent Ecosystem, §6.3)",
+  "explanation": "Wording like this drives tier inflation, so audit identity files for implicit model instructions.",
   "section": "§6.3"
  },
  {
@@ -56,7 +56,7 @@
    "Variable content before the stable prefix breaks the byte match, so the cache never hits."
   ],
   "answer": 3,
-  "explanation": "Any variable content placed ahead of the stable prefix invalidates the whole cache. Keep stable content first and variable content last. (Barron, The Claw AI Agent Ecosystem, §6.5.5)",
+  "explanation": "Any variable content placed ahead of the stable prefix invalidates the whole cache. Keep stable content first and variable content last.",
   "section": "§6.5.5"
  },
  {
@@ -68,7 +68,7 @@
    "604800 seconds"
   ],
   "answer": 1,
-  "explanation": "For periodic hourly use, a one-hour TTL keeps the cache warm across gaps; a five-minute TTL would expire between messages. (Barron, The Claw AI Agent Ecosystem, §6.5.2)",
+  "explanation": "For periodic hourly use, a one-hour TTL keeps the cache warm across gaps; a five-minute TTL would expire between messages.",
   "section": "§6.5.2"
  },
  {
@@ -80,7 +80,7 @@
    "A batch job that reuses the same prefix nightly with a 24-hour TTL"
   ],
   "answer": 0,
-  "explanation": "The 25% write premium is only recovered by later reads. A single-use call pays the premium with no reads to offset it. (Barron, The Claw AI Agent Ecosystem, §6.5.6)",
+  "explanation": "The 25% write premium is only recovered by later reads. A single-use call pays the premium with no reads to offset it.",
   "section": "§6.5.6"
  },
  {
@@ -92,7 +92,7 @@
    "pause, so queued messages are dropped"
   ],
   "answer": 2,
-  "explanation": "Disable needs a manual re-enable, giving you a chance to look into the cause before the agent runs again. Pause fits daily limits. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "explanation": "Disable needs a manual re-enable, giving you a chance to look into the cause before the agent runs again. Pause fits daily limits.",
   "section": "§6.6"
  },
  {
@@ -104,7 +104,7 @@
    "They automatically correct the cron expression."
   ],
   "answer": 1,
-  "explanation": "Runaway automation is a tail scenario that daily limits catch quickly, before it compounds over the billing cycle. (Barron, The Claw AI Agent Ecosystem, §6.6)",
+  "explanation": "Runaway automation is a tail scenario that daily limits catch quickly, before it compounds over the billing cycle.",
   "section": "§6.6"
  },
  {
@@ -116,7 +116,7 @@
    "Routing heartbeats to a local Ollama model"
   ],
   "answer": 3,
-  "explanation": "Day 1 is heartbeat routing: quick to set up, immediate effect, no capability change. Routing and pruning come in later weeks. (Barron, The Claw AI Agent Ecosystem, §6.8)",
+  "explanation": "Day 1 is heartbeat routing: quick to set up, immediate effect, no capability change. Routing and pruning come in later weeks.",
   "section": "§6.8"
  }
 ]

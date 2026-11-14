@@ -8,19 +8,19 @@
    "Docker binds to loopback by default, so nothing changes."
   ],
   "answer": 2,
-  "explanation": "Without the 127.0.0.1 prefix Docker publishes the port on 0.0.0.0. Bind to loopback and let a reverse proxy handle external TLS. (Barron, The Claw AI Agent Ecosystem, §5.2.1)",
+  "explanation": "Without the 127.0.0.1 prefix Docker publishes the port on 0.0.0.0. Bind to loopback and let a reverse proxy handle external TLS.",
   "section": "§5.2.1"
  },
  {
-  "q": "Which of these does the openclaw onboard wizard configure?",
+  "q": "Which setting does OpenClaw's onboarding wizard leave for you to edit by hand?",
   "options": [
    "Channel allowlists",
-   "Budget controls and spending limits",
-   "Prompt cache settings",
-   "Heartbeat interval and routing"
+   "Model provider",
+   "Budget limits",
+   "Enabled skills"
   ],
-  "answer": 0,
-  "explanation": "The wizard covers security acknowledgment, model provider, channels, channel allowlists and skills. Budget, routing, cache, memory governance and heartbeat settings need manual edits. (Barron, The Claw AI Agent Ecosystem, §5.3)",
+  "answer": 2,
+  "explanation": "The wizard covers the provider, channels, allowlists, and skills. Budget, routing, cache, memory governance, and heartbeat settings need manual edits.",
   "section": "§5.3"
  },
  {
@@ -32,7 +32,7 @@
    "A tunnel service such as Cloudflare Tunnel or Tailscale Funnel"
   ],
   "answer": 3,
-  "explanation": "Both tunnel options avoid port forwarding and terminate HTTPS automatically, giving the host the public endpoint webhooks need. (Barron, The Claw AI Agent Ecosystem, §5.1)",
+  "explanation": "Both tunnel options avoid port forwarding and terminate HTTPS automatically, giving the host the public endpoint webhooks need.",
   "section": "§5.1"
  },
  {
@@ -44,7 +44,7 @@
    "Replies on messaging platforms"
   ],
   "answer": 1,
-  "explanation": "Without a public endpoint, cron, outbound calls and messaging responses still work; only inbound webhook triggers are lost. (Barron, The Claw AI Agent Ecosystem, §5.1)",
+  "explanation": "Without a public endpoint, cron, outbound calls and messaging responses still work; only inbound webhook triggers are lost.",
   "section": "§5.1"
  },
  {
@@ -56,7 +56,7 @@
    "A .env file with owner-only permissions, kept out of git"
   ],
   "answer": 3,
-  "explanation": "A properly permissioned .env is adequate for single-operator setups; Vault's added benefit there is real but small. (Barron, The Claw AI Agent Ecosystem, §5.6)",
+  "explanation": "A properly permissioned .env is adequate for single-operator setups; Vault's added benefit there is real but small.",
   "section": "§5.6"
  },
  {
@@ -68,19 +68,19 @@
    "ufw rules are reset whenever the container restarts."
   ],
   "answer": 1,
-  "explanation": "The checklist says to verify Docker-managed iptables rules because Docker bypasses ufw by default. (Barron, The Claw AI Agent Ecosystem, §5.7)",
+  "explanation": "The checklist says to verify Docker-managed iptables rules because Docker bypasses ufw by default.",
   "section": "§5.7"
  },
  {
-  "q": "During the post-checklist functional test, you message the agent from an account not on the allowFrom list. What is the expected result?",
+  "q": "You message a hardened agent from an account that isn't on its allowlist. What should happen?",
   "options": [
-   "The message is rejected silently.",
-   "The agent replies that access is denied.",
-   "The agent asks the operator to approve the new user.",
-   "The agent responds but disables tools for that user."
+   "The message is rejected silently",
+   "The agent replies that access is denied",
+   "The agent asks the operator to approve the new user",
+   "The agent responds but with tools disabled"
   ],
   "answer": 0,
-  "explanation": "After hardening, messages from accounts outside allowFrom should be rejected without any reply. (Barron, The Claw AI Agent Ecosystem, §5.7)",
+  "explanation": "Replying at all confirms the bot exists and spends model calls. Unauthorized events should never reach the model.",
   "section": "§5.7"
  },
  {
@@ -92,7 +92,7 @@
    "They are preserved only if the image tag is pinned."
   ],
   "answer": 2,
-  "explanation": "Container recreation does not touch mounted volumes, so identity files and session history survive the update. (Barron, The Claw AI Agent Ecosystem, §5.10)",
+  "explanation": "Container recreation does not touch mounted volumes, so identity files and session history survive the update.",
   "section": "§5.10"
  },
  {
@@ -104,7 +104,7 @@
    "Ignore it unless API cost also spikes."
   ],
   "answer": 1,
-  "explanation": "One to five errors in 24 hours is yellow, which calls for investigation within a day. More than five is red. (Barron, The Claw AI Agent Ecosystem, §5.11)",
+  "explanation": "One to five errors in 24 hours is yellow, which calls for investigation within a day. More than five is red.",
   "section": "§5.11"
  },
  {
@@ -116,7 +116,7 @@
    "Version history of identity files for rollback and audit"
   ],
   "answer": 3,
-  "explanation": "archive/ holds earlier identity-file versions for rollback and incident audit; it is not a backup. (Barron, The Claw AI Agent Ecosystem, §5.9)",
+  "explanation": "archive/ holds earlier identity-file versions for rollback and incident audit; it is not a backup.",
   "section": "§5.9"
  }
 ]

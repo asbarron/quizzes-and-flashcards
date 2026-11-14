@@ -8,7 +8,7 @@
    "Streaming is enabled for the channel"
   ],
   "answer": 1,
-  "explanation": "DMs working rules out the token; the failure table maps this symptom to a misconfigured groupPolicy that should be mention. (Barron, The Claw AI Agent Ecosystem, §2.9)",
+  "explanation": "DMs working rules out the token; the failure table maps this symptom to a misconfigured groupPolicy that should be mention.",
   "section": "§2.9"
  },
  {
@@ -20,7 +20,7 @@
    "It binds the signature to the payload content"
   ],
   "answer": 3,
-  "explanation": "A static bearer token proves nothing about the payload; an HMAC signature is computed over the content itself. (Barron, The Claw AI Agent Ecosystem, §2.2)",
+  "explanation": "A static bearer token proves nothing about the payload; an HMAC signature is computed over the content itself.",
   "section": "§2.2"
  },
  {
@@ -32,7 +32,7 @@
    "Yesterday's daily log"
   ],
   "answer": 0,
-  "explanation": "Steps 8-9 (history and the incoming event) change each turn; steps 1-7 form the cacheable prefix. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "explanation": "Steps 8-9 (history and the incoming event) change each turn; steps 1-7 form the cacheable prefix.",
   "section": "§2.3"
  },
  {
@@ -44,7 +44,7 @@
    "Discards all incoming events"
   ],
   "answer": 2,
-  "explanation": "Missing files are skipped without error, so add an AGENTS.md check that alerts the operator. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "explanation": "Missing files are skipped without error, so add an AGENTS.md check that alerts the operator.",
   "section": "§2.3"
  },
  {
@@ -56,7 +56,7 @@
    "In the tool's SKILL.md"
   ],
   "answer": 1,
-  "explanation": "Anything in workspace context files is readable by the model and potentially exposed through injection. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "explanation": "Anything in workspace context files is readable by the model and potentially exposed through injection.",
   "section": "§2.3"
  },
  {
@@ -68,7 +68,7 @@
    "Neither; the model always asks the user"
   ],
   "answer": 0,
-  "explanation": "The model treats SOUL.md as the frame for interpreting the operational rules in AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §2.5)",
+  "explanation": "The model treats SOUL.md as the frame for interpreting the operational rules in AGENTS.md.",
   "section": "§2.5"
  },
  {
@@ -80,7 +80,7 @@
    "Schema validation, permission check, sandbox check, execution, result normalization"
   ],
   "answer": 3,
-  "explanation": "Arguments are validated first, permissions and sandboxing are resolved before execution, and output is normalized last. (Barron, The Claw AI Agent Ecosystem, §2.6)",
+  "explanation": "Arguments are validated first, permissions and sandboxing are resolved before execution, and output is normalized last.",
   "section": "§2.6"
  },
  {
@@ -92,7 +92,7 @@
    "Disable prompt caching"
   ],
   "answer": 2,
-  "explanation": "SKILL.md notes are only interpreted by the model; a code-level check refuses the call even if the model is manipulated. (Barron, The Claw AI Agent Ecosystem, §2.6)",
+  "explanation": "SKILL.md notes are only interpreted by the model; a code-level check refuses the call even if the model is manipulated.",
   "section": "§2.6"
  },
  {
@@ -104,7 +104,7 @@
    "Wrong scheduler timezone; fix the cron setting"
   ],
   "answer": 0,
-  "explanation": "The failure table maps unexpected MEMORY.md entries to injection, fixed by removal plus write restrictions. (Barron, The Claw AI Agent Ecosystem, §2.9)",
+  "explanation": "The failure table maps unexpected MEMORY.md entries to injection, fixed by removal plus write restrictions.",
   "section": "§2.9"
  },
  {
@@ -116,7 +116,7 @@
    "parseMode is set to mrkdwn"
   ],
   "answer": 1,
-  "explanation": "Streaming to a messaging app produces message fragments, so enforce non-streaming in both config and AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §2.8)",
+  "explanation": "Streaming to a messaging app produces message fragments, so enforce non-streaming in both config and AGENTS.md.",
   "section": "§2.8"
  }
 ]

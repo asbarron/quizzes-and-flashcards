@@ -8,7 +8,7 @@
    "A natural-language interface"
   ],
   "answer": 2,
-  "explanation": "The three properties are persistent authentication, autonomous execution, and natural language as the attack surface. (Barron, The Claw AI Agent Ecosystem, §8.1)",
+  "explanation": "The three properties are persistent authentication, autonomous execution, and natural language as the attack surface.",
   "section": "§8.1"
  },
  {
@@ -20,19 +20,19 @@
    "Only results from paid APIs should be trusted."
   ],
   "answer": 0,
-  "explanation": "Tool result injection is dangerous because outputs are often treated as trusted; the defense is giving them no instruction authority. (Barron, The Claw AI Agent Ecosystem, §8.2)",
+  "explanation": "Tool result injection is dangerous because outputs are often treated as trusted; the defense is giving them no instruction authority.",
   "section": "§8.2"
  },
  {
-  "q": "Which factor did NOT enable the car dealership chatbot incident?",
+  "q": "A customer talks a dealership chatbot into \"agreeing\" to sell a car for $1. Which missing control did NOT matter here?",
   "options": [
-   "No distinction in authority between operator configuration and customer messages",
-   "No refusal of persona-adoption requests",
-   "No confirmation step before consequential commitments",
-   "The attacker poisoned the chatbot's long-term memory."
+   "Separating operator authority from customer messages",
+   "Refusing persona-adoption requests",
+   "A confirmation step before binding commitments",
+   "Protecting long-term memory from poisoning"
   ],
   "answer": 3,
-  "explanation": "The attack needed no memory access or tools, only typed text exploiting missing authority, identity and confirmation rules. (Barron, The Claw AI Agent Ecosystem, §8.2)",
+  "explanation": "The attack needed no memory access or tools, only typed text exploiting missing authority, identity, and confirmation rules.",
   "section": "§8.2"
  },
  {
@@ -44,7 +44,7 @@
    "SKILL.md lists permissions but not the publisher."
   ],
   "answer": 1,
-  "explanation": "In the documented malicious skill, the description looked correct while the code exfiltrated data. Review every execution file. (Barron, The Claw AI Agent Ecosystem, §8.3)",
+  "explanation": "In the documented malicious skill, the description looked correct while the code exfiltrated data. Review every execution file.",
   "section": "§8.3"
  },
  {
@@ -56,7 +56,7 @@
    "Split it into a read-only skill and a separate send skill that requires confirmation."
   ],
   "answer": 3,
-  "explanation": "A02 hardening splits skills by permission tier and enables send only when needed, with confirmation on every send. (Barron, The Claw AI Agent Ecosystem, §8.4)",
+  "explanation": "A02 hardening splits skills by permission tier and enables send only when needed, with confirmation on every send.",
   "section": "§8.4"
  },
  {
@@ -68,7 +68,7 @@
    "Store it base64-encoded in the daily log."
   ],
   "answer": 1,
-  "explanation": "Credentials in workspace files sit in plaintext on disk and are sent with every request, ending up in provider logs. (Barron, The Claw AI Agent Ecosystem, §8.4b)",
+  "explanation": "Credentials in workspace files sit in plaintext on disk and are sent with every request, ending up in provider logs.",
   "section": "§8.4b"
  },
  {
@@ -80,7 +80,7 @@
    "Sending mail through a disabled send tool"
   ],
   "answer": 0,
-  "explanation": "If an injected instruction only needs read and send permissions the deployment already grants, permissions alone do not block it. (Barron, The Claw AI Agent Ecosystem, §8.5)",
+  "explanation": "If an injected instruction only needs read and send permissions the deployment already grants, permissions alone do not block it.",
   "section": "§8.5"
  },
  {
@@ -92,19 +92,19 @@
    "Indirect injection requires an allowlisted account."
   ],
   "answer": 2,
-  "explanation": "Access control limits who can message the agent, but indirect injection rides in emails, pages and documents the agent processes. (Barron, The Claw AI Agent Ecosystem, §8.5)",
+  "explanation": "Access control limits who can message the agent, but indirect injection rides in emails, pages and documents the agent processes.",
   "section": "§8.5"
  },
  {
-  "q": "An agent starts sending unexpected emails. What is the first step of the incident response playbook?",
+  "q": "An agent suddenly starts sending email nobody asked for. What do you do first?",
   "options": [
-   "Read the session transcript to learn what triggered it.",
-   "Stop the agent, or revoke its API keys if you cannot reach the host.",
-   "Check Sent Items to scope the damage.",
-   "Classify the root cause before touching anything."
+   "Read the session transcript to learn what triggered it",
+   "Stop the agent, or revoke its API keys if you can't reach the host",
+   "Check Sent Items to scope the damage",
+   "Classify the root cause before touching anything"
   ],
   "answer": 1,
-  "explanation": "Resist investigating first: every second of continued execution can add damage. Scope and reconstruction come after. (Barron, The Claw AI Agent Ecosystem, §8.8)",
+  "explanation": "Contain first. Every second of execution can add damage; scoping and investigation come after.",
   "section": "§8.8"
  },
  {
@@ -116,7 +116,7 @@
    "Supply chain compromise: uninstall the skill and rotate every credential the agent holds."
   ],
   "answer": 3,
-  "explanation": "Unexpected network calls from a skill indicate supply chain compromise. Treat all credentials as exposed and review workspace and memory. (Barron, The Claw AI Agent Ecosystem, §8.8)",
+  "explanation": "Unexpected network calls from a skill indicate supply chain compromise. Treat all credentials as exposed and review workspace and memory.",
   "section": "§8.8"
  }
 ]

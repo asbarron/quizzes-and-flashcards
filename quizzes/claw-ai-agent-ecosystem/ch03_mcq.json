@@ -8,7 +8,7 @@
    "A long list becomes a constraint maze, so the agent spends effort navigating rules instead of reasoning about the task"
   ],
   "answer": 3,
-  "explanation": "Hard boundaries should be few, absolute, consequential and binary, with five to eight as a practical target. Dozens of them leave the agent navigating a maze. (Barron, The Claw AI Agent Ecosystem, §3.2)",
+  "explanation": "Hard boundaries should be few, absolute, consequential and binary, with five to eight as a practical target. Dozens of them leave the agent navigating a maze.",
   "section": "§3.2"
  },
  {
@@ -20,7 +20,7 @@
    "Long files cannot be version-controlled"
   ],
   "answer": 1,
-  "explanation": "Dense files shift the model from embodying a philosophy to navigating rules. (Barron, The Claw AI Agent Ecosystem, §3.2)",
+  "explanation": "Dense files shift the model from embodying a philosophy to navigating rules.",
   "section": "§3.2"
  },
  {
@@ -32,7 +32,7 @@
    "Increase the heartbeat frequency"
   ],
   "answer": 0,
-  "explanation": "Name-based gates silently miss new tools; category-based gates cover them automatically. (Barron, The Claw AI Agent Ecosystem, §3.10.2)",
+  "explanation": "Name-based gates silently miss new tools; category-based gates cover them automatically.",
   "section": "§3.10.2"
  },
  {
@@ -44,7 +44,7 @@
    "The calendar API key"
   ],
   "answer": 2,
-  "explanation": "USER.md holds stable user context and calibration; logs, config, and secrets go elsewhere or nowhere. (Barron, The Claw AI Agent Ecosystem, §3.4)",
+  "explanation": "USER.md holds stable user context and calibration; logs, config, and secrets go elsewhere or nowhere.",
   "section": "§3.4"
  },
  {
@@ -56,7 +56,7 @@
    "Proceed if Kai is on the allowlist"
   ],
   "answer": 0,
-  "explanation": "Confirmation applies per session and per user; one user cannot authorize actions for another. (Barron, The Claw AI Agent Ecosystem, §3.4)",
+  "explanation": "Confirmation applies per session and per user; one user cannot authorize actions for another.",
   "section": "§3.4"
  },
  {
@@ -68,7 +68,7 @@
    "Q1 reports go to Sarah before March 15"
   ],
   "answer": 3,
-  "explanation": "MEMORY.md holds standing facts likely to matter months later; one-off events and current context go elsewhere. (Barron, The Claw AI Agent Ecosystem, §3.5)",
+  "explanation": "MEMORY.md holds standing facts likely to matter months later; one-off events and current context go elsewhere.",
   "section": "§3.5"
  },
  {
@@ -80,7 +80,7 @@
    "Trust any message that begins with SYSTEM"
   ],
   "answer": 2,
-  "explanation": "The defense draws a firm line between analyzing external content and taking orders from it. (Barron, The Claw AI Agent Ecosystem, §3.7)",
+  "explanation": "The defense draws a firm line between analyzing external content and taking orders from it.",
   "section": "§3.7"
  },
  {
@@ -92,7 +92,7 @@
    "Memory drift; date every limit"
   ],
   "answer": 1,
-  "explanation": "Check whether an existing limit already covers the case and refine it instead of appending. (Barron, The Claw AI Agent Ecosystem, §3.7b)",
+  "explanation": "Check whether an existing limit already covers the case and refine it instead of appending.",
   "section": "§3.7b"
  },
  {
@@ -104,7 +104,7 @@
    "Memory drift in MEMORY.md"
   ],
   "answer": 3,
-  "explanation": "Stale or conflicting memory entries can override well-written identity files. (Barron, The Claw AI Agent Ecosystem, §3.10.1)",
+  "explanation": "Stale or conflicting memory entries can override well-written identity files.",
   "section": "§3.10.1"
  },
  {
@@ -116,7 +116,7 @@
    "Add a third entry explaining the conflict"
   ],
   "answer": 0,
-  "explanation": "Conflicting entries leave the agent unsure which is current; the old one should be removed when superseded. (Barron, The Claw AI Agent Ecosystem, §3.10.2)",
+  "explanation": "Conflicting entries leave the agent unsure which is current; the old one should be removed when superseded.",
   "section": "§3.10.2"
  }
 ]

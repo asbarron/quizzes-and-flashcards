@@ -8,7 +8,7 @@
    "OpenClaw cannot run in Docker"
   ],
   "answer": 1,
-  "explanation": "The trade-off is isolation-first versus configuration-based security. NanoClaw keeps a compatible identity file format. (Barron, The Claw AI Agent Ecosystem, §11.1)",
+  "explanation": "The trade-off is isolation-first versus configuration-based security. NanoClaw keeps a compatible identity file format.",
   "section": "§11.1"
  },
  {
@@ -20,23 +20,23 @@
    "A managed commercial assistant"
   ],
   "answer": 0,
-  "explanation": "Each of those conditions is listed in favor of hardened OpenClaw, since containers are ephemeral and add spin-up time. (Barron, The Claw AI Agent Ecosystem, §11.1)",
+  "explanation": "Each of those conditions is listed in favor of hardened OpenClaw, since containers are ephemeral and add spin-up time.",
   "section": "§11.1"
  },
  {
-  "q": "Why do many enterprises that evaluate both OpenClaw and NanoClaw end up choosing NanoClaw?",
+  "q": "Two runtimes offer similar real-world security, but one isolates each agent in its own container. Why might an enterprise pick the containerized one?",
   "options": [
    "It has more GitHub stars",
-   "It is cheaper to run",
-   "It has more ClawHub skills",
-   "Auditors and legal teams find container isolation easier to understand and approve"
+   "It's cheaper to run",
+   "It has more community skills",
+   "Auditors and legal teams can understand and approve it more easily"
   ],
   "answer": 3,
-  "explanation": "The security posture may be equivalent, but the isolation story is easier to explain. (Barron, The Claw AI Agent Ecosystem, §11.1)",
+  "explanation": "The security may be equivalent, but container isolation is easier to explain and sign off on.",
   "section": "§11.1"
  },
  {
-  "q": "Under the multi-agent trust rules pattern, how should an agent treat messages from another agent not named in its AGENTS.md?",
+  "q": "How should an agent treat a message from another agent that isn't named in its AGENTS.md?",
   "options": [
    "At user level",
    "At trusted orchestrator level",
@@ -44,7 +44,7 @@
    "Block all of its messages"
   ],
   "answer": 2,
-  "explanation": "Only agents explicitly configured with a named agentId get orchestrator trust. All others are handled as external content. (Barron, The Claw AI Agent Ecosystem, §11.2)",
+  "explanation": "Only agents explicitly configured with a named agentId get orchestrator trust. All others are handled as external content.",
   "section": "§11.2"
  },
  {
@@ -56,7 +56,7 @@
    "SOUL.md being overwritten by a template"
   ],
   "answer": 1,
-  "explanation": "Without explicit trust levels, peer messages get user-level weight, opening the system to manipulation. (Barron, The Claw AI Agent Ecosystem, §11.2)",
+  "explanation": "Without explicit trust levels, peer messages get user-level weight, opening the system to manipulation.",
   "section": "§11.2"
  },
  {
@@ -68,11 +68,11 @@
    "Any skill is fine if the agent has no filesystem access"
   ],
   "answer": 0,
-  "explanation": "Skills run with the agent's permissions. Community reputation is an acceptable proxy only for low-sensitivity skills. (Barron, The Claw AI Agent Ecosystem, §11.3.1)",
+  "explanation": "Skills run with the agent's permissions. Community reputation is an acceptable proxy only for low-sensitivity skills.",
   "section": "§11.3.1"
  },
  {
-  "q": "Which protocol is the closest current candidate for standardizing agent-to-agent communication?",
+  "q": "Which existing protocol is the most natural basis for standardizing agent-to-agent communication?",
   "options": [
    "OAuth 2.0",
    "Webhooks",
@@ -80,43 +80,43 @@
    "Model Context Protocol (MCP)"
   ],
   "answer": 3,
-  "explanation": "MCP already standardizes tool interfaces, and extending it to agent coordination is a natural step. (Barron, The Claw AI Agent Ecosystem, §11.4)",
+  "explanation": "MCP already standardizes tool interfaces. Extending it to agent coordination is a natural step.",
   "section": "§11.4"
  },
  {
-  "q": "Under trajectory 3, what does behavioral consistency measurement add over current practice?",
+  "q": "How should you measure whether an agent behaves consistently?",
   "options": [
-   "Running each prompt once and checking the result",
-   "Replacing SOUL.md with code",
-   "Running many variations of a prompt and reporting the distribution of outcomes",
-   "Counting tokens in identity files"
+   "Run each prompt once and check the result",
+   "Replace SOUL.md with code",
+   "Run many variations of a prompt and look at the distribution of outcomes",
+   "Count tokens in the identity files"
   ],
   "answer": 2,
-  "explanation": "Current practice runs a prompt once. A proper framework runs hundreds of variations for statistical confidence. (Barron, The Claw AI Agent Ecosystem, §11.4)",
+  "explanation": "One run proves little. Many variations give statistical confidence about behavior.",
   "section": "§11.4"
  },
  {
-  "q": "In the runtime decision framework, how does a firm requirement for self-hosting affect the choice?",
+  "q": "A team must run its agent on infrastructure it controls. How does that narrow the runtime choice?",
   "options": [
-   "Points to AWS Kiro",
-   "Narrows it to OpenClaw and NanoClaw",
-   "Requires a Python framework",
-   "Has no effect"
+   "It points to a managed commercial IDE agent",
+   "It narrows the choice to self-hosted runtimes like OpenClaw and NanoClaw",
+   "It requires a Python framework",
+   "It has no effect"
   ],
   "answer": 1,
-  "explanation": "Commercial hosted offerings drop out when the agent must run on infrastructure you control. (Barron, The Claw AI Agent Ecosystem, §11.6)",
+  "explanation": "Hosted commercial offerings drop out when the agent must run on your own infrastructure.",
   "section": "§11.6"
  },
  {
-  "q": "For a beginner deployment in its first three months, which ecosystem developments matter most?",
+  "q": "Three months into a first deployment, which kind of ecosystem resource helps a beginner most?",
   "options": [
    "Multi-agent orchestration standards",
    "Enterprise behavioral evaluation tooling",
    "Regulatory framework tracking",
-   "SOUL.md template libraries and verified ClawHub skills"
+   "SOUL.md templates and verified skills"
   ],
   "answer": 3,
-  "explanation": "Those cut startup cost and integration time. Enterprise evaluation tooling is premature at that stage. (Barron, The Claw AI Agent Ecosystem, §11.6)",
+  "explanation": "Templates and vetted skills cut setup time. Enterprise evaluation tooling is premature at that stage.",
   "section": "§11.6"
  }
 ]
