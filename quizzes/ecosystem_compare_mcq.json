@@ -1,0 +1,146 @@
+[
+ {
+  "q": "In the book's landscape table, which systems are self-hosted and have full identity file support?",
+  "options": [
+   "CrewAI and AutoGen",
+   "OpenClaw and NanoClaw",
+   "Dify and Flowise",
+   "Claude.ai Projects and OpenAI Assistants"
+  ],
+  "answer": 1,
+  "explanation": "Only OpenClaw and NanoClaw get full marks for structured identity files while being self-hosted. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "section": "§11.1.1"
+ },
+ {
+  "q": "How does default host access differ between OpenClaw and NanoClaw?",
+  "options": [
+   "OpenClaw has full filesystem access by default; NanoClaw isolates work in containers",
+   "Both isolate every task by default",
+   "NanoClaw has full host access; OpenClaw uses containers",
+   "Neither can access the filesystem"
+  ],
+  "answer": 0,
+  "explanation": "OpenClaw relies on opt-in restrictions; NanoClaw is isolation-first by architecture. (Barron, The Claw AI Agent Ecosystem, §11.1)",
+  "section": "§11.1"
+ },
+ {
+  "q": "A team wants to move its OpenClaw SOUL.md and AGENTS.md to NanoClaw. What does the book say about the identity layer?",
+  "options": [
+   "NanoClaw does not support identity files",
+   "Files must be rewritten as container specs",
+   "NanoClaw uses a compatible format",
+   "Only USER.md carries over"
+  ],
+  "answer": 2,
+  "explanation": "The comparison lists NanoClaw's behavioral identity layer as compatible with OpenClaw's. (Barron, The Claw AI Agent Ecosystem, §11.1)",
+  "section": "§11.1"
+ },
+ {
+  "q": "Why does the book rate NanoClaw's configuration complexity higher than OpenClaw's?",
+  "options": [
+   "It requires Python code",
+   "It has no default settings",
+   "It lacks a JSON config",
+   "It requires container specs"
+  ],
+  "answer": 3,
+  "explanation": "Container specifications add setup work, along with container spin-up overhead per tool call. (Barron, The Claw AI Agent Ecosystem, §11.1)",
+  "section": "§11.1"
+ },
+ {
+  "q": "A Python-skilled team needs a multi-step task pipeline with defined start and end states and no always-on runtime. Which does the book point to?",
+  "options": [
+   "CrewAI or AutoGen",
+   "OpenClaw",
+   "NanoClaw",
+   "n8n"
+  ],
+  "answer": 0,
+  "explanation": "Python frameworks are better instrumented for pipelines and skip the cost of maintaining a persistent runtime. (Barron, The Claw AI Agent Ecosystem, §11.6)",
+  "section": "§11.6"
+ },
+ {
+  "q": "For an always-on assistant that reacts to events and keeps context across sessions, which does the book say provide the full runtime model?",
+  "options": [
+   "LangChain and LlamaIndex",
+   "Dify and Flowise",
+   "Only OpenClaw and NanoClaw",
+   "AutoGen and CrewAI"
+  ],
+  "answer": 2,
+  "explanation": "The others are libraries, builders, or hosted assistants rather than always-on runtimes. (Barron, The Claw AI Agent Ecosystem, §11.6)",
+  "section": "§11.6"
+ },
+ {
+  "q": "A technical team with no developers wants to configure an agent without writing code. Why does the book favor OpenClaw or NanoClaw here?",
+  "options": [
+   "They have no configuration at all",
+   "They are configured through JSON and markdown files",
+   "They include a drag-and-drop editor",
+   "They are managed by a cloud provider"
+  ],
+  "answer": 1,
+  "explanation": "Python frameworks need Python expertise. The book calls this team skill fit often a bigger constraint than architecture. (Barron, The Claw AI Agent Ecosystem, §11.6)",
+  "section": "§11.6"
+ },
+ {
+  "q": "How does the book position LangChain and LlamaIndex?",
+  "options": [
+   "As managed enterprise runtimes",
+   "As isolation-first runtimes",
+   "As no-code builders",
+   "As developer frameworks for building custom agents, not deployable runtimes"
+  ],
+  "answer": 3,
+  "explanation": "They are a framework layer. LangChain targets general agent and RAG pipelines; LlamaIndex targets document-heavy RAG. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "section": "§11.1.1"
+ },
+ {
+  "q": "Which two systems does the landscape table position as no-code builders?",
+  "options": [
+   "Dify and Flowise",
+   "CrewAI and AutoGen",
+   "OpenClaw and NanoClaw",
+   "LangChain and LlamaIndex"
+  ],
+  "answer": 0,
+  "explanation": "Dify is listed as a no-code agent builder and Flowise as a no-code LangChain builder. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "section": "§11.1.1"
+ },
+ {
+  "q": "When does the book recommend n8n with AI nodes?",
+  "options": [
+   "For container-isolated enterprise agents",
+   "For research experiments with many agents",
+   "When a workflow automation backbone with AI in certain steps beats a pure agent",
+   "When structured identity files are required"
+  ],
+  "answer": 2,
+  "explanation": "n8n suits hybrid automation. The table shows it has no native identity files or built-in memory. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "section": "§11.1.1"
+ },
+ {
+  "q": "Why do Claude.ai Projects and OpenAI Assistants get only partial credit for identity files?",
+  "options": [
+   "They use project instructions or a system prompt rather than structured multi-file identity",
+   "They cannot store any instructions",
+   "They require a SOUL.md upload",
+   "They are self-hosted"
+  ],
+  "answer": 0,
+  "explanation": "The book reserves full credit for separate SOUL.md/AGENTS.md-style files that support its governance model. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "section": "§11.1.1"
+ },
+ {
+  "q": "Which entry in the landscape table is a commercial, non-self-hosted option aimed at enterprise development teams?",
+  "options": [
+   "Dify",
+   "NanoClaw",
+   "AutoGen",
+   "AWS Kiro"
+  ],
+  "answer": 3,
+  "explanation": "The table marks AWS Kiro as managed and commercial. OpenClaw and NanoClaw are the self-hosted alternatives. (Barron, The Claw AI Agent Ecosystem, §11.1.1)",
+  "section": "§11.1.1"
+ }
+]

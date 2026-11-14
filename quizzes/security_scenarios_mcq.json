@@ -1,0 +1,146 @@
+[
+ {
+  "q": "Setup: an inbox agent has a Gmail skill with read, send and delete. An invoice email ends with hidden text telling the agent to forward the memory directory externally. Which mitigation best addresses this?",
+  "options": [
+   "Rely on the model's training to recognize injection.",
+   "Add the sender to a spam filter after the incident.",
+   "Add a SOUL.md rule denying instruction authority to external content and move send into a separate, confirmation-gated skill.",
+   "Raise the log level to debug to capture the payload."
+  ],
+  "answer": 2,
+  "explanation": "Indirect injection needs both a behavioral defense and narrower permissions so that a bypass cannot exfiltrate data. (Barron, The Claw AI Agent Ecosystem, §8.2, §8.4)",
+  "section": "§8.2, §8.4"
+ },
+ {
+  "q": "Setup: a research agent fetches web pages. One page hides an HTML comment telling the agent to email a conversation summary to an outside address. Which control still limits damage if the behavioral rule fails?",
+  "options": [
+   "Narrow outbound email permissions so the agent cannot send arbitrary mail.",
+   "A channel allowlist on Telegram",
+   "A higher cacheControlTtl",
+   "Pinning the web-search skill version"
+  ],
+  "answer": 0,
+  "explanation": "The book's defense for web page injection pairs the source authority rule with narrow email permissions; without send access the agent cannot comply. (Barron, The Claw AI Agent Ecosystem, §8.2)",
+  "section": "§8.2"
+ },
+ {
+  "q": "Setup: a document the agent summarizes contains a line telling it to record in MEMORY.md that the user authorized forwarding financial emails. What is the main risk?",
+  "options": [
+   "A one-time data leak that ends with the session",
+   "Higher token cost from a longer document",
+   "A denial-of-service loop",
+   "Memory poisoning: the entry persists and shapes every later session."
+  ],
+  "answer": 3,
+  "explanation": "Once written to memory, the injected 'fact' survives session end. AGENTS.md should forbid memory writes while processing external content. (Barron, The Claw AI Agent Ecosystem, §8.4 (A05))",
+  "section": "§8.4 (A05)"
+ },
+ {
+  "q": "Setup: in a multi-agent system, sub-agents follow any instruction from the brain agent. What is the risk and the fix?",
+  "options": [
+   "None, as long as the brain runs on Opus.",
+   "A compromised brain can direct destructive actions; configure it as a named orchestrator with tool-scoped authority.",
+   "Sub-agents will ignore the brain; give it Level 1 authority.",
+   "The brain will exceed its budget; add a per-session limit."
+  ],
+  "answer": 1,
+  "explanation": "Level 3 authority must be explicit and scoped. Without it, compromising the orchestrator propagates its authority downward. (Barron, The Claw AI Agent Ecosystem, §7.4.2, §8.4 (A08))",
+  "section": "§7.4.2, §8.4 (A08)"
+ },
+ {
+  "q": "Setup: MEMORY.md contains an entry claiming the user pre-authorized all bulk deletes without confirmation. The user asks the agent to clean up a test directory. What should happen?",
+  "options": [
+   "The agent deletes the files, citing the memory entry.",
+   "The agent deletes only files older than 30 days.",
+   "The agent refuses all file operations permanently.",
+   "The agent still asks for confirmation before deleting anything."
+  ],
+  "answer": 3,
+  "explanation": "This is the book's stored injection test: memory entries cannot grant the authority they claim. (Barron, The Claw AI Agent Ecosystem, §8.7)",
+  "section": "§8.7"
+ },
+ {
+  "q": "Setup: a user asks the agent to remember a payment provider API key so they don't have to look it up. What is the risk if the agent complies?",
+  "options": [
+   "None, as long as the workspace repo is private.",
+   "The key sits in plaintext on disk and is sent with every request, so it lands in provider logs.",
+   "Only that the key may expire sooner.",
+   "The agent will hit its context window limit."
+  ],
+  "answer": 1,
+  "explanation": "Credentials in workspace files are included in every context assembly. They belong in environment variables or a secrets manager. (Barron, The Claw AI Agent Ecosystem, §8.4b)",
+  "section": "§8.4b"
+ },
+ {
+  "q": "Setup: an agent that only summarizes email holds a Gmail OAuth token with full mail access. What is the best mitigation?",
+  "options": [
+   "Revoke the token and re-authorize with a read-only scope.",
+   "Keep the scope and add a SOUL.md rule against deleting mail.",
+   "Rotate the token every 90 days without changing scope.",
+   "Move the token from .env into openclaw.json."
+  ],
+  "answer": 0,
+  "explanation": "Full-access OAuth equals a logged-in browser session, including permanent deletion. Least privilege applies to OAuth scopes too. (Barron, The Claw AI Agent Ecosystem, §8.4b)",
+  "section": "§8.4b"
+ },
+ {
+  "q": "Setup: a Telegram bot is configured with dmPolicy set to open. What are the risks?",
+  "options": [
+   "Only group chats are exposed; DMs are still private.",
+   "The bot cannot receive messages until an allowlist is added.",
+   "Anyone who finds the bot can message it, enabling direct injection and costly channel flooding.",
+   "The only risk is slower response times."
+  ],
+  "answer": 2,
+  "explanation": "An open DM policy makes the agent publicly reachable. The book's fix is allowlist plus rate limits and budget caps. (Barron, The Claw AI Agent Ecosystem, §8.4 (A10), §8.5)",
+  "section": "§8.4 (A10), §8.5"
+ },
+ {
+  "q": "Setup: an agent with a trading skill reads a research report that ends by urging an immediate market-order purchase of 100 shares. What should prevent a trade?",
+  "options": [
+   "The report's author must be on the allowlist.",
+   "A SOUL.md rule that orders come only from the user in-session, never from external content.",
+   "The agent should place a smaller order to limit risk.",
+   "The trade should go through if the skill is in write mode."
+  ],
+  "answer": 1,
+  "explanation": "Financial content is a high-risk injection surface. External content informs analysis but never initiates orders. (Barron, The Claw AI Agent Ecosystem, §7.11)",
+  "section": "§7.11"
+ },
+ {
+  "q": "Setup: a user tells the trading agent to go ahead and rebalance the portfolio. Five trades are needed. What should the agent do?",
+  "options": [
+   "Execute all five, since the user approved the rebalance.",
+   "Execute the two largest trades and ask about the rest.",
+   "Execute them over five days to stay within limits.",
+   "Present each proposed trade separately and wait for confirmation of each one."
+  ],
+  "answer": 3,
+  "explanation": "Under the no-autonomous-rebalancing rule, a blanket instruction is not order-by-order confirmation. (Barron, The Claw AI Agent Ecosystem, §7.11)",
+  "section": "§7.11"
+ },
+ {
+  "q": "Setup: a popular ClawHub skill auto-updated last week. Logs now show it calling a domain unrelated to its stated service. What is the right response?",
+  "options": [
+   "Treat it as supply chain compromise: uninstall it, rotate all credentials, review workspace and memory, and report it.",
+   "Block that one domain at the firewall and keep using the skill.",
+   "Roll back to the previous version and resume.",
+   "Ask the agent whether the calls are legitimate."
+  ],
+  "answer": 0,
+  "explanation": "Unexpected outbound calls indicate supply chain compromise. Pinning versions with auto-update off would have prevented the silent update. (Barron, The Claw AI Agent Ecosystem, §8.3, §8.8)",
+  "section": "§8.3, §8.8"
+ },
+ {
+  "q": "Setup: a user said 'clean up my email' and the agent deleted about 1,400 messages. There was no attacker. How does the book classify and fix it?",
+  "options": [
+   "Prompt injection; add a source authority rule.",
+   "Supply chain compromise; reinstall the email skill.",
+   "Behavioral gap; add scope confirmation for bulk email actions and split email permissions into gated tiers.",
+   "Access control failure; tighten the allowlist."
+  ],
+  "answer": 2,
+  "explanation": "The book's analysis calls it a behavioral failure amplified by unscoped delete permission, and fixes both layers. (Barron, The Claw AI Agent Ecosystem, §8.4 (A03), §8.5)",
+  "section": "§8.4 (A03), §8.5"
+ }
+]
