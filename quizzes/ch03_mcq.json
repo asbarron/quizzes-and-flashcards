@@ -1,14 +1,14 @@
 [
  {
-  "q": "How many hard boundaries does Chapter 3 recommend for a SOUL.md?",
+  "q": "Why should a SOUL.md keep its hard boundaries to a short list?",
   "options": [
-   "One or two",
-   "Twenty to thirty",
-   "As many as needed to cover every edge case",
-   "Five to eight"
+   "Each boundary adds a separate model call at session start",
+   "Models stop reading identity files after the first few rules",
+   "Hard boundaries belong in AGENTS.md, so SOUL.md should only reference them",
+   "A long list becomes a constraint maze, so the agent spends effort navigating rules instead of reasoning about the task"
   ],
   "answer": 3,
-  "explanation": "Hard boundaries should be few and absolute; dozens of them leave the agent navigating a maze. (Barron, The Claw AI Agent Ecosystem, §3.2)",
+  "explanation": "Hard boundaries should be few, absolute, consequential and binary, with five to eight as a practical target. Dozens of them leave the agent navigating a maze. (Barron, The Claw AI Agent Ecosystem, §3.2)",
   "section": "§3.2"
  },
  {
@@ -20,11 +20,11 @@
    "Long files cannot be version-controlled"
   ],
   "answer": 1,
-  "explanation": "The book says dense files shift the model from embodying a philosophy to navigating rules. (Barron, The Claw AI Agent Ecosystem, §3.2)",
+  "explanation": "Dense files shift the model from embodying a philosophy to navigating rules. (Barron, The Claw AI Agent Ecosystem, §3.2)",
   "section": "§3.2"
  },
  {
-  "q": "AGENTS.md lists confirmation gates by tool name. The operator adds a Slack-posting tool, and the agent posts without confirming. What fix does the book prescribe?",
+  "q": "AGENTS.md lists confirmation gates by tool name. The operator adds a Slack-posting tool, and the agent posts without confirming. What's the right fix?",
   "options": [
    "Define gates by category, such as any tool that sends data to an external endpoint",
    "Move the gate into USER.md",
@@ -92,11 +92,11 @@
    "Memory drift; date every limit"
   ],
   "answer": 1,
-  "explanation": "The book says to check whether an existing limit already covers the case and refine it instead of appending. (Barron, The Claw AI Agent Ecosystem, §3.7b)",
+  "explanation": "Check whether an existing limit already covers the case and refine it instead of appending. (Barron, The Claw AI Agent Ecosystem, §3.7b)",
   "section": "§3.7b"
  },
  {
-  "q": "An operator keeps fixing a behavior only to see it return. Per the diagnostic ladder, what is the most common source?",
+  "q": "An operator keeps fixing a behavior only to see it return. What is the most common source?",
   "options": [
    "Unstable tool schema order",
    "Event queue depth",
@@ -108,7 +108,7 @@
   "section": "§3.10.1"
  },
  {
-  "q": "MEMORY.md says the user works 9-5 Pacific, and a later entry says the user is in London until further notice. What does the book recommend?",
+  "q": "MEMORY.md says the user works 9-5 Pacific, and a later entry says the user is in London until further notice. What's the right way to handle this?",
   "options": [
    "Explicitly delete the superseded entry, since MEMORY.md is a truth store, not a log",
    "Keep both and let the model pick the newer one",

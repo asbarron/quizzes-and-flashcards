@@ -12,7 +12,7 @@
   "section": "§2.9"
  },
  {
-  "q": "Why does the book recommend HMAC-SHA256 over a bearer token for webhook authentication?",
+  "q": "Why is HMAC-SHA256 preferred over a bearer token for webhook authentication?",
   "options": [
    "It is faster to compute",
    "It works without a shared secret",
@@ -44,7 +44,7 @@
    "Discards all incoming events"
   ],
   "answer": 2,
-  "explanation": "Missing files are skipped without error, so the book suggests an AGENTS.md check that alerts the operator. (Barron, The Claw AI Agent Ecosystem, §2.3)",
+  "explanation": "Missing files are skipped without error, so add an AGENTS.md check that alerts the operator. (Barron, The Claw AI Agent Ecosystem, §2.3)",
   "section": "§2.3"
  },
  {
@@ -116,7 +116,7 @@
    "parseMode is set to mrkdwn"
   ],
   "answer": 1,
-  "explanation": "Streaming to a messaging app produces message fragments; the book enforces non-streaming in both config and AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §2.8)",
+  "explanation": "Streaming to a messaging app produces message fragments, so enforce non-streaming in both config and AGENTS.md. (Barron, The Claw AI Agent Ecosystem, §2.8)",
   "section": "§2.8"
  }
 ]

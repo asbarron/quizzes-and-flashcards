@@ -36,7 +36,7 @@
   "section": "§4.3"
  },
  {
-  "q": "Why does the book suggest routing the end-of-session summary to Haiku?",
+  "q": "Why is it reasonable to route the end-of-session summary to Haiku?",
   "options": [
    "Haiku has a larger context window",
    "AGENTS.md requires it",
@@ -80,7 +80,7 @@
    "MEMORY.md crossed its hard threshold"
   ],
   "answer": 0,
-  "explanation": "The book warns to disable heartbeats only when there are no scheduled tasks or background processing. (Barron, The Claw AI Agent Ecosystem, §4.6)",
+  "explanation": "Disable heartbeats only when there are no scheduled tasks or background processing. (Barron, The Claw AI Agent Ecosystem, §4.6)",
   "section": "§4.6"
  },
  {

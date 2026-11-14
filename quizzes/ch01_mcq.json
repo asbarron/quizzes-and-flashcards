@@ -1,6 +1,6 @@
 [
  {
-  "q": "How does Chapter 1 primarily characterize the move from chat interfaces to persistent agents?",
+  "q": "What best characterizes the move from chat interfaces to persistent agents?",
   "options": [
    "A capability shift driven by larger models",
    "A hosting shift from cloud to on-premises",
@@ -8,7 +8,7 @@
    "A pricing shift from per-seat to per-token billing"
   ],
   "answer": 2,
-  "explanation": "The book argues the change is mainly about time: an agent's state carries forward, while a chat exchange is complete in itself. (Barron, The Claw AI Agent Ecosystem, §1.1)",
+  "explanation": "The change is mainly about time: an agent's state carries forward, while a chat exchange is complete in itself. (Barron, The Claw AI Agent Ecosystem, §1.1)",
   "section": "§1.1"
  },
  {
@@ -20,7 +20,7 @@
    "Output channel failure"
   ],
   "answer": 0,
-  "explanation": "A wrong decision written to memory keeps shaping later behavior, which the book calls compounding errors. (Barron, The Claw AI Agent Ecosystem, §1.1)",
+  "explanation": "A wrong decision written to memory keeps shaping later behavior; these are compounding errors. (Barron, The Claw AI Agent Ecosystem, §1.1)",
   "section": "§1.1"
  },
  {
@@ -36,7 +36,7 @@
   "section": "§1.1.1"
  },
  {
-  "q": "According to Chapter 1, what was wrong with the conventional system prompt approach?",
+  "q": "What was wrong with the conventional system prompt approach to shaping agent behavior?",
   "options": [
    "It used more tokens than identity files",
    "It was opaque, brittle, and reset every session",
@@ -44,7 +44,7 @@
    "It required a vector database"
   ],
   "answer": 1,
-  "explanation": "The book describes system prompts as hidden from users, fragile under unexpected input, and non-persistent. (Barron, The Claw AI Agent Ecosystem, §1.2)",
+  "explanation": "System prompts are hidden from users, fragile under unexpected input, and non-persistent. (Barron, The Claw AI Agent Ecosystem, §1.2)",
   "section": "§1.2"
  },
  {
@@ -72,7 +72,7 @@
   "section": "§1.3"
  },
  {
-  "q": "Compared with a RAG system, how does the book describe Claw-pattern memory?",
+  "q": "How does Claw-pattern memory differ from a RAG system?",
   "options": [
    "Retrieved by semantic similarity from a vector store",
    "Filled by a separate ingestion pipeline",
@@ -84,7 +84,7 @@
   "section": "§1.3.1"
  },
  {
-  "q": "A user says \"keep my inbox organized.\" By Wednesday the agent has archived promotions, created folders, and unsubscribed from newsletters. Which mitigation does the book map to this risk?",
+  "q": "A user says \"keep my inbox organized.\" By Wednesday the agent has archived promotions, created folders, and unsubscribed from newsletters. Which mitigation addresses this risk?",
   "options": [
    "Explicit permission design and hard limits in SOUL.md",
    "Routing to a cheaper model tier",
@@ -92,11 +92,11 @@
    "Lengthening the heartbeat interval"
   ],
   "answer": 0,
-  "explanation": "This is scope expansion, which the book's risk table pairs with permission design and SOUL.md hard limits. (Barron, The Claw AI Agent Ecosystem, §1.4)",
+  "explanation": "This is scope expansion, which calls for permission design and SOUL.md hard limits. (Barron, The Claw AI Agent Ecosystem, §1.4)",
   "section": "§1.4"
  },
  {
-  "q": "How does the book characterize the February 2026 inbox deletion incident?",
+  "q": "What best explains the February 2026 inbox deletion incident?",
   "options": [
    "A hallucination bug in the email tool",
    "A predictable result of a capable system lacking specified intent, scope, and reversibility",

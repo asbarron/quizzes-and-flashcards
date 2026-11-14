@@ -8,7 +8,7 @@
    "Docker binds to loopback by default, so nothing changes."
   ],
   "answer": 2,
-  "explanation": "Without the 127.0.0.1 prefix Docker publishes the port on 0.0.0.0. The book says to bind to loopback and let a reverse proxy handle external TLS. (Barron, The Claw AI Agent Ecosystem, §5.2.1)",
+  "explanation": "Without the 127.0.0.1 prefix Docker publishes the port on 0.0.0.0. Bind to loopback and let a reverse proxy handle external TLS. (Barron, The Claw AI Agent Ecosystem, §5.2.1)",
   "section": "§5.2.1"
  },
  {
@@ -24,7 +24,7 @@
   "section": "§5.3"
  },
  {
-  "q": "A home Mac Mini deployment needs Gmail Pub/Sub webhooks, and the operator does not want to open router ports. What does the book recommend?",
+  "q": "A home Mac Mini deployment needs Gmail Pub/Sub webhooks, and the operator does not want to open router ports. What's the recommended approach?",
   "options": [
    "Binding the gateway to 0.0.0.0 and enabling UPnP",
    "Polling Gmail with a cron job every minute instead",
@@ -48,7 +48,7 @@
   "section": "§5.1"
  },
  {
-  "q": "For a single-operator personal deployment on a machine the operator fully controls, which secrets approach does the book consider sufficient?",
+  "q": "For a single-operator personal deployment on a machine the operator fully controls, which secrets approach is sufficient?",
   "options": [
    "HashiCorp Vault with an agent sidecar",
    "Docker Swarm secrets with automated rotation",
@@ -56,11 +56,11 @@
    "A .env file with owner-only permissions, kept out of git"
   ],
   "answer": 3,
-  "explanation": "The book calls a properly permissioned .env adequate for single-operator setups and says Vault's added benefit there is real but small. (Barron, The Claw AI Agent Ecosystem, §5.6)",
+  "explanation": "A properly permissioned .env is adequate for single-operator setups; Vault's added benefit there is real but small. (Barron, The Claw AI Agent Ecosystem, §5.6)",
   "section": "§5.6"
  },
  {
-  "q": "An operator enables ufw with a deny rule for port 8080 and assumes the gateway is protected. What does the book warn about?",
+  "q": "An operator enables ufw with a deny rule for port 8080 and assumes the gateway is protected. What's wrong with that assumption?",
   "options": [
    "ufw cannot block TCP ports above 1024.",
    "Docker modifies iptables directly and bypasses ufw by default, so the rule may not apply.",
@@ -80,7 +80,7 @@
    "The agent responds but disables tools for that user."
   ],
   "answer": 0,
-  "explanation": "The book's post-checklist test expects messages from accounts outside allowFrom to be rejected without any reply. (Barron, The Claw AI Agent Ecosystem, §5.7)",
+  "explanation": "After hardening, messages from accounts outside allowFrom should be rejected without any reply. (Barron, The Claw AI Agent Ecosystem, §5.7)",
   "section": "§5.7"
  },
  {
@@ -96,7 +96,7 @@
   "section": "§5.10"
  },
  {
-  "q": "A personal deployment logs 3 ERROR entries in the past 24 hours. Under the book's alert thresholds, what should you do?",
+  "q": "Your agent logged 3 ERROR entries in the past 24 hours. What's the right response?",
   "options": [
    "Treat it as green; fewer than 5 errors is normal.",
    "Treat it as yellow and investigate within 24 hours.",
@@ -116,7 +116,7 @@
    "Version history of identity files for rollback and audit"
   ],
   "answer": 3,
-  "explanation": "The book says archive/ holds earlier identity-file versions for rollback and incident audit, and explicitly is not a backup. (Barron, The Claw AI Agent Ecosystem, §5.9)",
+  "explanation": "archive/ holds earlier identity-file versions for rollback and incident audit; it is not a backup. (Barron, The Claw AI Agent Ecosystem, §5.9)",
   "section": "§5.9"
  }
 ]
