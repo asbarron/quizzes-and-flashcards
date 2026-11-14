@@ -12,7 +12,7 @@ card and question cites the book section it covers.
 
 | Path | What it holds |
 |---|---|
-| `flashcards/` | 14 decks, one term and definition per line, tab-separated. |
+| `flashcards/` | 13 decks, one term and definition per line, tab-separated. |
 | `quizzes/` | 15 multiple-choice quizzes in JSON, with answers, explanations, and section numbers. |
 | `deck_metadata.json` | Title, description, and tags for each deck. |
 
@@ -36,7 +36,7 @@ The `.tsv` files import into most flashcard apps:
   contents, then set the separator to **Tab**.
 - **Brainscape**: **Create deck > Import**, paste, and use **Tab**.
 
-A ready-made Anki package with every deck is shared on AnkiWeb.
+An Anki package with every deck is coming to AnkiWeb.
 
 ## Use the quizzes
 
