@@ -48,4 +48,3 @@ SKILL.md	Per-skill file describing its tools, input schemas, and usage constrain
 Token audit	Counting tokens across workspace files with tiktoken to find bloat. Target a total under 3,000 tokens.
 Trust hierarchy collapse	Multi-agent failure where sub-agent messages get user-level authority, so a compromised sub-agent can steer the brain agent.
 Webhook	A public HTTPS endpoint an outside service calls when events occur, used for Gmail push, GitHub events, and calendar updates.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

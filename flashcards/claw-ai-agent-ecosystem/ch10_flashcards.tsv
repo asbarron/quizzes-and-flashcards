@@ -22,4 +22,3 @@ Harm floor	The hard boundaries an agent keeps regardless of instructions. Leavin
 Deployer (EU AI Act)	The party that puts an AI system into use for a purpose. An individual running OpenClaw counts as a deployer, not a provider.
 NIST AI RMF	Voluntary US framework published in 2023, organized into four functions: Govern, Map, Measure, and Manage.
 Configuration vs. ethical specification	Configuration records how a system runs normally. An ethical specification says what it values and whose interests win when values conflict.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

@@ -23,4 +23,3 @@ Spec-first workflow	Write SOUL.md, then AGENTS.md tool permission specs, then ad
 Partial spec	Covers the happy path but omits conflict ordering, a trust hierarchy, refusals, out-of-scope handling and an adversarial stance.
 Trading skill write mode	Trading skills start read-only. Order placement is unavailable until the user enables it in the current session with a documented command.
 No autonomous rebalancing	The agent may recommend trades, but each order needs its own same-session confirmation. A blanket approval for a sequence does not count.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

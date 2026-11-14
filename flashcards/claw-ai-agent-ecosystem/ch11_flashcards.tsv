@@ -23,4 +23,3 @@ Template test	If you cannot recall making the decision a SOUL.md section encodes
 Four development trajectories	Security tooling matures, multi-agent orchestration standardizes, behavioral evaluation frameworks develop, and regulatory frameworks arrive.
 Adversarial subagents	Open research problem: a subagent compromised by injection pushing its payload up to the orchestrator. No standard defense exists yet.
 Portable vs. non-portable assets	Identity markdown files move between runtimes. Session logs, skill configuration, and channel registrations must be redone on a new platform.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

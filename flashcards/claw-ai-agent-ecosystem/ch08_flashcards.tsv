@@ -23,4 +23,3 @@ Silent allowlist rejection	Messages from non-allowlisted accounts get no reply a
 Incident response order	Stop the agent first, then assess external impact, then reconstruct what happened. Do not restart before fixing the root cause.
 Four root cause categories	Behavioral gap, prompt injection, permission misconfiguration, and supply chain compromise. The category determines the fix.
 Paper trading first	Run any trading skill against a simulated brokerage account with the full test battery before switching to live credentials.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

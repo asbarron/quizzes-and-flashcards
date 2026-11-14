@@ -23,4 +23,3 @@ Provider-level spend cap	A hard limit set in the model provider's console slight
 token_audit.py	A script that counts tokens per workspace file. Run it monthly to catch workspace growth that otherwise goes unnoticed.
 MEMORY.md compression	A monthly pass that drops stale entries, merges related ones and shortens the rest. MEMORY.md is the main source of workspace bloat.
 Cost anomaly shape	Sudden spikes usually point to loops or router misconfiguration; slow, steady increases usually point to workspace or MEMORY.md growth.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3

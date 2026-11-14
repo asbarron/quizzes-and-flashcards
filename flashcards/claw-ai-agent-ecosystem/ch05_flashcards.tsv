@@ -23,4 +23,3 @@ Backup targets	workspace/ and state/. With a working Compose setup, these two di
 archive/ directory	Holds earlier versions of identity files for rollback and audit. It is version history, not a backup.
 Behavioral monitoring	A short weekly read of a few recent conversations, checking for misread instructions, missed confirmation gates and unexpected MEMORY.md writes.
 Uptime Kuma	Optional external uptime monitor added to the Compose stack that polls the health endpoint and alerts when it fails.
-Source: The Claw AI Agent Ecosystem	Cards based on The Claw AI Agent Ecosystem: Designing, Operating, and Securing Self-Hosted AI Agents by Ava S. Barron. Kindle and paperback: amazon.com/dp/B0GT7NBZV3
