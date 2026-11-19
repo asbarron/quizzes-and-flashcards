@@ -1,0 +1,218 @@
+[
+ {
+  "q": "[Foundation] In the architecture bake-off, which architecture's deletes could no gate judge one by one?",
+  "options": [
+   "react: the model names its own targets each step",
+   "plan-and-execute: the plan is checked only before step 1",
+   "codeact: the harness sees one action, run this program",
+   "react, stuck: the step budget ends the loop first"
+  ],
+  "answer": 2,
+  "explanation": "**codeact**: its action is **one program**, and the deletes happen inside it, so a gate can only accept or refuse the whole thing; all six deletes, protected ones included, would reach the provider.\n- **react / plan-and-execute:** each of their deletes was gated alone; the gates denied the bad ones.\n- **react, stuck:** it proposed nothing; the step budget stopped it.\n**A strong answer** says gating per effect means moving the gates inside the tools the program calls.",
+  "section": "§Design the loop, then the concepts"
+ },
+ {
+  "q": "[Foundation] What can code still do to a frozen Decision once it holds a reference to it?",
+  "options": [
+   "Change a field through object.__setattr__",
+   "Nothing: freezing makes the instance's memory read-only",
+   "Change fields in place through dataclasses.replace",
+   "Change a field by plain assignment if it catches the error"
+  ],
+  "answer": 0,
+  "explanation": "`frozen` guards the **attribute protocol**, not the object: `object.__setattr__` still works, since that's how `dataclasses` sets the fields in `__init__`.\n- **Memory read-only:** nothing in Python freezes the object itself.\n- **replace in place:** `replace` builds a new object and leaves the original unchanged.\n- **Catch the error:** the assignment raises `FrozenInstanceError` before anything changes.\n**A strong answer** says frozen stops **mistakes**, not a component that means to change a record.",
+  "section": "§Design the loop, then the concepts"
+ },
+ {
+  "q": "[Foundation] verify prints OK for a ledger cut right after its run_start. What does that OK establish?",
+  "options": [
+   "No record was edited or dropped since the ledger was written",
+   "Each line is JSON, seq runs 1..n, each prev matches the line before",
+   "The run that opened in the ledger was closed by run_end or stand_down",
+   "The records are in the order the executor actually wrote them"
+  ],
+  "answer": 1,
+  "explanation": "Only **internal consistency**: one JSON object per line, contiguous `seq`, and each `prev` chained to the line before.\n- **Nothing edited or dropped:** a writer who re-chains, or an edit of the last record, still passes.\n- **Closed / in order:** that's **legality**, which the loop grammar checks; the cut run is never closed.\n**A strong answer** keeps integrity and legality apart.",
+  "section": "§Design the loop, then the concepts"
+ },
+ {
+  "q": "[Foundation] Which of these words does the loop grammar reject?",
+  "options": [
+   "recovered stand_down",
+   "run_start decision gates decision gates action run_end",
+   "run_start model_call decision gates escalation stand_down",
+   "run_start gates run_end"
+  ],
+  "answer": 3,
+  "explanation": "`run_start gates run_end`: a **gates** record needs a **decision** before it, so the automaton has no transition on `gates` from the opened state.\n- **recovered stand_down:** a recovered process found no run to open and stood down.\n- **decision gates decision gates action:** a decision may stop at its gates before the next one acts.\n- **escalation then stand_down:** an escalation in place of an action, then a closing record.\n**A strong answer** can name the record where a rejected word goes wrong.",
+  "section": "§The loop automaton"
+ },
+ {
+  "q": "[Foundation] run_start stores the run contract's terms beside its hash. What does that NOT give a checker?",
+  "options": [
+   "A way to recompute the hash with no access to the run's config",
+   "A way to hold the run's records to the promise it was made under",
+   "Tamper evidence, since a rewriter can recompute the hash",
+   "A short exact name to compare two runs' promises by"
+  ],
+  "answer": 2,
+  "explanation": "**Tamper evidence**: whoever rewrites the terms can recompute the hash beside them; showing an edit is the **ledger chain's** job.\n- **Recompute without config / hold records to it:** that is exactly what storing the **terms** gives.\n- **Short exact name:** that is what the **hash** gives; equal hashes mean the same promise.\n**A strong answer** doesn't call the contract hash an integrity check.",
+  "section": "§The run contract"
+ },
+ {
+  "q": "[Core] A teammate writes to_dict(obj) as return vars(obj) for a frozen Decision, and every value-comparing test passes. What's your review comment?",
+  "options": [
+   "Fine: freezing already protects any dict the caller receives from it",
+   "It hands out the record's own __dict__; writes change the record",
+   "It raises FrozenInstanceError as soon as the caller writes to it",
+   "Fine, as long as every enum in it is replaced by its value"
+  ],
+  "answer": 1,
+  "explanation": "`vars(obj)` returns the record's own **`__dict__`**: freezing replaces `__setattr__`, it doesn't protect `__dict__`, so writing to the dict changes the frozen record.\n- **FrozenInstanceError:** that's what assigning to a field does, not writing to a returned dict.\n- **Enums replaced:** conversion doesn't fix sharing; a **deep copy** via `asdict` does.\n**A strong answer** asks for a test that the dict is a copy, the only kind that kills this.",
+  "section": "§Contracts"
+ },
+ {
+  "q": "[Core] Which contract_hash gives two different hashes for the same contract in two Python processes?",
+  "options": [
+   "sha256 of json.dumps(to_dict(c)) without sort_keys",
+   "sha256 of repr(c)",
+   "sha256 of the canonical JSON with ensure_ascii=True",
+   "format(hash(canonical_json) & (2**256 - 1), '064x')"
+  ],
+  "answer": 3,
+  "explanation": "The one built on **`hash()`**: Python salts str hashes per process (`PYTHONHASHSEED`), so it passes a test in one process and fails across processes.\n- **No sort_keys / repr / ensure_ascii:** all stable across processes, but not the **canonical JSON** (sorted keys, no whitespace, UTF-8) that the clause specifies, so no other implementation could reproduce them.\n**A strong answer** tests the hash in fresh processes with different seeds.",
+  "section": "§The run contract"
+ },
+ {
+  "q": "[Core] The mutant strategy_reads_clock computes idle_days_min if time.time() > 0 else 0. Why can't an output-comparing test kill it, and what can?",
+  "options": [
+   "It is output-equivalent; a test making the clock call raise kills it",
+   "It is equivalent outright, so it leaves the mutation-score denominator",
+   "It differs only on Sundays; pinning the date to a Sunday kills it",
+   "It differs only across processes; two hash seeds kill it"
+  ],
+  "answer": 0,
+  "explanation": "It's **output-equivalent**: `time.time() > 0` is always true, so outputs never change, but the **effect**, the clock call, is still there, and a test that watches it kills the mutant.\n- **Equivalent outright:** an effect test can tell it apart, so it stays in the denominator.\n- **Sundays / hash seeds:** those are other mutants' failure modes; this one never changes output.\n**A strong answer** links this to why the purity rule is an **effect ban**.",
+  "section": "§Write the pure strategy"
+ },
+ {
+  "q": "[Core] Why does the Sunday mutant, which drops candidates costing 50 a day or more on Sundays, survive the original test suite?",
+  "options": [
+   "It is output-equivalent, so no output-comparing test can see it",
+   "It reads the clock through datetime, which the tests never patch at all",
+   "No fixture costs that much, and the suite didn't run on a Sunday",
+   "It only imports a module and never calls it while tests run"
+  ],
+  "answer": 2,
+  "explanation": "It changes output, but only on a day and for a resource **no fixture** has: the most expensive seed resource costs 9.0 a day, and the determinism test calls the function twice within microseconds.\n- **Output-equivalent:** it does change output, just not under these fixtures.\n- **datetime:** it reads the day through `time.time`, so patching `time.time` kills it on any day.\n**A strong answer** names the lesson: **passing tests** are not **adequate tests**.",
+  "section": "§Write the pure strategy"
+ },
+ {
+  "q": "[Core] A purity test patches time.time on the time module. Why does a strategy with from time import time as _now still pass it?",
+  "options": [
+   "monkeypatch undoes the patch before the strategy is called",
+   "time.time is a C function, so patching it has no effect",
+   "The strategy module is reloaded fresh for each pytest test",
+   "The import bound its own reference in the strategy module"
+  ],
+  "answer": 3,
+  "explanation": "The import **binds its own reference** in the strategy's namespace at import time, and a patch on the `time` module doesn't reach it.\n- **Undone early / C function / reload:** none happens; the patch works, on a name the strategy no longer uses.\nThe fix: patch the name in the **strategy's own namespace**, matching functions by identity, or read its imports with `ast`. **A strong answer** says a test only covers the impurities someone thought of.",
+  "section": "§Problem set"
+ },
+ {
+  "q": "[Core] The mutant gates_import_tools adds from .tools import FakeCloud to the gate table and never calls it. Why can't any test that runs the code kill it?",
+  "options": [
+   "The gate table runs only in live mode, which tests never use",
+   "An import nobody calls changes neither output nor effect",
+   "pytest caches imports, so the mutant is never actually loaded",
+   "FakeCloud is a test double, so importing it is always allowed"
+  ],
+  "answer": 1,
+  "explanation": "An unused import changes **neither output nor effect**, so running code can't see it; the layer rule forbids it because an import is a **capability** one edit away from use.\n- **Live mode only:** shadow runs evaluate the gates too.\n- **FakeCloud allowed:** `tools` is on the effect surface whatever it holds.\n**A strong answer** reaches for a **static** check that reads imports with `ast`, in every spelling.",
+  "section": "§Spec, run loop: layers"
+ },
+ {
+  "q": "[Core] The reordered ledger has its first action written before its gates, and verify still says OK. Why doesn't the hash chain catch it?",
+  "options": [
+   "Its writer set each prev for the order it chose",
+   "verify skips action records; only gates records are hashed",
+   "The chain covers only the last record, which is unchanged",
+   "Reordering keeps seq contiguous, and verify ignores prev"
+  ],
+  "answer": 0,
+  "explanation": "The chain checks that each `prev` is the hash of the record before, and the writer **re-chained** the swapped order. The order is wrong only against the **loop grammar**, which rejects it at the first `action`.\n- **Skips actions / last record only / ignores prev:** verify chains every line and does read `prev`.\n**A strong answer** calls **integrity** and **legality** different properties, with different machinery.",
+  "section": "§The loop automaton"
+ },
+ {
+  "q": "[Core] A gate raises KeyError on the first candidate, leaving the word run_start decision. What does the loop automaton report?",
+  "options": [
+   "Rejected at the decision record, since no gates record follows",
+   "Rejected at run_start, since the run has no closing record",
+   "Accepted, because the grammar allows an interrupted run",
+   "Never closed: the word is a proper prefix of a legal run"
+  ],
+  "answer": 3,
+  "explanation": "**Never closed**: no event lacks a transition, so nothing is rejected at a record; the word stops in an open state.\n- **Rejected at decision / run_start:** both events have transitions from the state they arrive in.\n- **Interrupted:** only if a later `recovered` named this run, and none does.\n**A strong answer** says this is exactly what a crash looks like, which is why the run must be **closed** at its boundary.",
+  "section": "§Break it: a broken executor"
+ },
+ {
+  "q": "[Core] A fix moves the gates record above the action record, but still after the provider call. Why does the ordering check fail it?",
+  "options": [
+   "The action record then carries the wrong outcome for the delete",
+   "The grammar rejects gates directly after a decision record",
+   "A death mid-call leaves no record that a gate allowed it",
+   "The provider refuses a delete whose action isn't recorded yet"
+  ],
+  "answer": 2,
+  "explanation": "The **write-ahead rule**: the allowing `gates` record must be in the ledger before the effect. Written after the call, it may never be written, and a delete the provider performed looks **ungated**.\n- **Wrong outcome:** the outcome is still the provider's return value.\n- **Grammar rejects gates after decision:** that is the legal order.\n**A strong answer** tests the ledger's state at the **moment of the call**, not the final order.",
+  "section": "§Break it: a broken executor"
+ },
+ {
+  "q": "[Advanced] To close every run, a teammate wraps only the gate call in try/except KeyError and writes stand_down. The test with a raising gate passes. Which case still leaves the run open?",
+  "options": [
+   "A gate raising KeyError for the first candidate in the run",
+   "The provider's list call raising OSError before any gate",
+   "A run in which the model gives no verdict for one candidate",
+   "A run in which nothing raises and run_end is written normally"
+  ],
+  "answer": 1,
+  "explanation": "The provider's **OSError** before any gate: it raises outside the narrow catch. The closing rule puts the catch at the **run boundary**, for every `Exception`, the one place every exception passes through.\n- **Gate KeyError:** the one case this catch does handle.\n- **No verdict / normal run:** a missing verdict counts as SKIP, and the normal path writes `run_end`.\n**A strong answer** makes clear that the test raises from somewhere that is not a gate.",
+  "section": "§Spec, run loop: closing"
+ },
+ {
+  "q": "[Advanced] After writing stand_down, the fixed executor could re-raise or return the counts so far. A teammate prefers returning. Which is right, and why?",
+  "options": [
+   "Re-raise: returning makes a failed run look successful",
+   "Return: the stand_down record already tells everyone it failed",
+   "Return: re-raising leaves the run open for recovery",
+   "Re-raise: verify rejects a ledger whose last record is stand_down"
+  ],
+  "answer": 0,
+  "explanation": "**Re-raise**: the ledger says **how** the run ended, the exit code says **that** it failed, and both readers must see it; returning lets the supervisor report success and not alert.\n- **stand_down tells everyone:** the caller, and the supervisor behind it, would see a return and not alert.\n- **Leaves the run open:** the run is already closed by `stand_down`; recovery is for kills and crashes.\n**A strong answer** keeps the failure **loud** as well as recorded.",
+  "section": "§Break it: a broken executor"
+ },
+ {
+  "q": "[Advanced] deadline_s is 60 in the RunContract default and as a literal passed to the supervisor. You need to change the deadline so the contract hash tracks it. Which edit changes the hash?",
+  "options": [
+   "Editing the supervisor's literal deadline_s=60",
+   "Either edit, since both read the same value",
+   "Neither, since declared terms are left out of the hash",
+   "Editing the default in RunContract"
+  ],
+  "answer": 3,
+  "explanation": "Only the **RunContract default**: `deadline_s` is a **declared term**, so it is hashed, but the supervisor doesn't read the contract.\n- **The literal:** changes behavior without changing the hash, so the two can drift.\n- **Neither:** declared terms are still part of the hashed contract.\n**A strong answer** proposes making the supervisor read its deadline from the contract, turning a declared term into an **enforced** one.",
+  "section": "§The run contract"
+ },
+ {
+  "q": "[Advanced] A teammate argues that the strategy only needs to be deterministic for replay, so a clock read whose result is ignored is fine. Is that right?",
+  "options": [
+   "Agree: purity adds nothing replay can use over determinism",
+   "Replay needs determinism; purity is sufficient and checkable",
+   "Replay needs the model's answers to be pure, not the strategy",
+   "Agree, as long as the strategy sorts its output by resource id"
+  ],
+  "answer": 1,
+  "explanation": "Replay needs **determinism** on the logged facts, but the course asks for **purity**: a strategy that reads the clock and ignores it is deterministic today, and the next edit can start using it.\n- **Purity adds nothing:** banning the effect is a condition a test can check and an edit can't quietly break.\n- **Sorting:** order independence is one consequence of purity, not purity.\nTrade-off: the effect ban is stricter than replay strictly needs, and that is what makes it testable.",
+  "section": "§Write the pure strategy"
+ }
+]

@@ -1,0 +1,230 @@
+[
+ {
+  "q": "[Foundation] Under the course's 200-merge table, how many tokens is vm-db-prod?",
+  "options": [
+   "1",
+   "3",
+   "5",
+   "10"
+  ],
+  "answer": 2,
+  "explanation": "**Five**: the **pre-tokenizer** cuts it into vm, -, db, -, prod before any merge applies, and **no token crosses those cuts**.\n- **10:** its bytes with no merge applied at all.\n- **3:** assumes the hyphens can join the names.\n- **1:** treats the id as one vocabulary entry, as ARM with a leading space is.\n**A strong answer** blames the pre-tokenizer, not the size of the merge table.",
+  "section": "§Tokenize"
+ },
+ {
+  "q": "[Foundation] p = [0.5, 0.25, 0.25] and top_p = 0.75. Which entries are in the nucleus?",
+  "options": [
+   "The first two",
+   "All three",
+   "Only the first",
+   "The first and the third"
+  ],
+  "answer": 0,
+  "explanation": "**The first two**: the nucleus is the **shortest prefix** whose mass is **at least top_p**, and 0.5 + 0.25 already reaches 0.75.\n- **All three:** the mutant that stops only when the mass exceeds top_p.\n- **Only the first:** a nucleus at 0.5, not 0.75.\n- **The first and the third:** breaks the tie to the higher index; ties go to the lower one.\n**A strong answer** names \"at least\", not \"more than\".",
+  "section": "§Distributions"
+ },
+ {
+  "q": "[Foundation] How many sampler draws does SampledModel.decide make for one reply about five candidates?",
+  "options": [
+   "One per token of the reply",
+   "One per call, shared by all candidates",
+   "Ten: one per verdict and one per thesis",
+   "Five: one per verdict position"
+  ],
+  "answer": 3,
+  "explanation": "**Five**: ToyLM **forces** every token but the verdict, and forced text is **encoded with no draw**, so a reply about n candidates makes exactly n draws.\n- **One per token:** forced tokens have probability 1 and need no draw.\n- **One per call:** each verdict position is its own draw.\n- **Ten:** the thesis is forced text too.\n**A strong answer** ties the i-th draw to the i-th candidate.",
+  "section": "§Spec, model boundary: toylm"
+ },
+ {
+  "q": "[Foundation] What does lowering the temperature never change?",
+  "options": [
+   "How many tokens the nucleus holds at a fixed top_p",
+   "Which token is most likely",
+   "The ratio of ARM's probability to SKIP's",
+   "The probability of the most likely token"
+  ],
+  "answer": 1,
+  "explanation": "**Which token is most likely**: exp is increasing and T is positive, so **order is preserved** at every temperature.\n- **The nucleus size:** it can change, since the probabilities change; on the lab's row it grows from two to four as T rises.\n- **The ratio:** it is exp of the logit gap divided by T, so it moves with T.\n- **The top probability:** a lower T widens the gaps, so the top token takes more of the mass.\n**A strong answer** keeps order and probabilities apart.",
+  "section": "§From tokens to a distribution"
+ },
+ {
+  "q": "[Foundation] A ReplayModel is called with the same candidates as its recorded line, but the context now has an extra owner note. What does it answer?",
+  "options": [
+   "Every candidate SKIP: the prompt hash differs",
+   "The recorded verdicts, since the candidate ids match",
+   "A fresh sample from the model, labeled as a replay",
+   "An error that stops the run before the gates"
+  ],
+  "answer": 0,
+  "explanation": "**Every candidate SKIP**: the **prompt hash** covers the whole prompt, context included, so this isn't the recorded call, and the replay **fails closed** without re-sampling.\n- **The recorded verdicts:** matching on ids alone replays an answer to a different question.\n- **A fresh sample:** a replay must never call a model.\n- **An error:** a miss is answered, with SKIP and a thesis that says why.\n**A strong answer** makes clear that a replay never re-samples.",
+  "section": "§Spec, model boundary: replay"
+ },
+ {
+  "q": "[Core] Under the sampling clause, how many entries does top_p([0.6, 0.3, 0.1], 0.9) keep?",
+  "options": [
+   "Two, because 0.6 + 0.3 equals 0.9",
+   "Two, because the comparison allows a small tolerance",
+   "Three, because 0.6 + 0.3 as doubles is just below 0.9",
+   "It depends on how the platform rounds doubles at the boundary"
+  ],
+  "answer": 2,
+  "explanation": "**Three**: the clause compares the **running floating-point sum** with >= and **no tolerance**, and 0.6 + 0.3 is 0.8999999999999999, so a third entry is needed.\n- **Equals 0.9:** true in decimals, not in doubles.\n- **A tolerance:** a tolerance such as 1e-9 is a mutant the check kills.\n- **Platform rounding:** IEEE 754 doubles give the same sum on every conforming machine.\n**A strong answer** makes clear that the boundary is specified behavior.",
+  "section": "§Spec, model boundary: sampling"
+ },
+ {
+  "q": "[Core] Logits are ARM 2.0, SKIP 1.6, other 0. At T = 0.1 and top_p = 1.0, about how many of 10,000 draws are SKIP?",
+  "options": [
+   "None: T = 0.1 is effectively greedy",
+   "About 180",
+   "About 1,800",
+   "About 3,300"
+  ],
+  "answer": 1,
+  "explanation": "**About 180**: at T = 0.1 the gap of 0.4 becomes 4, so SKIP gets **exp(-4) / (1 + exp(-4))**, about 1.8% of the mass; seed 7 drew 174.\n- **None:** only T = 0 is greedy; a low temperature makes the second token **rare, not impossible**.\n- **About 1,800:** misreads 1.8% as 18%.\n**A strong answer** computes from the logits rather than guessing.",
+  "section": "§From tokens to a distribution"
+ },
+ {
+  "q": "[Core] Why is (c / n) to the k a poor estimator of pass^k for k of 2 or more?",
+  "options": [
+   "It is biased downward, since it ignores the failures",
+   "It is unbiased but has a larger variance",
+   "It is undefined whenever c is smaller than k",
+   "It is biased upward: it samples with replacement"
+  ],
+  "answer": 3,
+  "explanation": "**Biased upward**: by **Jensen's inequality** the average of (c / n) to the k exceeds q to the k, because one lucky success can be counted k times. **C(c, k) / C(n, k)** chooses without replacement and its expectation is exactly q to the k.\n- **Biased downward:** the wrong direction.\n- **Undefined when c < k:** that describes neither; C(c, k) / C(n, k) is simply 0 then.\n**A strong answer** names the direction of the bias and its cause.",
+  "section": "§Measure, record, replay"
+ },
+ {
+  "q": "[Core] What goes wrong if SampledModel creates random.Random(seed) inside every decide call?",
+  "options": [
+   "Draws stop being reproducible from the seed across runs",
+   "The temperature is reset to its default of 1.0 on each call",
+   "Calls repeat the same first draws, so K calls measure one",
+   "Forced text starts consuming draws from the generator"
+  ],
+  "answer": 2,
+  "explanation": "**Repeated calls repeat the same first draws**: the model must hold **one generator for its lifetime**, so each call draws where the last one stopped.\n- **Not reproducible:** a fresh generator per call is still reproducible, which is why the bug is easy to miss.\n- **Forced text:** it never draws, whatever the generator.\n**A strong answer** separates reproducible from independent.",
+  "section": "§Generation"
+ },
+ {
+  "q": "[Core] On a hot verdict row whose nucleus at 0.9 has four tokens, you also set top_k = 2. Which tokens can be drawn?",
+  "options": [
+   "The top two, ARM and SKIP",
+   "All four tokens of the nucleus",
+   "ARM alone",
+   "ARM, SKIP and ARM with a leading space"
+  ],
+  "answer": 0,
+  "explanation": "**ARM and SKIP**: the sampler applies **top-k first, then the nucleus**. Top-k keeps two, renormalized to about 0.55 and 0.45, and the nucleus of that at 0.9 needs both.\n- **All four:** applies the nucleus and ignores top-k.\n- **ARM alone:** 0.55 doesn't reach 0.9.\n**A strong answer** treats the order of the cuts as part of the sampler.",
+  "section": "§Distributions"
+ },
+ {
+  "q": "[Core] A teammate's encoder matches yours on vm-db-prod but not on a longer resource id. What is the most likely bug?",
+  "options": [
+   "It merges across pre-token boundaries",
+   "It joins the leftmost pair in the table, not the lowest-ranked",
+   "It counts merge ranks from 1, so every merged id is one too high",
+   "It starts from characters instead of UTF-8 bytes"
+  ],
+  "answer": 1,
+  "explanation": "**Leftmost instead of lowest-ranked**: encoding **replays training** in merge order, and on short pieces the two rules often coincide while on longer ones they don't.\n- **Merging across pieces / ranks from 1:** both would already fail vm-db-prod.\n- **Characters instead of bytes:** they are the same on an ASCII id.\n**A strong answer** names why the bug survives short tests.",
+  "section": "§Tokenize"
+ },
+ {
+  "q": "[Core] A naive matcher arms a candidate whenever its object contains the text ARM. Which reply does it get right, only by luck?",
+  "options": [
+   "A SKIP whose thesis says WARM standby",
+   "A verdict written as DISARM",
+   "A SKIP whose thesis says do not DISARM its backups",
+   "A verdict written as lowercase arm"
+  ],
+  "answer": 3,
+  "explanation": "**Lowercase arm**: the match is case-sensitive, so it happens to stay SKIP. The strict parser rejects it by design, because it isn't one of the **two legal values**.\n- **WARM, DISARM verdict, DISARM thesis:** each contains ARM as text, so each gets armed: the matcher **fails open**.\n**A strong answer** calls the lowercase case luck, not design.",
+  "section": "§Break it: string matching"
+ },
+ {
+  "q": "[Core] A CLIModel call fails with \"Your credit balance is too low.\", which the unavailable pattern doesn't match. What happens?",
+  "options": [
+   "The chain stops and every candidate is SKIP",
+   "The same model is retried until the timeout",
+   "The next model in the chain is tried",
+   "The run arms the candidates of the last good reply"
+  ],
+  "answer": 0,
+  "explanation": "**The chain stops, all SKIP**: an unrecognized failure is a **real error**, so CLIModel stops without trying the next model and **fails closed**.\n- **The next model:** that happens only on a match, a timeout, or a binary that can't start.\n- **Retry, or reuse the last reply:** neither is in the fallback clause.\n**A strong answer** calls the cost availability, not safety.",
+  "section": "§Spec, model boundary: fallback"
+ },
+ {
+  "q": "[Core] The near-tie lab sums one 4,096-term dot product three ways in float32 at T = 0 and gets two different verdicts. What differs between the three runs?",
+  "options": [
+   "The random seed each order uses",
+   "The precision the inputs are rounded to first",
+   "The temperature applied after the sum",
+   "Only how the additions are grouped"
+  ],
+  "answer": 3,
+  "explanation": "**Only the grouping**: same inputs, same operations, and each grouping rounds at different places; the differences exceed the true gap of about 6e-8, because **floating-point addition isn't associative**.\n- **The seed or the temperature:** there is no random number anywhere; this is **greedy decoding**.\n- **Input precision:** all three use the same float32 inputs.\n**A strong answer** sees why temperature 0 alone can't fix it.",
+  "section": "§Make it deterministic"
+ },
+ {
+  "q": "[Advanced] An auditor wants to re-examine last Tuesday's run of the janitor on a served model, decision for decision. Which approach gives exactly that run's model decisions?",
+  "options": [
+   "Replay the recorded raw output",
+   "Call the model again with the same seed",
+   "Call the model again at temperature 0",
+   "Call the same dated model name again"
+  ],
+  "answer": 0,
+  "explanation": "**Replay the recording**: a served model isn't deterministic even at temperature 0, so only the **raw text, binding and date** reproduce its decisions, through the **same parser**.\n- **Seed or temperature 0:** both leave the logits free to change with the server's batch.\n- **A dated name:** stops one cause, a new model, and does nothing about the batch.\n**A strong answer** names recording as the one part under the harness's control.",
+  "section": "§Spec, model boundary: raw-output"
+ },
+ {
+  "q": "[Advanced] A teammate caches replies by a hash of the whole prompt, so next week's identical prompt gets today's verdicts. What is the flaw, as a fix for nondeterminism?",
+  "options": [
+   "Hash collisions will make it return wrong verdicts",
+   "Its hits still depend on the provider's sampler seed",
+   "A hit isn't a fresh call; a miss can still disagree",
+   "It hashes too little of the prompt to catch changed evidence"
+  ],
+  "answer": 2,
+  "explanation": "**A hit isn't a call**: it is replay under another name. The moment the evidence changes, a new tag or one more idle day, the call goes to the model, and nothing makes it agree.\n- **Seed:** a cache hit never reaches the sampler.\n- **Hashes too little:** it hashes the whole prompt; the problem is the misses, not the hits.\n**A strong answer** says nothing the janitor does alone makes two fresh calls agree.",
+  "section": "§Make it deterministic"
+ },
+ {
+  "q": "[Advanced] A candidate agrees with its greedy verdict with probability about 0.524. Assuming independent calls, what does acting on the majority of five calls do?",
+  "options": [
+   "Cuts the chance of disagreeing to under 5% by averaging",
+   "Barely helps: about 45% wrong, against one call's 48%",
+   "Makes the verdict deterministic, since a majority is stable",
+   "Makes it worse than a single call, since errors compound"
+  ],
+  "answer": 1,
+  "explanation": "**Barely helps**: the majority of five disagrees when at most two agree, about **0.45**. **A near-tie stays a near-tie**, at five times the cost.\n- **Under 5%:** that needs a model that is already fairly sure.\n- **Worse than one call:** not under independence; served calls can be **correlated**, which pushes it toward one call's rate.\n**A strong answer** computes it and questions independence.",
+  "section": "§Problem set"
+ },
+ {
+  "q": "[Advanced] A sampler draws at T = 0.8 when asked for 0.7. Which check catches it?",
+  "options": [
+   "The three-standard-error measurement check at seed 7",
+   "The stress run of the measurement at 200 seeds",
+   "A second measurement run at another seed",
+   "The exact tests that rebuild every draw"
+  ],
+  "answer": 3,
+  "explanation": "**The exact generation tests**: they rebuild each draw and fail a mis-tempered sampler.\n- **Three standard errors at seed 7, or the stress run:** a **consistency check** has little power against a sampler that is only a little wrong; this one passes 196 of the 200 seeds.\n- **Another seed:** one more sample of the same weak check.\n**A strong answer** matches each kind of test to what it can see.",
+  "section": "§Measure, record, replay"
+ },
+ {
+  "q": "[Advanced] A replay of a recorded run gives the recorded decisions, but one delete the original run allowed is now denied. What is the explanation?",
+  "options": [
+   "The replay re-sampled one call whose hash didn't match",
+   "The recording holds the parsed verdicts, not the raw text",
+   "The gates read their own inputs, which changed",
+   "The recording's seed differed from the original run's"
+  ],
+  "answer": 2,
+  "explanation": "**The gates read their own inputs**: a replay reproduces **only the model's side** of a run; the clock, HALT, the mode and the inventory are read fresh.\n- **Re-sampled:** a replay never calls a model; a miss is all SKIP.\n- **Parsed verdicts:** the recording holds the **raw text**, replayed through the same parser.\n- **Seed:** a replay draws nothing.\n**A strong answer** separates model-side and whole-run reproduction.",
+  "section": "§Spec, model boundary: raw-output"
+ }
+]

@@ -1,0 +1,218 @@
+[
+ {
+  "q": "[Foundation] In a live run, G2-still-idle raises `KeyError` while the other four gates allow. With an `evaluate` that meets the Spec, what happens to the action?",
+  "options": [
+   "It is allowed, because four of the five gates allowed",
+   "No gates record is written for that action",
+   "The run crashes and is never closed",
+   "It is denied, with a `gate error: KeyError` reason"
+  ],
+  "answer": 3,
+  "explanation": "It is **denied**: a gate that couldn't decide is a deny (**fail closed**), and the other gates still run, so the record keeps every reason.\n- **Majority allowed:** gates combine by conjunction, not by vote.\n- **Crash or missing record:** that is the broken-gate behavior before the fix.\n**A strong answer** mentions the full gates record, not just the deny.",
+  "section": "§A gate that raises must deny"
+ },
+ {
+  "q": "[Foundation] Which of these can a gate enforce?",
+  "options": [
+   "Every unknown outcome is eventually reconciled",
+   "Never delete a resource tagged prod",
+   "Eventually delete every idle resource",
+   "Every run eventually writes `run_end`"
+  ],
+  "answer": 1,
+  "explanation": "Only \"never delete a resource tagged prod\": it is a **safety property**, and a gate sees one proposed action and can stop it before the bad step.\n- **The three \"eventually\" options:** **liveness** properties, which no finite prefix violates, so a monitor never has a moment to stop.\n**A strong answer** gives liveness to a supervisor or reconcile pass, not to a gate.",
+  "section": "§Concepts: what a gate can enforce"
+ },
+ {
+  "q": "[Foundation] Which tinyharness component plays XACML's policy information point?",
+  "options": [
+   "The fresh provider read plus `Config`",
+   "`run_once`, which acts only on allowed",
+   "`gates.py`, where the table is written",
+   "`gates.evaluate`, which renders the decision"
+  ],
+  "answer": 0,
+  "explanation": "The **PIP** supplies attribute values, which is the fresh provider read plus `Config`.\n- **`evaluate`:** the **PDP**, which decides.\n- **`run_once`:** the **PEP**, which enforces.\n- **`gates.py`:** the PAP, where policy is written.\n**A strong answer** makes clear that a stale-facts bug is placed in the PIP, which is why G2 re-reads idleness.",
+  "section": "§Concepts: a reference monitor"
+ },
+ {
+  "q": "[Foundation] What does an empty gate table, `GATES = ()`, allow under deny wins?",
+  "options": [
+   "Nothing: with no gate allowing, the default is deny",
+   "Only actions proposed in shadow mode",
+   "Everything: the empty conjunction is true",
+   "Nothing: `evaluate` raises, so fail closed denies"
+  ],
+  "answer": 2,
+  "explanation": "**Everything**: `allowed` is the AND of zero results, which is true. A **reference monitor with no rules is an open door**.\n- **Default deny:** deny wins has no default; it is a conjunction, and fail closed applies only to a gate that raises.\n- **`evaluate` raises:** `all([])` returns True without error.\n**A strong answer** doesn't assume a deny-by-default where the code computes a conjunction.",
+  "section": "§Concepts: deny wins and monotonicity"
+ },
+ {
+  "q": "[Foundation] A candidate G6 has catch rate 0.9 and false-deny rate 0.9 on the history. Is it a good gate?",
+  "options": [
+   "Yes: it catches nine in ten of the regretted deletions",
+   "Yes, as long as it runs in the Ask tier, not as a deny",
+   "It can't be judged without both rates' Wilson intervals",
+   "No: a gate denying a random 90% scores the same"
+  ],
+  "answer": 3,
+  "explanation": "**No**: a gate carries information about regret only if its **catch rate beats its false-deny rate**, and equal rates sit on the **ROC diagonal**.\n- **Nine in ten:** the catch rate alone ignores the safe deletions it also stops.\n- **Ask tier:** escalating doesn't add information; it turns each false deny into a question for a person.\n**A strong answer** compares the two rates.",
+  "section": "§Design G6-ask"
+ },
+ {
+  "q": "[Core] A gate returns `(\"escalate\", \"worth a look\")`, and `evaluate` builds `GateResult(g.id, bool(allow), reason)` with no `ESCALATE` branch. What happens to the action?",
+  "options": [
+   "It is allowed: a non-empty string is truthy",
+   "It is denied, but no escalation record is written",
+   "`evaluate` raises `TypeError` and the run stays open",
+   "An escalation record is written and nothing is deleted"
+  ],
+  "answer": 0,
+  "explanation": "It is **allowed**: `bool(\"escalate\")` is True. That is mutant **`escalate_allows`**, and the reason the Spec says to test for `ESCALATE` before coercing.\n- **Denied without a record, or escalated:** both assume code that recognizes the answer, which this `evaluate` lacks.\n- **`TypeError`:** the shape is a valid 2-tuple with a str reason.\n**A strong answer** tests by `==` before `bool()`, not with `is`.",
+  "section": "§The Ask tier"
+ },
+ {
+  "q": "[Core] A teammate makes `evaluate` return at the first deny. It gives the same `allowed` value for every input. What's your review comment?",
+  "options": [
+   "It breaks monotonicity: adding a gate could flip a deny",
+   "It loses the later gates' verdicts and reasons",
+   "It breaks fail closed: later exceptions go uncaught",
+   "It breaks complete mediation, which needs every gate"
+  ],
+  "answer": 1,
+  "explanation": "The decision is unchanged; the **evidence** is not. The gates record should hold **every gate's verdict and reason**, so an operator can see, for example, that the kill switch was also in force when G1 denied.\n- **Monotonicity:** still holds, since the conjunction is the same.\n- **Complete mediation:** asks only for an allowing record before each effect.\n**A strong answer** treats the ledger as evidence, not only a verdict.",
+  "section": "§G1 and deny wins"
+ },
+ {
+  "q": "[Core] An `evaluate` turns every gate exception into an allow (mutant `catch_returns_allow`). Which check reports it directly?",
+  "options": [
+   "Complete mediation, since the allow was never earned",
+   "The loop grammar, since the caught exception leaves the run open",
+   "Ledger integrity, since the gates record no longer hashes",
+   "None directly; it shows in what got through"
+  ],
+  "answer": 3,
+  "explanation": "**None directly**: complete mediation only asks for an **allowing gates record** before each effect, and a wrong decision point still writes one. Its faults show in what got through: **protected-never-deleted**, shadow inertness, budget and halt.\n- **Loop grammar:** a caught exception lets the run close normally.\n- **Ledger integrity:** the records are well-formed and chained.\n**A strong answer** knows complete mediation watches the PEP, not the PDP.",
+  "section": "§Concepts: a reference monitor"
+ },
+ {
+  "q": "[Core] A gate writes a file that a later gate reads. Which premise of the monotonicity proof does that break?",
+  "options": [
+   "That each answer depends only on action and facts",
+   "That a raising gate contributes 0 to the conjunction",
+   "That an escalation's `allow` is False",
+   "That gates are always evaluated in a fixed table order"
+  ],
+  "answer": 0,
+  "explanation": "It breaks the premise that **each answer depends only on the action and the facts**. The proof needs the old results to be a **sub-list of the new**, and a gate that changes another gate's inputs can change an old result.\n- **Fail closed and escalation:** separate premises, untouched here.\n- **Table order:** order doesn't enter a conjunction of independent gates.\n**A strong answer** connects it to the tamperproof requirement and a read-only facts view.",
+  "section": "§Problem set: deny wins is monotone"
+ },
+ {
+  "q": "[Core] G5 checks for `HALT` with `Path(...).exists()`. What goes wrong?",
+  "options": [
+   "A `HALT` created mid-run is ignored until the next run",
+   "`exists()` raises on a directory, so a `HALT` directory crashes the run",
+   "A dangling `HALT` symlink reads as absent, so G5 fails open",
+   "Nothing: `exists()` and `lstat()` agree on every entry"
+  ],
+  "answer": 2,
+  "explanation": "A **dangling symlink reads as absent**, because `exists()` follows links. The Spec says **any entry** at the path halts, and only not-found means no kill switch.\n- **Mid-run `HALT`:** the gate reads the path at gate time, so it counts.\n- **Directory:** `exists()` returns True for a directory; it doesn't raise.\n**A strong answer** names `lstat` with only `FileNotFoundError` caught, so other errors deny through `evaluate`.",
+  "section": "§G2 to G5, from the Spec"
+ },
+ {
+  "q": "[Core] G4-live-mode is written as `mode != Mode.SHADOW`. It passes today's tests. What breaks later?",
+  "options": [
+   "A plain string `\"shadow\"` would be read as live",
+   "A third mode such as replay would be allowed to act",
+   "The kill switch would no longer stop shadow runs",
+   "Shadow runs stop recording the other gates' verdicts"
+  ],
+  "answer": 1,
+  "explanation": "A **third mode would be allowed to act**: a **deny-list** allows any value it doesn't name, while an **allow-list** of `Mode.LIVE` denies anything new.\n- **Plain string:** the str-enum hole is real, but it's `\"live\"` passing as `Mode.LIVE`, which the `isinstance` test closes.\n- **Kill switch, verdicts:** G5 and the record are independent of G4.\n**A strong answer** names permission rather than exclusion in one comparison.",
+  "section": "§G2 to G5, from the Spec"
+ },
+ {
+  "q": "[Core] A gate reads `facts.get(\"actions_today\", 0)`, and the executor forgets to put the key in the dict. What happens?",
+  "options": [
+   "The gate raises `KeyError` and `evaluate` denies",
+   "`evaluate` records a malformed answer as a `TypeError`",
+   "The budget fails open: a missing count reads as 0",
+   "The executor refuses to build the facts dict and stops"
+  ],
+  "answer": 2,
+  "explanation": "The budget **fails open**: the defensive `.get` turns a missing fact into a **guess** of zero, so every action passes G3.\n- **`KeyError`:** that is what `facts[\"actions_today\"]` would do, and the Spec's intended path to a deny.\n- **Malformed answer:** the gate still returns a valid 2-tuple.\n**A strong answer** makes clear that a gate missing a fact must deny, not guess.",
+  "section": "§G2 to G5, from the Spec"
+ },
+ {
+  "q": "[Core] Clock in UTC-4, budget 3. Run 1 at 23:45 local deletes three; run 2 at 00:15 local, the next local day, has three more candidates. How many does run 2 delete on the starter, and after the UTC fix?",
+  "options": [
+   "0 on the starter, 0 after the fix",
+   "3 on the starter, 3 after the fix",
+   "0 on the starter, 3 after the fix",
+   "3 on the starter, 0 after the fix"
+  ],
+  "answer": 3,
+  "explanation": "**Three on the starter, zero after the fix**: 23:45 and 00:15 in UTC-4 are 03:45 and 04:15 UTC, the **same UTC day**. The starter compares **local dates** and sees a new day; the fix compares UTC dates and sees the budget spent.\n- **3 and 3:** what a fix converting to the machine's zone gives when the process runs in the clock's zone.\n**A strong answer** converts both instants before comparing dates.",
+  "section": "§Break it: the midnight budget"
+ },
+ {
+  "q": "[Advanced] Why is untrusted-data monotonicity (untrusted text may only narrow what is allowed) something no single gate can enforce?",
+  "options": [
+   "It is a liveness property, and monitors enforce only safety",
+   "It relates two runs, so it is a hyperproperty, not a trace property",
+   "Gates never see the context string, so they miss injected text",
+   "It needs an edit automaton that inserts actions, and gates only stop"
+  ],
+  "answer": 1,
+  "explanation": "It **relates two runs**: whether one run is acceptable depends on another on the same world, so it is a **2-safety hyperproperty**, and an execution monitor enforces only properties of single executions.\n- **Liveness:** wrong category; the issue is two traces, not \"eventually\".\n- **Context string:** not seeing it is by design, and still can't compare runs.\n**A strong answer** proposes a **metamorphic pair** of runs as the check.",
+  "section": "§Concepts: what a gate can enforce"
+ },
+ {
+  "q": "[Advanced] G1 denies `vm-db-prod`, and G6-ask escalates it in the same gates record. What does the ledger show, and why?",
+  "options": [
+   "An escalation record naming G6-ask, since a person should look",
+   "Both a denial and an escalation record for the action",
+   "A plain denial, with no escalation record",
+   "An allow, because the escalation overrides the deny"
+  ],
+  "answer": 2,
+  "explanation": "A **plain denial**: **deny wins over escalate**. An escalation record is written only when **every gate that said no was escalating**; policy already decided, so there's nothing to ask a person about.\n- **Escalation or both records:** would put an unanswerable question in the human queue.\n- **Allow:** escalate is a deny for effects.\n**A strong answer** names `all(r.escalate for r in no)`, not `any`.",
+  "section": "§The Ask tier"
+ },
+ {
+  "q": "[Advanced] The executor mints a `DeleteGrant` after the gates allow. A reviewer wants to treat the grant as proof that the gates ran. What's wrong with that?",
+  "options": [
+   "Grants expire before the delete reaches the provider",
+   "The grant names the resource but not its incarnation",
+   "The provider accepts deletes without a grant in live mode",
+   "`authority.mint` checks nothing; any code can call it"
+  ],
+  "answer": 3,
+  "explanation": "A grant **proves mint ran, not that the gates did**: `authority.mint` checks nothing. What the course relies on instead is **complete mediation**, checked from the **witness log** of every provider call.\n- **Incarnation:** a grant does bind one resource and incarnation; that isn't the gap.\n- **Expiry, provider:** neither speaks to whether the gates ran.\n**A strong answer** measures mediation from outside the code path.",
+  "section": "§Concepts: a reference monitor"
+ },
+ {
+  "q": "[Advanced] A teammate lets the model tune G6-ask's thresholds while enforcement stays deterministic. Why does that undermine deny wins?",
+  "options": [
+   "Monotonicity covers adding rows, not rewriting them",
+   "Deterministic code can't evaluate thresholds a model chose",
+   "Model-written rules can't be `Gate(id, doc, check)` rows",
+   "A model-written rule always raises, so everything denies"
+  ],
+  "answer": 0,
+  "explanation": "**Monotonicity covers adding rows, not rewriting them**: deny wins protects you only when the table is fixed. A model that writes thresholds is a **channel from untrusted text to policy**, which **untrusted-data monotonicity** says must never widen what is allowed.\n- **Deterministic code, row format:** both work fine; the problem is who writes the rule.\n**A strong answer** separates who enforces policy from who writes it.",
+  "section": "§Going further: G1 as data"
+ },
+ {
+  "q": "[Advanced] A teammate's midnight fix converts `now` with `.astimezone()` (no argument) and each `ts` the same way. CI is green. What still breaks?",
+  "options": [
+   "Records written before the fix still use the old local date",
+   "Nothing: both sides now convert to the same zone",
+   "It counts in the machine's zone, not UTC",
+   "`fromisoformat` drops the offset, so ts stays local"
+  ],
+  "answer": 2,
+  "explanation": "It counts in **the machine's zone**: `.astimezone()` with no argument converts to the local zone, so it looks right on **UTC CI runners** and containers and is wrong anywhere else. Pass `UTC` explicitly.\n- **Same zone on both sides:** consistent, but the Spec's day is the UTC day.\n- **`fromisoformat`:** it reads the offset, which is why parsing makes the conversion exact.\n**A strong answer** runs the tests with the process in a non-UTC zone.",
+  "section": "§Break it: the midnight budget"
+ }
+]
