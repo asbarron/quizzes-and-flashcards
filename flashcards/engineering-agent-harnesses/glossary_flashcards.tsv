@@ -1,0 +1,55 @@
+Agent-computer interface	The commands and feedback a harness gives the model, which are **part of the policy** because they change how well the same model does the task.
+Ask tier	A third gate outcome, escalate, that is a **deny for effects** but is recorded as an escalation and counted apart, so a **human queue** can be built from the ledger.
+Autoregressive model	A model that scores the next token given everything before it, so a reply's probability is the **product of its tokens' conditional probabilities**.
+Batch invariance	A property of inference kernels whose results **don't depend on the batch size**, removing one cause of nondeterminism at a **cost in throughput**.
+Budget day	The **calendar day in UTC**, [00:00, 24:00), over which G3 counts budgeted actions, named explicitly in config as `budget_day_tz`.
+Byte-pair encoding (BPE)	A tokenizer built by repeatedly merging the **most frequent adjacent pair** of symbols, whose **ordered merge list** is applied in order to encode new text.
+Complete mediation	The principle that **every access to every object** must be checked for authority; in tinyharness, no effect without an **allowing gates record** for that action earlier in the same run.
+Declared term	A contract term **no code reads** from the contract, which records the promise **without enforcing it**.
+Deny wins	The gate rule that an action runs **only if every gate allows** it, while **every gate still runs** and records its verdict and reason.
+Effect clause	A rule that **bans a capability**, such as reading a clock, rather than only requiring the same output for the same input.
+Effect surface	Every tinyharness module that can change the world, record evidence, call out or grant authority, which the strategy and the gate table **must not import**.
+ETCLOVG	The survey's **seven harness layers**: Execution environment, Tool interface, Context and memory, Lifecycle and orchestration, Observability, Verification and evaluation, Governance and security.
+Execution monitor	A mechanism that watches a system's execution step by step and **stops it before a step** that would violate the policy.
+Facts, not claims	The principle that when the ledger (what the harness says it did) and the witness log and snapshots (what happened) disagree, **the witness wins**.
+Fail closed	The gate table's form of fail-safe defaults: a gate that raises, or returns a malformed answer, **is a deny for that gate**, and the other gates still run.
+Fail-safe defaults	Basing access decisions on **permission rather than exclusion**, so that a mistake or an unanticipated case results in **refusal, not in access**.
+False-deny rate	Safe actions a gate denies, over all safe actions; a gate carries information only if its **catch rate beats this rate**.
+Forced text	Reply positions where the next token has **probability 1**, encoded with **no draw**, as in the toy model everywhere but the verdict.
+Gateability	How much of each action a harness can **check on its own before it happens**, which shrinks as the model owns more of the control flow.
+Greedy decoding	Temperature 0: always take the **most probable token**, breaking ties by the lower index.
+Harness	Everything in an agent's loop **except the model's weights**: what the model is shown, which actions it may propose, which proposals may execute, what is recorded, and what happens when something fails.
+Harness card	A **per-layer report** of a harness, after the survey's reporting table, giving the configuration to reproduce or judge it and the **failure evidence** it keeps.
+Hyperproperty	A policy that **relates several runs** rather than judging one execution, such as untrusted-data monotonicity's comparison of a clean run with an injected one.
+Idempotency key	A key carried by every delete that the provider remembers once applied, so the same key sent again returns **already_applied** instead of deleting twice.
+Interrupted run	An opened run with no closing record whose next record is a **recovered** that names it, the only open run the loop grammar accepts.
+Liveness property	A property that **something good eventually happens**, which no finite prefix can violate, so **no execution monitor can enforce it**.
+Logit	The score of one vocabulary token at the next position: the **dot product** of the hidden state with that token's row of the output matrix.
+Loop grammar	The **regular language** of legal runs: each run's records, read in order as event names, must form a word of it, which a **deterministic finite automaton** checks in one pass.
+Mutation score	The fraction of **non-equivalent mutants**, small syntactic changes to a program, that a test suite kills.
+Nucleus (top-p) sampling	A cut that keeps the **shortest prefix** of tokens, in decreasing probability, whose total probability is **at least `top_p**, and renormalizes.
+Output-equivalent mutant	A mutant that returns exactly what the original returns for every input, so only a test that **watches its effects** can kill it.
+Paired comparison	A comparison in which every arm sees **exactly the same inputs**, so the difference between arms is due to the arm alone.
+pass@k	The chance that **at least one of k** samples succeeds, the right measure when a person picks the best try.
+pass^k	The chance that **all k independent trials** of the same task succeed, estimated without bias from n trials with c successes as **C(c, k) / C(n, k)**.
+Policy decision point (PDP)	The XACML role that evaluates a request against policy and **returns a decision**; in tinyharness, `gates.evaluate`.
+Policy enforcement point (PEP)	The XACML role that intercepts the access, asks the PDP and **carries out its decision**; in tinyharness, `run_once`.
+Policy information point (PIP)	The XACML role that **supplies attribute values**; in tinyharness, the fresh provider read plus `Config` that build the facts dict.
+Pre-tokenizer	The regular expression that cuts text into words, numbers, punctuation runs and whitespace, each with at most one leading space, before any merge, so **no token crosses a piece**.
+Process grounding	StateFlow's term for carrying which step of a task a run is in through **explicit states and transitions**, so the code knows it rather than the model.
+Reference monitor	One mechanism that mediates every reference a subject makes to an object, and must be **always invoked, tamperproof, and small enough to be analyzed and tested**.
+Replay (of history)	A re-run of the strategy and the model over recorded days of history, with what was regretted afterwards, under **several thresholds at once**.
+Replay (of recorded model output)	Reproducing a run's model decisions by reading **recorded raw output** back through the same parser, **failing closed** with SKIP when a call doesn't match its recorded line.
+Replay parity	The property that a strategy's value **depends only on the logged facts**, so re-running it in replay is evidence about what live did.
+Run contract	A frozen record of a run's goal, scope, limits, allowed models, stop terms, required evidence and escalation, fixed before the run and **hashed into `run_start**.
+Run within its contract	The invariant that every run's records **stay within the contract** hashed into its `run_start`: actions within the maximum, mode as declared, models within the allowed set.
+Safety property	A property whose every violation shows in some **finite prefix** that no continuation can repair: **nothing bad ever happens**.
+Shadow mode	A run that goes through every phase, gates included, with the live-mode gate **denying every action**, so nothing is deleted.
+Temperature	The divisor applied to logits before softmax: below 1 it sharpens the distribution, above 1 it flattens it, and it **never changes the order** of the tokens.
+The model proposes, code disposes	The design rule that every property a safe agent needs holds **because of the harness**, whatever the model proposes.
+Token	A byte string from a fixed vocabulary; its id is its index in that vocabulary, and the model **sees only ids**, never characters.
+Top-k	A cut that keeps the **k most probable tokens** and renormalizes.
+Unknown is not nothing	The rule that a delete whose outcome is unknown **may have been applied**, so it is recorded as unknown and settled later by **reconcile** from the provider's truth.
+Witness log	The checker's record of every call the harness made to the provider, **written by the checker** rather than the harness.
+Workflow	A system that orchestrates models and tools through **predefined code paths**, as opposed to an agent, which lets the model direct its own process and tool use.
+Write-ahead rule	The database-logging rule, carried over to the ledger, that the record of a change must be in the log **before the change reaches the data**.

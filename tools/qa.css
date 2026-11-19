@@ -1,0 +1,12 @@
+.level { max-width: 640px; margin: 0 auto 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em;
+  text-transform: uppercase; color: #6a4fc0; }
+.nightMode .level, .night_mode .level { color: #b9a5ff; }
+.body p { margin: 0 0 10px; }
+.body b, .q b { font-weight: 650; }
+ul.plan { padding-left: 1.3em; margin: 0 0 10px; }
+ul.plan li { margin: 4px 0; }
+code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.88em;
+  background: rgba(127, 127, 127, 0.14); padding: 0 3px; border-radius: 3px; }
+pre { max-width: 640px; margin: 0 auto 10px; padding: 10px 12px; overflow-x: auto; font-size: 14px;
+  line-height: 1.4; background: rgba(127, 127, 127, 0.12); border-radius: 6px; }
+pre code { background: none; padding: 0; font-size: inherit; }

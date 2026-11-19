@@ -1,0 +1,218 @@
+[
+ {
+  "q": "[Foundation] What does a shadow run never do that a live run does?",
+  "options": [
+   "Call delete_resource or write an action record",
+   "Run the five gates over a fresh provider read",
+   "Ask the model for a verdict on each candidate",
+   "Append decision and gates records to the ledger"
+  ],
+  "answer": 0,
+  "explanation": "Shadow **never calls `delete_resource`** or writes an `action` record. It runs every phase up to the act branch, **gates included**, with `G4-live-mode` denying every action.\n- **Gates, model, records:** all three happen in shadow, which is why it shows what live would propose and gate first.\n**A strong answer** knows the act branch is the part shadow leaves untested.",
+  "section": "§Spec, run loop: shadow"
+ },
+ {
+  "q": "[Foundation] In the live run with the context 'ml: in use', the model ARMed vm-db-prod. Which part of the harness kept it alive?",
+  "options": [
+   "G3-daily-budget, because the day's three deletions were used up",
+   "G5-kill-switch, because the HALT file was present",
+   "The model, which skipped it because of the context",
+   "G1-protected, reading its prod tag from a fresh provider read"
+  ],
+  "answer": 3,
+  "explanation": "**G1-protected** denied it: the fresh read showed the `prod` tag. The model **armed** it, idle 60 days with nothing about its owner in the context.\n- **G3:** at most one of the day's three deletions was used when its turn came.\n- **G5:** the HALT file came only later.\n**A strong answer** makes clear that protection is never the model's job: **the model proposes, code disposes**.",
+  "section": "§The whole game, live"
+ },
+ {
+  "q": "[Foundation] verify prints 'OK  1 records ok' for a ledger cut right after its run_start. What has it established?",
+  "options": [
+   "The run that the record opens finished cleanly with run_end",
+   "No record in the file has been edited since it was appended",
+   "Its one line is a JSON object, seq 1, prev all zeros",
+   "Every run in the ledger satisfies the loop grammar"
+  ],
+  "answer": 2,
+  "explanation": "Only the **chain's shape**: one JSON object per line, `seq` from 1, the first `prev` 64 zeros.\n- **No record edited:** the last record, here the only one, is hashed by nothing after it.\n- **Finished, loop grammar:** the run never closed, which the **loop grammar** rejects and verify can't see.\n**A strong answer** doesn't read OK as complete or unedited.",
+  "section": "§What OK means"
+ },
+ {
+  "q": "[Foundation] Zero regrets in 10 deletions. What is wrong with the textbook Wald interval p ± 1.96·sqrt(p(1−p)/n) here?",
+  "options": [
+   "It has zero width, [0, 0], claiming certainty",
+   "It extends below zero, which no rate can be",
+   "It is about [0, 0.2775], which is too wide to use",
+   "It is undefined, because the formula divides by p(1 - p)"
+  ],
+  "answer": 0,
+  "explanation": "At p = 0 the Wald half-width, proportional to sqrt(p(1 − p)/n), is zero, so it **claims certainty** from ten trials.\n- **[0, 0.2775]:** that is the **Wilson interval** at 0 in 10, not Wald's.\n- **Below zero:** Wald does that at 1 in 10, a different failure.\n- **Divides by p(1 − p):** it multiplies, it doesn't divide.\n**A strong answer** reaches for Wilson on small samples.",
+  "section": "§Concepts and reading"
+ },
+ {
+  "q": "[Foundation] On which of the seven harness layers does the hash-chained ledger sit?",
+  "options": [
+   "Observability only, as the trace of what ran",
+   "Lifecycle, Observability and Governance",
+   "Governance only, as the audit trail",
+   "Verification and Observability"
+  ],
+  "answer": 1,
+  "explanation": "**Lifecycle, Observability and Governance**: `reconcile` reads it as lifecycle state, it is the trace of what ran, and its hash chain makes it the **audit trail**.\n- **One layer only:** hides two of its three jobs.\n- **Verification:** that layer holds `replay.compare` and the course's witness, not the ledger.\n**A strong answer** says the layers leak.",
+  "section": "§The harness card"
+ },
+ {
+  "q": "[Core] A copy's root holds a HALT file. From the labs subfolder you run a live once pass with --cloud and --ledger pointing at the root. What does G5-kill-switch do?",
+  "options": [
+   "It denies every action, because a HALT file exists in the root",
+   "It denies only the two protected resources, which G1 also denies",
+   "It allows every action: it checks the working directory",
+   "Nothing: the run crashes before it ever reads the cloud file"
+  ],
+  "answer": 2,
+  "explanation": "`kill_switch_path` is the **relative path** `HALT`, so G5 checks the process's **working directory**, finds nothing, and allows.\n- **Denies every action:** the root's HALT is not where it looks.\n- **Only the protected two:** that is `G1-protected`; the rest can be deleted, up to the **daily budget**.\n- **Crashes:** that happens from `labs/` without `--cloud`.\n**A strong answer** names the working-directory point.",
+  "section": "§The whole game, live"
+ },
+ {
+  "q": "[Core] A shadow run over the six-resource inventory ends with denied 5, yet no gate found anything wrong with bucket-tmp. What is denied counting?",
+  "options": [
+   "Only the actions some gate found a policy problem with",
+   "The candidates the model chose to SKIP in this run",
+   "Actions the provider refused because they lacked a DeleteGrant",
+   "Every action G4-live-mode denied, policy denials included"
+  ],
+  "answer": 3,
+  "explanation": "In shadow **G4-live-mode denies every action**, and the starter's summary counts those as denied, with no separate shadowed count.\n- **Policy problems only:** just `ip-old-lb` and `vm-db-prod` were also denied by `G1-protected`.\n- **SKIPs:** a SKIP never reaches the gates.\n- **Refused:** shadow never sends a delete.\n**A strong answer** trusts the **gates records**, not the number.",
+  "section": "§The whole game, shadow"
+ },
+ {
+  "q": "[Core] Why is replay's acted count an upper bound on what live would delete, rather than a prediction of it?",
+  "options": [
+   "Replay skips the gates: no daily budget, no fresh read",
+   "Replay uses a different strategy function from live",
+   "Replay's sixty days contain more idle resources than the live cloud",
+   "Replay counts already_applied and not_found outcomes as deletions"
+  ],
+  "answer": 0,
+  "explanation": "Replay **skips the gates** and re-applies only the keep/prod rule, so it has no **daily budget** and no **fresh read**.\n- **Different strategy:** it is the same pure function, so for the strategy replay is evidence about live.\n- **already_applied as deletions:** that is the starter's live summary, not replay.\n**A strong answer** adds that the regret rate is bounded neither way.",
+  "section": "§The whole game, replay"
+ },
+ {
+  "q": "[Core] Someone proposes moving the idle threshold from 14 days to 7 because 'the 7-day regret rate is still under 17%'. What is wrong with the argument?",
+  "options": [
+   "17% is computed over too few days to mean anything",
+   "The 79 extra deletions it adds have 30 regrets, 38%",
+   "The 7-day arm saw different days from the 14-day arm",
+   "Regret rates can't be compared across different thresholds"
+  ],
+  "answer": 1,
+  "explanation": "The decision is about the **marginal deletions**: 79 extra, 30 of them regrets, 0.38, against the arm's **average** of 0.167.\n- **Different days:** every arm sees the same sixty days; replay is **paired**.\n- **Can't compare:** the arms are nested, so the difference of counts is exactly what the 7-day arm adds.\n**A strong answer** prices a change by what it adds.",
+  "section": "§The whole game, replay"
+ },
+ {
+  "q": "[Core] A rejected line in the run_once puzzle retries a delete whose outcome came back unknown. When does that retry delete twice?",
+  "options": [
+   "When the resource was protected and G1-protected denied it",
+   "When the run is in shadow mode and G4 denied the action",
+   "When the first delete succeeded but its reply was lost",
+   "When reconcile already settled the action as not_applied"
+  ],
+  "answer": 2,
+  "explanation": "A timeout can come **after** the provider applied the delete: **unknown is not nothing**. The **idempotency key** makes a repeat answer `already_applied`, but only while the key is remembered.\n- **G1 or G4 denied:** a denied action is never sent, so there is nothing to retry.\n- **Settled not_applied:** the provider said it never happened, so a retry deletes once.\n**A strong answer** names the safe move: record unknown, stand down, let reconcile settle it.",
+  "section": "§Map the code"
+ },
+ {
+  "q": "[Core] Why must the gates' facts come from a provider read made after the decision, rather than from the inventory the candidate came from?",
+  "options": [
+   "The first read lists only names, not tags",
+   "Reading twice halves the chance of a provider error",
+   "The model may have edited the inventory it was shown",
+   "The world can change in between the two reads"
+  ],
+  "answer": 3,
+  "explanation": "A gate reading stale facts has the **time-of-check-to-time-of-use** gap: it can allow an action whose premise no longer holds, so the facts come from a **provider read made after the decision**.\n- **Model edited the inventory:** the model has no tool that changes anything; it only returns verdicts.\n- **Names only, error odds:** neither is why the Spec requires the second read.\n**A strong answer** names the words \"after the decision\".",
+  "section": "§Spec, run loop: fresh-facts"
+ },
+ {
+  "q": "[Core] After the gates allow, the executor mints a DeleteGrant, and the provider refuses a delete without one. What does the grant not prove?",
+  "options": [
+   "That the delete targets the intended resource",
+   "That the gates ran and allowed the action",
+   "That the delete is sent with the intended key",
+   "That the delete is sent within 30 seconds"
+  ],
+  "answer": 1,
+  "explanation": "It doesn't prove **the gates ran**: `authority.mint` is a **public function that checks nothing**, so code can call `mint`, then `delete_resource`, and skip `evaluate`.\n- **Resource, key, 30 seconds:** the grant binds **one action, one key, one resource** with a 30-second expiry, so it does stop those three mistakes.\n**A strong answer** says the grant proves `mint` ran, not that the gates did.",
+  "section": "§The whole game, live"
+ },
+ {
+  "q": "[Core] On the cut ledger, verify says OK and the property check reports the loop grammar violated. Which verdict is wrong?",
+  "options": [
+   "Neither: they check two different properties",
+   "verify, because the ledger is incomplete",
+   "The loop grammar, because a valid chain means a valid run",
+   "Both, because one record is too little evidence to judge"
+  ],
+  "answer": 0,
+  "explanation": "**Neither**: verify checks the **chain's shape**, which a one-record chain has; the **loop grammar** checks that every run that started also ended, which the cut run didn't.\n- **verify is wrong:** it never claims completeness; a shorter file is still a valid chain.\n- **Valid chain means valid run:** a log's integrity says nothing about what it records.\n**A strong answer** separates integrity from completeness.",
+  "section": "§What OK means"
+ },
+ {
+  "q": "[Advanced] Against a writer who can append to the ledger file, what does the unkeyed SHA-256 chain detect?",
+  "options": [
+   "Edits to any record except the last",
+   "Edits to any record, including the final one",
+   "Truncation of the final records",
+   "Nothing: it can recompute every later prev"
+  ],
+  "answer": 3,
+  "explanation": "**Nothing**: the chain is **unkeyed**, so anyone who can append computes the same hashes and writes a chain that verifies.\n- **Except the last:** true against accidents and naive edits, not against a writer who recomputes.\n- **Including the final one:** nothing hashes the last record, even without an attacker.\n- **Truncation:** a shorter file is still a valid chain.\n**A strong answer** names the fix: a MAC, or a **signed checkpoint** of length and head hash kept outside the file.",
+  "section": "§Concepts and reading"
+ },
+ {
+  "q": "[Advanced] A HALT file is left in place and the supervised live run repeats. It exits 0, reports ok with acted 0, and the heartbeat says success. What would notice the janitor has stopped working?",
+  "options": [
+   "An alert that fires when the heartbeat goes stale",
+   "A check that the exit code is non-zero",
+   "A monitor on outcomes: armed but nothing acted",
+   "verify failing on the ledger after the next run"
+  ],
+  "answer": 2,
+  "explanation": "Only a **monitor on outcomes** notices an agent doing **too little**; every crash signal is green.\n- **Stale heartbeat:** catches a job that stopped running, not one that runs and acts on nothing.\n- **Exit code:** a run that denies everything exits 0.\n- **verify:** the chain is perfectly valid.\n**A strong answer** says kill switches and budgets only stop an agent doing too much.",
+  "section": "§The whole game, live"
+ },
+ {
+  "q": "[Advanced] A team wants to sign off on the janitor's delete handling after a week of clean shadow runs. Why is that evidence insufficient?",
+  "options": [
+   "Shadow skips the five gates, so it can't show what a live run would allow",
+   "It never takes the act branch: mint and the outcome handlers never run",
+   "Shadow uses a different model, so its verdicts can differ from a live run's",
+   "Shadow writes no ledger records, so nothing it did can be reviewed later"
+  ],
+  "answer": 1,
+  "explanation": "Shadow runs every phase up to the act branch and **never takes it**: `mint`, `delete_resource`, the refused and unknown handlers and the `acted` count stay untested.\n- **Skips the gates:** it runs all five; `G4-live-mode` is what denies.\n- **Different model, no records:** same model call, and it writes run_start, decision, gates and run_end.\n**A strong answer** names the second gap: shadow never spends the **budget**, so G3 reads 0/3 for every action.",
+  "section": "§Concepts and reading"
+ },
+ {
+  "q": "[Advanced] The 30-day arm had 8 regrets in 122 deletions, the 14-day arm 23 in 239. A teammate says 30 days is safer. What's the right response?",
+  "options": [
+   "Agreed: 0.066 is lower than 0.096, so the 30-day arm is safer",
+   "Not from these intervals; compare the paired marginal deletions",
+   "No: overlapping intervals prove the two rates are equal",
+   "No conclusion is possible at all, because the arms saw different days"
+  ],
+  "answer": 1,
+  "explanation": "The Wilson intervals, about (0.034, 0.124) and (0.065, 0.140), **overlap widely**, and the arms are **nested** on the same days, so a **paired** look at the marginal deletions is the right test.\n- **Point estimates:** ignore the uncertainty of 122 and 239 trials.\n- **Overlap proves equal:** comparing intervals is conservative; overlap proves neither.\n- **Different days:** every arm sees the same sixty.\n**A strong answer** names the marginal set: 117 deletions, 15 regrets.",
+  "section": "§Problem set"
+ },
+ {
+  "q": "[Advanced] A draft harness card reports T.versions as covered because every run_start records tools_fingerprint. What's your objection?",
+  "options": [
+   "The fingerprint hashes tool names only, not behavior",
+   "The fingerprint is never written to the ledger",
+   "A card can report a version string, never a hash",
+   "Versions belong on the Execution layer, not the Tool layer"
+  ],
+  "answer": 0,
+  "explanation": "`tools_fingerprint` hashes the **tool names only**, so a tool whose behavior changes under the same name still passes the **pin**; and the command line never sets `pinned_tools`, so it is recorded, not checked.\n- **Never written:** it is in every `run_start`.\n- **Format or layer:** the card's rule is whether something actually **reports** the field.\n**A strong answer** marks a field missing even when every name in it is real.",
+  "section": "§The harness card"
+ }
+]
